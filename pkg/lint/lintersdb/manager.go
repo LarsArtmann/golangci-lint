@@ -104,25 +104,28 @@ func (m *Manager) GetOptimizedLinters() ([]*linter.Config, error) {
 	m.combineGoAnalysisLinters(resultLintersSet)
 
 	// Make order of execution of linters (go/analysis metalinter and unused) stable.
-	resultLinters := slices.SortedFunc(maps.Values(resultLintersSet), func(a *linter.Config, b *linter.Config) int {
-		if b.Name() == linter.LastLinter {
-			return -1
-		}
-
-		if a.Name() == linter.LastLinter {
-			return 1
-		}
-
-		if a.DoesChangeTypes != b.DoesChangeTypes {
-			// move type-changing linters to the end to optimize speed
-			if b.DoesChangeTypes {
+	resultLinters := slices.SortedFunc(
+		maps.Values(resultLintersSet),
+		func(a, b *linter.Config) int {
+			if b.Name() == linter.LastLinter {
 				return -1
 			}
-			return 1
-		}
 
-		return strings.Compare(a.Name(), b.Name())
-	})
+			if a.Name() == linter.LastLinter {
+				return 1
+			}
+
+			if a.DoesChangeTypes != b.DoesChangeTypes {
+				// move type-changing linters to the end to optimize speed
+				if b.DoesChangeTypes {
+					return -1
+				}
+				return 1
+			}
+
+			return strings.Compare(a.Name(), b.Name())
+		},
+	)
 
 	return resultLinters, nil
 }

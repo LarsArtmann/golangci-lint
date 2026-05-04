@@ -17,16 +17,16 @@ linters:
         text: weak cryptographic primitive
       - linters:
           - staticcheck
-        text: 'SA9003:'
+        text: "SA9003:"
       - linters:
           - staticcheck
-        text: 'ST1006:'
+        text: "ST1006:"
       - linters:
           - staticcheck
-        text: 'S1033:'
+        text: "S1033:"
       - linters:
           - lll
-        source: '^//go:generate '
+        source: "^//go:generate "
       - linters:
           - err113
         source: foo

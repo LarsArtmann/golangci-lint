@@ -23,7 +23,10 @@ func filterIssues(issues []*result.Issue, filter func(issue *result.Issue) bool)
 	return retIssues
 }
 
-func filterIssuesUnsafe(issues []*result.Issue, filter func(issue *result.Issue) bool) []*result.Issue {
+func filterIssuesUnsafe(
+	issues []*result.Issue,
+	filter func(issue *result.Issue) bool,
+) []*result.Issue {
 	retIssues := make([]*result.Issue, 0, len(issues))
 	for _, issue := range issues {
 		if filter(issue) {
@@ -34,7 +37,10 @@ func filterIssuesUnsafe(issues []*result.Issue, filter func(issue *result.Issue)
 	return retIssues
 }
 
-func filterIssuesErr(issues []*result.Issue, filter func(issue *result.Issue) (bool, error)) ([]*result.Issue, error) {
+func filterIssuesErr(
+	issues []*result.Issue,
+	filter func(issue *result.Issue) (bool, error),
+) ([]*result.Issue, error) {
 	retIssues := make([]*result.Issue, 0, len(issues))
 	for _, issue := range issues {
 		if issue.FromLinter == typeCheckName {
@@ -56,7 +62,10 @@ func filterIssuesErr(issues []*result.Issue, filter func(issue *result.Issue) (b
 	return retIssues, nil
 }
 
-func transformIssues(issues []*result.Issue, transform func(issue *result.Issue) *result.Issue) []*result.Issue {
+func transformIssues(
+	issues []*result.Issue,
+	transform func(issue *result.Issue) *result.Issue,
+) []*result.Issue {
 	retIssues := make([]*result.Issue, 0, len(issues))
 	for _, issue := range issues {
 		newIssue := transform(issue)

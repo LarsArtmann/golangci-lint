@@ -4,14 +4,13 @@ import (
 	"sync"
 
 	"github.com/Masterminds/semver/v3"
-	"github.com/ryancurrah/gomodguard/v2"
-	"golang.org/x/tools/go/analysis"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 	"github.com/golangci/golangci-lint/v2/pkg/golinters/internal"
 	"github.com/golangci/golangci-lint/v2/pkg/lint/linter"
 	"github.com/golangci/golangci-lint/v2/pkg/result"
+	"github.com/ryancurrah/gomodguard/v2"
+	"golang.org/x/tools/go/analysis"
 )
 
 const linterNameV2 = "gomodguard_v2"

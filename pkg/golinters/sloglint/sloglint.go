@@ -1,10 +1,9 @@
 package sloglint
 
 import (
-	"go-simpler.org/sloglint"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"go-simpler.org/sloglint"
 )
 
 func New(settings *config.SlogLintSettings) *goanalysis.Linter {

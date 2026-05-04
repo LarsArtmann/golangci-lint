@@ -58,11 +58,13 @@ func Test_extractErrors(t *testing.T) {
 					},
 				},
 			},
-			expected: []packages.Error{{
-				Pos:  "/home/ldez/sources/go/src/github.com/golangci/golangci-lint/pkg/golinters/deadcode.go:21:9",
-				Msg:  "undeclared name: linterName",
-				Kind: 3,
-			}},
+			expected: []packages.Error{
+				{
+					Pos:  "/home/ldez/sources/go/src/github.com/golangci/golangci-lint/pkg/golinters/deadcode.go:21:9",
+					Msg:  "undeclared name: linterName",
+					Kind: 3,
+				},
+			},
 		},
 		{
 			desc: "package with import errors but with only one error and without tip error",
@@ -81,11 +83,13 @@ func Test_extractErrors(t *testing.T) {
 					},
 				},
 			},
-			expected: []packages.Error{{
-				Pos:  "/home/ldez/sources/golangci/sandbox/main.go:6:11",
-				Msg:  "could not import github.com/example/foo (main.go:6:2: missing go.sum entry for module providing package github.com/example/foo (imported by github.com/golangci/sandbox); to add:\n\tgo get github.com/golangci/sandbox)",
-				Kind: 3,
-			}},
+			expected: []packages.Error{
+				{
+					Pos:  "/home/ldez/sources/golangci/sandbox/main.go:6:11",
+					Msg:  "could not import github.com/example/foo (main.go:6:2: missing go.sum entry for module providing package github.com/example/foo (imported by github.com/golangci/sandbox); to add:\n\tgo get github.com/golangci/sandbox)",
+					Kind: 3,
+				},
+			},
 		},
 		{
 			desc: "package with import errors but without tip error",
@@ -109,11 +113,13 @@ func Test_extractErrors(t *testing.T) {
 					},
 				},
 			},
-			expected: []packages.Error{{
-				Pos:  "/home/ldez/sources/golangci/sandbox/main.go:6:11",
-				Msg:  "could not import github.com/example/foo (main.go:6:2: missing go.sum entry for module providing package github.com/example/foo (imported by github.com/golangci/sandbox); to add:\n\tgo get github.com/golangci/sandbox)",
-				Kind: 3,
-			}},
+			expected: []packages.Error{
+				{
+					Pos:  "/home/ldez/sources/golangci/sandbox/main.go:6:11",
+					Msg:  "could not import github.com/example/foo (main.go:6:2: missing go.sum entry for module providing package github.com/example/foo (imported by github.com/golangci/sandbox); to add:\n\tgo get github.com/golangci/sandbox)",
+					Kind: 3,
+				},
+			},
 		},
 	}
 

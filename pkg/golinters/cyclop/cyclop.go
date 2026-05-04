@@ -2,7 +2,6 @@ package cyclop
 
 import (
 	"github.com/bkielbasa/cyclop/pkg/analyzer"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 )

@@ -47,14 +47,20 @@ func run(ctx context.Context) error {
 		return fmt.Errorf("failed to generate v1: %w", err)
 	}
 
-	destV1 := filepath.Join(filepath.Dir(dest), strings.TrimSuffix(filepath.Base(dest), ext)+"-v1"+ext)
+	destV1 := filepath.Join(
+		filepath.Dir(dest),
+		strings.TrimSuffix(filepath.Base(dest), ext)+"-v1"+ext,
+	)
 
 	err = generate(allReleases, minAllowedVersionV1, destV1)
 	if err != nil {
 		return fmt.Errorf("failed to generate v1: %w", err)
 	}
 
-	destV2 := filepath.Join(filepath.Dir(dest), strings.TrimSuffix(filepath.Base(dest), ext)+"-v2"+ext)
+	destV2 := filepath.Join(
+		filepath.Dir(dest),
+		strings.TrimSuffix(filepath.Base(dest), ext)+"-v2"+ext,
+	)
 
 	err = generate(allReleases, version{major: 2, minor: 0, patch: 0}, destV2)
 	if err != nil {
@@ -93,7 +99,9 @@ func fetchAllReleases(ctx context.Context) ([]release, error) {
 		return nil, errors.New("no GITHUB_TOKEN environment variable")
 	}
 
-	client := githubv4.NewClient(oauth2.NewClient(ctx, oauth2.StaticTokenSource(&oauth2.Token{AccessToken: githubToken})))
+	client := githubv4.NewClient(
+		oauth2.NewClient(ctx, oauth2.StaticTokenSource(&oauth2.Token{AccessToken: githubToken})),
+	)
 
 	var q struct {
 		Repository struct {
@@ -167,23 +175,36 @@ func buildConfig(releases []release, minAllowedVersion version) (*actionConfig, 
 	for minorVersionedStr, maxPatchVersion := range maxPatchReleases {
 		if minAllowedVersion.major < maxPatchVersion.major {
 			minorVersionToConfig[minorVersionedStr] = versionConfig{
-				Error: fmt.Sprintf("golangci-lint version '%s' isn't supported: only v%d versions are supported",
-					minorVersionedStr, minAllowedVersion.major),
+				Error: fmt.Sprintf(
+					"golangci-lint version '%s' isn't supported: only v%d versions are supported",
+					minorVersionedStr,
+					minAllowedVersion.major,
+				),
 			}
 			continue
 		}
 
 		if !maxPatchVersion.isAfterOrEq(&minAllowedVersion) {
 			minorVersionToConfig[minorVersionedStr] = versionConfig{
-				Error: fmt.Sprintf("golangci-lint version '%s' isn't supported: we support only %s and later versions",
-					minorVersionedStr, minAllowedVersion),
+				Error: fmt.Sprintf(
+					"golangci-lint version '%s' isn't supported: we support only %s and later versions",
+					minorVersionedStr,
+					minAllowedVersion,
+				),
 			}
 			continue
 		}
 
-		err := findLinuxAssetURL(&maxPatchVersion, versionToRelease[maxPatchVersion].ReleaseAssets.Nodes)
+		err := findLinuxAssetURL(
+			&maxPatchVersion,
+			versionToRelease[maxPatchVersion].ReleaseAssets.Nodes,
+		)
 		if err != nil {
-			return nil, fmt.Errorf("failed to find linux asset url for release %s: %w", maxPatchVersion, err)
+			return nil, fmt.Errorf(
+				"failed to find linux asset url for release %s: %w",
+				maxPatchVersion,
+				err,
+			)
 		}
 
 		minorVersionToConfig[minorVersionedStr] = versionConfig{
@@ -202,7 +223,12 @@ func buildConfig(releases []release, minAllowedVersion version) (*actionConfig, 
 }
 
 func findLinuxAssetURL(ver *version, releaseAssets []releaseAsset) error {
-	pattern := fmt.Sprintf("golangci-lint-%d.%d.%d-linux-amd64.tar.gz", ver.major, ver.minor, ver.patch)
+	pattern := fmt.Sprintf(
+		"golangci-lint-%d.%d.%d-linux-amd64.tar.gz",
+		ver.major,
+		ver.minor,
+		ver.patch,
+	)
 
 	for _, relAsset := range releaseAssets {
 		if strings.HasSuffix(relAsset.DownloadURL, pattern) {

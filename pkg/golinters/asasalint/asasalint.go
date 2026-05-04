@@ -2,7 +2,6 @@ package asasalint
 
 import (
 	"github.com/alingse/asasalint"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 	"github.com/golangci/golangci-lint/v2/pkg/golinters/internal"

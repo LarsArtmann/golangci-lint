@@ -40,7 +40,11 @@ func (InvalidIssue) Finish() {}
 
 func (p InvalidIssue) shouldPassIssue(issue *result.Issue) (bool, error) {
 	if issue.FilePath() == "" {
-		p.log.Warnf("no file path for the issue: probably a bug inside the linter %q: %#v", issue.FromLinter, issue)
+		p.log.Warnf(
+			"no file path for the issue: probably a bug inside the linter %q: %#v",
+			issue.FromLinter,
+			issue,
+		)
 
 		return false, nil
 	}

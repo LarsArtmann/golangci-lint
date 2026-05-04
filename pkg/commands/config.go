@@ -6,13 +6,12 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/exitcodes"
 	"github.com/golangci/golangci-lint/v2/pkg/fsutils"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 type pathOptions struct {
@@ -95,7 +94,14 @@ func (c *configCommand) preRunE(cmd *cobra.Command, args []string) error {
 	// It only needs to know the path of the configuration file.
 	cfg := config.NewDefault()
 
-	loader := config.NewLintersLoader(c.log.Child(logutils.DebugKeyConfigReader), c.viper, cmd.Flags(), c.opts, cfg, args)
+	loader := config.NewLintersLoader(
+		c.log.Child(logutils.DebugKeyConfigReader),
+		c.viper,
+		cmd.Flags(),
+		c.opts,
+		cfg,
+		args,
+	)
 
 	err := loader.Load(config.LoadOptions{})
 	if err != nil {

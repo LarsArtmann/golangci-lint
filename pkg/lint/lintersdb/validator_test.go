@@ -3,9 +3,8 @@ package lintersdb
 import (
 	"testing"
 
-	"github.com/stretchr/testify/require"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
+	"github.com/stretchr/testify/require"
 )
 
 type validateErrorTestCase struct {

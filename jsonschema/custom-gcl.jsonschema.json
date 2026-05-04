@@ -26,23 +26,17 @@
       },
       "additionalProperties": false,
       "type": "object",
-      "required": [
-        "version"
-      ],
+      "required": ["version"],
       "description": "Configuration represents the configuration file."
     },
     "Plugin": {
       "oneOf": [
         {
-          "required": [
-            "version"
-          ],
+          "required": ["version"],
           "title": "version"
         },
         {
-          "required": [
-            "path"
-          ],
+          "required": ["path"],
           "title": "path"
         }
       ],
@@ -66,9 +60,7 @@
       },
       "additionalProperties": false,
       "type": "object",
-      "required": [
-        "module"
-      ],
+      "required": ["module"],
       "description": "Plugin represents information about a plugin."
     }
   },

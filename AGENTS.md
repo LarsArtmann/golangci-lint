@@ -27,6 +27,7 @@ GL_TEST_RUN=1 go test -v -parallel 2 ./...    # Run tests directly
 ```
 
 **Integration tests for a specific linter**:
+
 ```bash
 # Test a specific linter's integration tests by testdata file name:
 make test_integration T=bodyclose.go
@@ -130,11 +131,13 @@ func New() *goanalysis.Linter {
 ```
 
 If the linter needs configuration, accept a settings struct:
+
 ```go
 func New(settings *config.SomeSettings) *goanalysis.Linter { ... }
 ```
 
 For linters with custom run logic (not just wrapping an analyzer), use `WithContextSetter` and `WithIssuesReporter`:
+
 ```go
 return goanalysis.
     NewLinterFromAnalyzer(analyzer).
@@ -215,6 +218,7 @@ Add the linter configuration (alphabetical order). Do NOT edit `.golangci.refere
 There are three common patterns for linter adapters:
 
 1. **Simple analyzer wrapper** — The linter just wraps an existing `analysis.Analyzer`:
+
    ```go
    func New() *goanalysis.Linter {
        return goanalysis.NewLinterFromAnalyzer(someanalyzer.Analyzer).
@@ -223,6 +227,7 @@ There are three common patterns for linter adapters:
    ```
 
 2. **With configuration** — Linter accepts config settings and uses `WithContextSetter`:
+
    ```go
    func New(settings *config.SomeSettings) *goanalysis.Linter {
        var mu sync.Mutex
@@ -285,6 +290,7 @@ There are three common patterns for linter adapters:
 ### Integration test flow
 
 Integration tests work by:
+
 1. Building the `golangci-lint` binary.
 2. Running it against testdata `.go` files with specific directives.
 3. Parsing `// want "pattern"` comments as expected diagnostics.

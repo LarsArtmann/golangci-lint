@@ -1,10 +1,9 @@
 package funlen
 
 import (
-	"github.com/ultraware/funlen"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/ultraware/funlen"
 )
 
 type Config struct {

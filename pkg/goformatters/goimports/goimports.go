@@ -3,9 +3,8 @@ package goimports
 import (
 	"strings"
 
-	"golang.org/x/tools/imports"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
+	"golang.org/x/tools/imports"
 )
 
 const Name = "goimports"

@@ -4,6 +4,6 @@ linters:
   settings:
     exhaustruct:
       include:
-      - .*\.ExhaustructCustom
+        - .*\.ExhaustructCustom
       exclude:
-      - .*\.ExhaustructCustom[\d]{1,2}
+        - .*\.ExhaustructCustom[\d]{1,2}

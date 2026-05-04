@@ -41,7 +41,7 @@ func initDefaultCache() Cache {
 	}
 	if _, err := os.Stat(filepath.Join(dir, "README")); err != nil {
 		// Best effort.
-		os.WriteFile(filepath.Join(dir, "README"), []byte(cacheREADME), 0666)
+		os.WriteFile(filepath.Join(dir, "README"), []byte(cacheREADME), 0o666)
 	}
 
 	diskCache, err := Open(dir)

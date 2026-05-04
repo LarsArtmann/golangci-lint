@@ -1,9 +1,8 @@
 package forcetypeassert
 
 import (
-	"github.com/gostaticanalysis/forcetypeassert"
-
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/gostaticanalysis/forcetypeassert"
 )
 
 func New() *goanalysis.Linter {

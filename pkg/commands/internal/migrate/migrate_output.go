@@ -86,7 +86,10 @@ func defaultFormatPath(p string) string {
 	return p
 }
 
-func cleanIncompatibleFormats(old versionone.OutputFormats, f1, f2 string) versionone.OutputFormats {
+func cleanIncompatibleFormats(
+	old versionone.OutputFormats,
+	f1, f2 string,
+) versionone.OutputFormats {
 	index1 := slices.IndexFunc(old, func(format versionone.OutputFormat) bool {
 		return ptr.Deref(format.Format) == f1
 	})

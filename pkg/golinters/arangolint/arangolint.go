@@ -1,9 +1,8 @@
 package arangolint
 
 import (
-	"go.augendre.info/arangolint/pkg/analyzer"
-
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"go.augendre.info/arangolint/pkg/analyzer"
 )
 
 func New() *goanalysis.Linter {

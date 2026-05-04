@@ -60,16 +60,20 @@ This property has been replaced with `linters.default: none`.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters:
   disable-all: true
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   default: none
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -79,16 +83,20 @@ This property has been replaced with `linters.default: all`.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters:
   enable-all: true
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   default: all
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -98,6 +106,7 @@ The linters `gci`, `gofmt`, `gofumpt`, and `goimports` have been moved to the `f
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters:
   enable:
@@ -106,8 +115,10 @@ linters:
     - gofumpt
     - goimports
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 formatters:
   enable:
@@ -116,6 +127,7 @@ formatters:
     - gofumpt
     - goimports
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -125,6 +137,7 @@ The linters `stylecheck`, `gosimple`, and `staticcheck` has been merged inside t
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters:
   enable:
@@ -132,13 +145,16 @@ linters:
     - staticcheck
     - stylecheck
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   enable:
     - staticcheck
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -149,10 +165,10 @@ This property has been removed.
 There are 2 new options (they are not strictly equivalent to the previous option):
 
 1. `linters.default: fast`: set all "fast" linters as the default set of linters.
-    ```yaml
-    linters:
-      default: fast
-    ```
+   ```yaml
+   linters:
+     default: fast
+   ```
 2. `--fast-only`: filters all enabled linters to keep only "fast" linters.
 
 #### `linters.presets`
@@ -165,27 +181,29 @@ The `migrate` command automatically migrates `linters.presets` in individual lin
 {{< tab >}}
 Presets:
 
-| name | linters |
-|------|---------|
-| bugs | `asasalint`, `asciicheck`, `bidichk`, `bodyclose`, `contextcheck`, `durationcheck`, `errcheck`, `errchkjson`, `errorlint`, `exhaustive`, `gocheckcompilerdirectives`, `gochecksumtype`, `gosec`, `gosmopolitan`, `govet`, `loggercheck`, `makezero`, `musttag`, `nilerr`, `nilnesserr`, `noctx`, `protogetter`, `reassign`, `recvcheck`, `rowserrcheck`, `spancheck`, `sqlclosecheck`, `staticcheck`, `testifylint`, `zerologlint` |
-| comment | `dupword`, `godot`, `godox`, `misspell` |
-| complexity | `cyclop`, `funlen`, `gocognit`, `gocyclo`, `maintidx`, `nestif` |
-| error | `err113`, `errcheck`, `errorlint`, `wrapcheck` |
-| format | `gci`, `gofmt`, `gofumpt`, `goimports` |
-| import | `depguard`, `gci`, `goimports`, `gomodguard` |
-| metalinter | `gocritic`, `govet`, `revive`, `staticcheck` |
-| module | `depguard`, `gomoddirectives`, `gomodguard` |
-| performance | `bodyclose`, `fatcontext`, `noctx`, `perfsprint`, `prealloc` |
-| sql | `rowserrcheck`, `sqlclosecheck` |
-| style | `asciicheck`, `canonicalheader`, `containedctx`, `copyloopvar`, `decorder`, `depguard`, `dogsled`, `dupl`, `err113`, `errname`, `exhaustruct`, `exptostd`, `forbidigo`, `forcetypeassert`, `ginkgolinter`, `gochecknoglobals`, `gochecknoinits`, `goconst`, `gocritic`, `godot`, `godox`, `goheader`, `gomoddirectives`, `gomodguard`, `goprintffuncname`, `gosimple`, `grouper`, `iface`, `importas`, `inamedparam`, `interfacebloat`, `intrange`, `ireturn`, `lll`, `loggercheck`, `makezero`, `mirror`, `misspell`, `mnd`, `musttag`, `nakedret`, `nilnil`, `nlreturn`, `nolintlint`, `nonamedreturns`, `nosprintfhostport`, `paralleltest`, `predeclared`, `promlinter`, `revive`, `sloglint`, `stylecheck`, `tagalign`, `tagliatelle`, `testpackage`, `tparallel`, `unconvert`, `usestdlibvars`, `varnamelen`, `wastedassign`, `whitespace`, `wrapcheck`, `wsl` |
-| test | `exhaustruct`, `paralleltest`, `testableexamples`, `testifylint`, `testpackage`, `thelper`, `tparallel`, `usetesting` |
-| unused | `ineffassign`, `unparam`, `unused` |
+| name        | linters                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| bugs        | `asasalint`, `asciicheck`, `bidichk`, `bodyclose`, `contextcheck`, `durationcheck`, `errcheck`, `errchkjson`, `errorlint`, `exhaustive`, `gocheckcompilerdirectives`, `gochecksumtype`, `gosec`, `gosmopolitan`, `govet`, `loggercheck`, `makezero`, `musttag`, `nilerr`, `nilnesserr`, `noctx`, `protogetter`, `reassign`, `recvcheck`, `rowserrcheck`, `spancheck`, `sqlclosecheck`, `staticcheck`, `testifylint`, `zerologlint`                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| comment     | `dupword`, `godot`, `godox`, `misspell`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| complexity  | `cyclop`, `funlen`, `gocognit`, `gocyclo`, `maintidx`, `nestif`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| error       | `err113`, `errcheck`, `errorlint`, `wrapcheck`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| format      | `gci`, `gofmt`, `gofumpt`, `goimports`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| import      | `depguard`, `gci`, `goimports`, `gomodguard`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| metalinter  | `gocritic`, `govet`, `revive`, `staticcheck`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| module      | `depguard`, `gomoddirectives`, `gomodguard`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| performance | `bodyclose`, `fatcontext`, `noctx`, `perfsprint`, `prealloc`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| sql         | `rowserrcheck`, `sqlclosecheck`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| style       | `asciicheck`, `canonicalheader`, `containedctx`, `copyloopvar`, `decorder`, `depguard`, `dogsled`, `dupl`, `err113`, `errname`, `exhaustruct`, `exptostd`, `forbidigo`, `forcetypeassert`, `ginkgolinter`, `gochecknoglobals`, `gochecknoinits`, `goconst`, `gocritic`, `godot`, `godox`, `goheader`, `gomoddirectives`, `gomodguard`, `goprintffuncname`, `gosimple`, `grouper`, `iface`, `importas`, `inamedparam`, `interfacebloat`, `intrange`, `ireturn`, `lll`, `loggercheck`, `makezero`, `mirror`, `misspell`, `mnd`, `musttag`, `nakedret`, `nilnil`, `nlreturn`, `nolintlint`, `nonamedreturns`, `nosprintfhostport`, `paralleltest`, `predeclared`, `promlinter`, `revive`, `sloglint`, `stylecheck`, `tagalign`, `tagliatelle`, `testpackage`, `tparallel`, `unconvert`, `usestdlibvars`, `varnamelen`, `wastedassign`, `whitespace`, `wrapcheck`, `wsl` |
+| test        | `exhaustruct`, `paralleltest`, `testableexamples`, `testifylint`, `testpackage`, `thelper`, `tparallel`, `usetesting`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| unused      | `ineffassign`, `unparam`, `unused`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 # Removed
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -219,7 +237,7 @@ The following deprecated linters have been removed:
 The alternative linters has been removed.
 
 | Alt Name v1 | Name v2       |
-|-------------|---------------|
+| ----------- | ------------- |
 | `gas`       | `gosec`       |
 | `goerr113`  | `err113`      |
 | `gomnd`     | `mnd`         |
@@ -230,6 +248,7 @@ The alternative linters has been removed.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters:
   enable:
@@ -241,8 +260,10 @@ linters:
     - vet
     - vetshadow
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   enable:
@@ -253,6 +274,7 @@ linters:
     - staticcheck
     - govet
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -264,6 +286,7 @@ Settings for `gci`, `gofmt`, `gofumpt`, and `goimports` are moved to the `format
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters-settings:
   govet:
@@ -271,8 +294,10 @@ linters-settings:
   gofmt:
     simplify: false
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   settings:
@@ -284,6 +309,7 @@ formatters:
     gofmt:
       simplify: false
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -295,13 +321,16 @@ To ignore test files, use `linters.exclusions.rules`.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters-settings:
   asasalint:
     ignore-test: true
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   exclusions:
@@ -310,6 +339,7 @@ linters:
         linters:
           - asasalint
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -319,19 +349,23 @@ This option has been deprecated since v1.58.0 and has been replaced with `linter
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters-settings:
   copyloopvar:
     ignore-alias: false
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   settings:
     copyloopvar:
       check-alias: true
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -343,13 +377,16 @@ To ignore test files, use `linters.exclusions.rules`.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters-settings:
   cyclop:
     skip-test: true
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   exclusions:
@@ -358,6 +395,7 @@ linters:
         linters:
           - cyclop
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -369,13 +407,16 @@ To exclude functions, use `linters.settings.errcheck.exclude-functions` instead.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters-settings:
   errcheck:
     exclude: ./errcheck_excludes.txt
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   settings:
@@ -385,6 +426,7 @@ linters:
         - io.Copy(*bytes.Buffer)
         - io.Copy(os.Stdout)
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -396,22 +438,26 @@ To exclude functions, use `linters.settings.errcheck.exclude-functions` instead.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters-settings:
   errcheck:
-    ignore: 'io:.*'
+    ignore: "io:.*"
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   settings:
     errcheck:
       exclude-functions:
-        - 'io.ReadFile'
-        - 'io.Copy(*bytes.Buffer)'
-        - 'io.Copy(os.Stdout)'
+        - "io.ReadFile"
+        - "io.Copy(*bytes.Buffer)"
+        - "io.Copy(os.Stdout)"
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -423,18 +469,22 @@ To analyze generated files, use `linters.exclusions.generated`.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters-settings:
   exhaustive:
     check-generated: true
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   exclusions:
     generated: disable
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -444,6 +494,7 @@ This field has been replaced with `linters-settings.forbidigo.forbid[].pattern`.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters-settings:
   forbidigo:
@@ -451,8 +502,10 @@ linters-settings:
       - p: '^fmt\.Print.*$'
         msg: Do not commit print statements.
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   settings:
@@ -461,6 +514,7 @@ linters:
         - pattern: '^fmt\.Print.*$'
           msg: Do not commit print statements.
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -470,23 +524,27 @@ The `pattern` has become mandatory for the `forbid` field.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters-settings:
   forbidigo:
     forbid:
-      - '^print(ln)?$'
+      - "^print(ln)?$"
       - '^spew\.(ConfigState\.)?Dump$'
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   settings:
     forbidigo:
       forbid:
-        - pattern: '^print(ln)?$'
+        - pattern: "^print(ln)?$"
         - pattern: '^spew\.(ConfigState\.)?Dump$'
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -498,13 +556,16 @@ Use `linters.settings.gci.sections` instead.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters-settings:
   gci:
-    local-prefixes: 'github.com/example/pkg'
+    local-prefixes: "github.com/example/pkg"
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   settings:
@@ -514,6 +575,7 @@ linters:
         - default
         - prefix(github.com/example/pkg)
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -525,19 +587,23 @@ To analyze generated files, use `linters.exclusions.generated`.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters:
   settings:
     gci:
       skip-generated: false
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   exclusions:
     generated: disable
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -549,13 +615,16 @@ To ignore test files, use `linters.exclusions.rules`.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters-settings:
   goconst:
     ignore-tests: true
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   exclusions:
@@ -564,6 +633,7 @@ linters:
         linters:
           - goconst
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -573,23 +643,27 @@ The special variable `${configDir}` has been replaced with `${base-path}`.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters-settings:
   gocritic:
     settings:
       ruleguard:
-        rules: '${configDir}/ruleguard/rules-*.go'
+        rules: "${configDir}/ruleguard/rules-*.go"
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   settings:
     gocritic:
       settings:
         ruleguard:
-          rules: '${base-path}/ruleguard/rules-*.go'
+          rules: "${base-path}/ruleguard/rules-*.go"
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -601,13 +675,16 @@ Use `linters.settings.govet.enable: shadow` instead.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters-settings:
   govet:
     check-shadowing: true
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   settings:
@@ -615,6 +692,7 @@ linters:
       enable:
         - shadow
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -624,14 +702,17 @@ This option has been replaced with `linters.settings.misspell.ignore-rules`.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters-settings:
   misspell:
     ignore-words:
       - foo
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   settings:
@@ -639,6 +720,7 @@ linters:
       ignore-rules:
         - foo
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -648,13 +730,16 @@ This string option has been replaced with the slice option with the same name.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters-settings:
   predeclared:
     ignore: "new,int"
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   settings:
@@ -663,6 +748,7 @@ linters:
         - new
         - int
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -672,19 +758,23 @@ This option has been replaced with `linters.settings.predeclared.qualified-name`
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters-settings:
   predeclared:
     q: true
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   settings:
     predeclared:
       qualified-name: true
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -696,18 +786,22 @@ Use `linters.exclusions.generated` instead.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters-settings:
   revive:
     ignore-generated-header: true
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   exclusions:
     generated: strict
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -717,19 +811,23 @@ This option has been deprecated since v1.58.0 and has been replaced with `linter
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters-settings:
   sloglint:
     context-only: true
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   settings:
     sloglint:
       context: all
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -741,17 +839,21 @@ Use `run.go` instead.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters-settings:
   staticcheck:
-    go: '1.22'
+    go: "1.22"
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 run:
-  go: '1.22'
+  go: "1.22"
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -761,16 +863,20 @@ This option has been deprecated since v1.60.0 and has been removed.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters-settings:
   unused:
     exported-is-used: true
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 # Removed
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -780,16 +886,20 @@ This option has been deprecated since v1.51.0 and has been removed.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters-settings:
   usestdlibvars:
     os-dev-null: true
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 # Removed
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -799,16 +909,20 @@ This option has been deprecated since v1.51.0 and has been removed.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters-settings:
   usestdlibvars:
     syslog-priority: true
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 # Removed
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -818,21 +932,25 @@ This option has been renamed to `linters.settings.wrapcheck.ignore-interface-reg
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters-settings:
   wrapcheck:
     ignoreInterfaceRegexps:
-      - '^(?i)c(?-i)ach(ing|e)'
+      - "^(?i)c(?-i)ach(ing|e)"
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   settings:
     wrapcheck:
       ignore-interface-regexps:
-        - '^(?i)c(?-i)ach(ing|e)'
+        - "^(?i)c(?-i)ach(ing|e)"
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -842,21 +960,25 @@ This option has been renamed to `linters.settings.wrapcheck.ignore-package-globs
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters-settings:
   wrapcheck:
     ignorePackageGlobs:
-      - 'encoding/*'
+      - "encoding/*"
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   settings:
     wrapcheck:
       ignore-package-globs:
-        - 'encoding/*'
+        - "encoding/*"
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -866,14 +988,17 @@ This option has been renamed to `linters.settings.wrapcheck.ignore-sig-regexps`.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
-  linters-settings:
-    wrapcheck:
-      ignoreSigRegexps:
-        - '\.New.*Error\('
+linters-settings:
+  wrapcheck:
+    ignoreSigRegexps:
+      - '\.New.*Error\('
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   settings:
@@ -881,6 +1006,7 @@ linters:
       ignore-sig-regexps:
         - '\.New.*Error\('
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -890,21 +1016,25 @@ This option has been renamed to `linters.settings.wrapcheck.ignore-sigs`.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters-settings:
   wrapcheck:
     ignoreSigs:
-      - '.Errorf('
+      - ".Errorf("
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   settings:
     wrapcheck:
       ignore-sigs:
-        - '.Errorf('
+        - ".Errorf("
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -920,14 +1050,17 @@ To ignore case, use `(?i)` at the beginning of a regex syntax.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 issues:
   exclude-case-sensitive: false
   exclude:
-    - 'abcdef'
+    - "abcdef"
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   exclusions:
@@ -935,6 +1068,7 @@ linters:
       - path: '(.+)\.go$'
         text: (?i)abcdef
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -946,10 +1080,12 @@ Use `linters.exclusions.paths` and `formatters.exclusions.paths` to exclude dire
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 issues:
   exclude-dirs-use-default: true
 ```
+
 {{< /tab >}}
 {{< tab >}}
 
@@ -961,6 +1097,7 @@ linters:
       - builtin$
       - examples$
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -970,14 +1107,17 @@ This property has been replaced with `linters.exclusions.paths` and `formatters.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 issues:
   exclude-dirs:
     - src/external_libs
     - autogenerated_by_my_lib
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   exclusions:
@@ -985,6 +1125,7 @@ linters:
       - src/external_libs
       - autogenerated_by_my_lib
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -994,14 +1135,17 @@ This property has been replaced with `linters.exclusions.paths` and `formatters.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 issues:
   exclude-files:
     - '.*\.my\.go$'
     - lib/bad.go
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   exclusions:
@@ -1009,6 +1153,7 @@ linters:
       - '.*\.my\.go$'
       - lib/bad.go
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -1018,17 +1163,21 @@ This property has been deprecated since v1.59.0 and has been replaced with `lint
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters:
   exclude-generated-strict: true
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   exclusions:
     generated: strict
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -1038,17 +1187,21 @@ This property has been replaced with `linters.exclusions.generated`.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 linters:
   exclude-generated: lax
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   exclusions:
     generated: lax
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -1058,6 +1211,7 @@ This property has been replaced with `linters.exclusions.rules`.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 issues:
   exclude-rules:
@@ -1081,8 +1235,10 @@ issues:
         - err113
       source: "foo"
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   exclusions:
@@ -1100,16 +1256,16 @@ linters:
         text: weak cryptographic primitive
         linters:
           - gosec
-      - text: 'SA9003:'
+      - text: "SA9003:"
         linters:
           - staticcheck
       - source: foo
         linters:
           - err113
-  ```
+```
+
 {{< /tab >}}
 {{< /tabs >}}
-
 
 #### `issues.exclude-use-default`
 
@@ -1117,12 +1273,15 @@ This property has been replaced with `linters.exclusions.presets`.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 issues:
   exclude-use-default: true
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   exclusions:
@@ -1132,6 +1291,7 @@ linters:
       - legacy
       - std-error-handling
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -1141,13 +1301,16 @@ This property has been replaced with `linters.exclusions.rules`.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 issues:
   exclude:
     - abcdef
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   exclusions:
@@ -1155,6 +1318,7 @@ linters:
     - path: '(.+)\.go$'
       text: abcdef
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -1164,14 +1328,17 @@ This property has been replaced with `linters.exclusions.presets`.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 issues:
   include:
     - EXC0014
     - EXC0015
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   exclusions:
@@ -1180,6 +1347,7 @@ linters:
       - legacy
       - std-error-handling
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -1191,23 +1359,27 @@ This property has been deprecated since v1.57.0 and has been replaced with `outp
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 output:
-  format: 'checkstyle:report.xml,json:stdout,colored-line-number'
+  format: "checkstyle:report.xml,json:stdout,colored-line-number"
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 output:
   formats:
     checkstyle:
-      path: 'report.xml'
+      path: "report.xml"
     json:
       path: stdout
     text:
       path: stdout
       color: true
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -1217,6 +1389,7 @@ The property `output.formats[].format` has been replaced with `output.formats[].
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 output:
   formats:
@@ -1225,8 +1398,10 @@ output:
     - format: checkstyle
       path: report.xml
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 output:
   formats:
@@ -1235,6 +1410,7 @@ output:
     checkstyle:
       path: report.xml
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -1244,19 +1420,23 @@ This format has been replaced by the format `text`.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 output:
   formats:
     - format: line-number
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 output:
   formats:
     text:
       path: stdout
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -1266,13 +1446,16 @@ This format has been replaced by the format `text` with the option `colors` (`tr
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 output:
   formats:
     - format: colored-line-number
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 output:
   formats:
@@ -1280,6 +1463,7 @@ output:
       path: stdout
       colors: true
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -1289,13 +1473,16 @@ This format has been replaced by the format `tab` with the option `colors` (`tru
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 output:
   formats:
     - format: colored-tab
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 output:
   formats:
@@ -1303,6 +1490,7 @@ output:
       path: stdout
       colors: true
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -1314,6 +1502,7 @@ To not print the lines with issues, use the `text` format with the option `print
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 output:
   formats:
@@ -1321,8 +1510,10 @@ output:
       path: stdout
   print-issued-lines: false
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 output:
   formats:
@@ -1330,6 +1521,7 @@ output:
       path: stdout
       print-issued-lines: false
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -1341,6 +1533,7 @@ To not print the linter name, use the `text` format with the option `print-linte
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 output:
   formats:
@@ -1348,8 +1541,10 @@ output:
       path: stdout
   print-linter-name: false
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 output:
   formats:
@@ -1357,6 +1552,7 @@ output:
       path: stdout
       print-linter-name: false
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -1380,16 +1576,20 @@ This property has been deprecated since v1.63.0 and has been replaced by `issues
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 output:
   uniq-by-line: true
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 issues:
   uniq-by-line: true
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -1409,16 +1609,20 @@ This property has a new default value of `cfg` instead of `wd`.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 run:
 # When not specified, relative-path-mode is set to 'wd' by default
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 run:
-  relative-path-mode: 'cfg'
+  relative-path-mode: "cfg"
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -1428,16 +1632,20 @@ This property has been deprecated since v1.57.0 and has been replaced by `output
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 run:
   show-stats: true
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 output:
   show-stats: true
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -1447,16 +1655,20 @@ This property has been deprecated since v1.57.0 and has been replaced by `issues
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 run:
   skip-dirs-use-default: false
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 issues:
   exclude-dirs-use-default: false
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -1468,14 +1680,17 @@ Use `linters.exclusions.paths` and `formatters.exclusions.paths` to exclude dire
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 run:
   skip-dirs:
     - src/external_libs
     - autogenerated_by_my_lib
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   exclusions:
@@ -1483,6 +1698,7 @@ linters:
       - src/external_libs
       - autogenerated_by_my_lib
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -1494,14 +1710,17 @@ Use `linters.exclusions.paths` and `formatters.exclusions.paths` to exclude file
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 run:
   skip-files:
     - '.*\.my\.go$'
     - lib/bad.go
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 linters:
   exclusions:
@@ -1509,6 +1728,7 @@ linters:
       - '.*\.my\.go$'
       - lib/bad.go
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -1524,16 +1744,20 @@ This property has been replaced with `severity.default`.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 severity:
   default-severity: error
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 severity:
   default: error
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -1545,6 +1769,7 @@ To ignore case, use `(?i)` at the beginning of a regex syntax.
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```yaml
 severity:
   case-sensitive: true
@@ -1552,18 +1777,21 @@ severity:
     - severity: info
       linters:
         - foo
-      text: 'Example.*'
+      text: "Example.*"
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```yaml
 severity:
   rules:
     - severity: info
       linters:
         - foo
-      text: '(?i)Example.*'
+      text: "(?i)Example.*"
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -1581,14 +1809,17 @@ version: "2"
 
 {{< tabs items="v1,v2" >}}
 {{< tab >}}
+
 ```JSONata
 "go.lintTool": "golangci-lint",
 "go.lintFlags": [
   "--fast"
 ]
 ```
+
 {{< /tab >}}
 {{< tab >}}
+
 ```JSONata
 "go.lintTool": "golangci-lint",
 "go.lintFlags": [
@@ -1603,6 +1834,7 @@ version: "2"
   "--stdin"
 ]
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -1707,12 +1939,14 @@ Run only the `govet` linter, output results to stdout in JSON format, and sort r
 ```bash
 golangci-lint run --disable-all --enable=govet --out-format=json --sort-order=linter --sort-results
 ```
+
 {{< /tab >}}
 {{< tab >}}
 
 ```bash
 golangci-lint run --default=none --enable=govet --output.json.path=stdout
 ```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -1724,11 +1958,13 @@ Do not print issued lines, output results to stdout without colors in text forma
 ```bash
 golangci-lint run --print-issued-lines=false --out-format code-climate:gl-code-quality-report.json,line-number
 ```
+
 {{< /tab >}}
 {{< tab >}}
 
 ```bash
 golangci-lint run --output.text.path=stdout --output.text.colors=false --output.text.print-issued-lines=false --output.code-climate.path=gl-code-quality-report.json
 ```
+
 {{< /tab >}}
 {{< /tabs >}}

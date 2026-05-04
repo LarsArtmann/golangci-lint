@@ -8,12 +8,11 @@ import (
 	"slices"
 
 	"github.com/go-viper/mapstructure/v2"
-	"github.com/mitchellh/go-homedir"
-	"github.com/spf13/viper"
-
 	"github.com/golangci/golangci-lint/v2/pkg/exitcodes"
 	"github.com/golangci/golangci-lint/v2/pkg/fsutils"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
+	"github.com/mitchellh/go-homedir"
+	"github.com/spf13/viper"
 )
 
 type BaseConfig interface {
@@ -32,7 +31,13 @@ type BaseLoader struct {
 	args []string
 }
 
-func NewBaseLoader(log logutils.Log, v *viper.Viper, opts LoaderOptions, cfg BaseConfig, args []string) *BaseLoader {
+func NewBaseLoader(
+	log logutils.Log,
+	v *viper.Viper,
+	opts LoaderOptions,
+	cfg BaseConfig,
+	args []string,
+) *BaseLoader {
 	return &BaseLoader{
 		opts:  opts,
 		viper: v,

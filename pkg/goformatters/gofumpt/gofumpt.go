@@ -3,9 +3,8 @@ package gofumpt
 import (
 	"strings"
 
-	gofumpt "mvdan.cc/gofumpt/format"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
+	gofumpt "mvdan.cc/gofumpt/format"
 )
 
 const Name = "gofumpt"

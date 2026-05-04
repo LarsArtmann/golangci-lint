@@ -16,4 +16,4 @@ linters-settings:
     min: 2
     max: 2
     ignore-calls: false
-    ignore-strings: 'foo.+'
+    ignore-strings: "foo.+"

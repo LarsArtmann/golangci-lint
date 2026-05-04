@@ -9,10 +9,9 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/golangci/golangci-lint/v2/pkg/exitcodes"
 	hcversion "github.com/hashicorp/go-version"
 	"github.com/stretchr/testify/require"
-
-	"github.com/golangci/golangci-lint/v2/pkg/exitcodes"
 )
 
 // RunContext the information extracted from directives.
@@ -108,9 +107,12 @@ func ParseTestDirectives(tb testing.TB, sourcePath string) *RunContext {
 	if rc.ExpectedLinter == "" {
 		for _, arg := range rc.Args {
 			if strings.HasPrefix(arg, "-E") && !strings.Contains(arg, ",") {
-				require.Empty(tb, rc.ExpectedLinter,
+				require.Empty(
+					tb,
+					rc.ExpectedLinter,
 					"could not infer expected linter for errors because multiple linters are enabled. "+
-						"Please use the `//golangcitest:expected_linter ` directive in your test to indicate the linter-under-test.")
+						"Please use the `//golangcitest:expected_linter ` directive in your test to indicate the linter-under-test.",
+				)
 				rc.ExpectedLinter = arg[2:]
 			}
 		}

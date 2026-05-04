@@ -16,9 +16,9 @@ linters-settings:
       - return
       - assign
     ignored-numbers:
-      - '0666'
-      - '0755'
-      - '42'
+      - "0666"
+      - "0755"
+      - "42"
     ignored-files:
       - 'magic1_.+\.go$'
     ignored-functions:

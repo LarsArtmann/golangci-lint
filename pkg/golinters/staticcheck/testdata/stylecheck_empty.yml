@@ -4,4 +4,4 @@ linters:
   settings:
     staticcheck:
       checks: ["ST1013"]
-      http-status-code-whitelist: [ ]
+      http-status-code-whitelist: []

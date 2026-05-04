@@ -6,14 +6,13 @@ import (
 	"slices"
 	"strings"
 
-	"golang.org/x/tools/go/analysis"
-	"golang.org/x/tools/go/packages"
-
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis/pkgerrors"
 	"github.com/golangci/golangci-lint/v2/pkg/lint/linter"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
 	"github.com/golangci/golangci-lint/v2/pkg/result"
 	"github.com/golangci/golangci-lint/v2/pkg/timeutils"
+	"golang.org/x/tools/go/analysis"
+	"golang.org/x/tools/go/packages"
 )
 
 type runAnalyzersConfig interface {
@@ -32,7 +31,14 @@ func runAnalyzers(cfg runAnalyzersConfig, lintCtx *linter.Context) ([]*result.Is
 	const stagesToPrint = 10
 	defer sw.PrintTopStages(stagesToPrint)
 
-	runner := newRunner(cfg.getName(), log, lintCtx.PkgCache, lintCtx.LoadGuard, cfg.getLoadMode(), sw)
+	runner := newRunner(
+		cfg.getName(),
+		log,
+		lintCtx.PkgCache,
+		lintCtx.LoadGuard,
+		cfg.getLoadMode(),
+		sw,
+	)
 
 	pkgs := lintCtx.Packages
 	if cfg.useOriginalPackages() {
@@ -83,7 +89,10 @@ func runAnalyzers(cfg runAnalyzersConfig, lintCtx *linter.Context) ([]*result.Is
 	return issues, nil
 }
 
-func buildIssues(diags []*Diagnostic, linterNameBuilder func(diag *Diagnostic) string) []*result.Issue {
+func buildIssues(
+	diags []*Diagnostic,
+	linterNameBuilder func(diag *Diagnostic) string,
+) []*result.Issue {
 	var issues []*result.Issue
 
 	for _, diag := range diags {
@@ -145,9 +154,13 @@ func buildIssues(diags []*Diagnostic, linterNameBuilder func(diag *Diagnostic) s
 
 				issues = append(issues, &result.Issue{
 					FromLinter: linterName,
-					Text:       fmt.Sprintf("%s(related information): %s", diag.Analyzer.Name, info.Message),
-					Pos:        relatedPos,
-					Pkg:        diag.Pkg,
+					Text: fmt.Sprintf(
+						"%s(related information): %s",
+						diag.Analyzer.Name,
+						info.Message,
+					),
+					Pos: relatedPos,
+					Pkg: diag.Pkg,
 				})
 			}
 		}

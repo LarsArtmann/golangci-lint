@@ -7,12 +7,11 @@ import (
 	"os"
 	"slices"
 
-	"github.com/spf13/pflag"
-	"github.com/spf13/viper"
-
 	"github.com/golangci/golangci-lint/v2/pkg/fsutils"
 	"github.com/golangci/golangci-lint/v2/pkg/goutil"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
+	"github.com/spf13/pflag"
+	"github.com/spf13/viper"
 )
 
 var errConfigDisabled = errors.New("config is disabled by --no-config")
@@ -42,21 +41,42 @@ type Loader struct {
 	mode string
 }
 
-func NewLintersLoader(log logutils.Log, v *viper.Viper, fs *pflag.FlagSet, opts LoaderOptions, cfg *Config, args []string) *Loader {
+func NewLintersLoader(
+	log logutils.Log,
+	v *viper.Viper,
+	fs *pflag.FlagSet,
+	opts LoaderOptions,
+	cfg *Config,
+	args []string,
+) *Loader {
 	loader := newLoader(log, v, fs, opts, cfg, args)
 	loader.mode = modeLinters
 
 	return loader
 }
 
-func NewFormattersLoader(log logutils.Log, v *viper.Viper, fs *pflag.FlagSet, opts LoaderOptions, cfg *Config, args []string) *Loader {
+func NewFormattersLoader(
+	log logutils.Log,
+	v *viper.Viper,
+	fs *pflag.FlagSet,
+	opts LoaderOptions,
+	cfg *Config,
+	args []string,
+) *Loader {
 	loader := newLoader(log, v, fs, opts, cfg, args)
 	loader.mode = modeFormatters
 
 	return loader
 }
 
-func newLoader(log logutils.Log, v *viper.Viper, fs *pflag.FlagSet, opts LoaderOptions, cfg *Config, args []string) *Loader {
+func newLoader(
+	log logutils.Log,
+	v *viper.Viper,
+	fs *pflag.FlagSet,
+	opts LoaderOptions,
+	cfg *Config,
+	args []string,
+) *Loader {
 	return &Loader{
 		BaseLoader: NewBaseLoader(log, v, opts, cfg, args),
 		fs:         fs,
@@ -109,7 +129,11 @@ func (l *Loader) Load(opts LoadOptions) error {
 		return err
 	}
 
-	l.cfg.basePath, err = fsutils.GetBasePath(context.Background(), l.cfg.Run.RelativePathMode, l.cfg.cfgDir)
+	l.cfg.basePath, err = fsutils.GetBasePath(
+		context.Background(),
+		l.cfg.Run.RelativePathMode,
+		l.cfg.cfgDir,
+	)
 	if err != nil {
 		return fmt.Errorf("get base path: %w", err)
 	}
@@ -193,11 +217,15 @@ func (l *Loader) handleDeprecation() error {
 func (l *Loader) handleLinterOptionDeprecations() {
 	// Deprecated since v2.1.0.
 	if l.cfg.Linters.Settings.Goconst.IgnoreStrings != "" {
-		l.log.Warnf("The configuration option `linters.settings.goconst.ignore-strings` is deprecated, " +
-			"please use `linters.settings.goconst.ignore-string-values`.")
+		l.log.Warnf(
+			"The configuration option `linters.settings.goconst.ignore-strings` is deprecated, " +
+				"please use `linters.settings.goconst.ignore-string-values`.",
+		)
 
-		l.cfg.Linters.Settings.Goconst.IgnoreStringValues = append(l.cfg.Linters.Settings.Goconst.IgnoreStringValues,
-			l.cfg.Linters.Settings.Goconst.IgnoreStrings)
+		l.cfg.Linters.Settings.Goconst.IgnoreStringValues = append(
+			l.cfg.Linters.Settings.Goconst.IgnoreStringValues,
+			l.cfg.Linters.Settings.Goconst.IgnoreStrings,
+		)
 	}
 }
 

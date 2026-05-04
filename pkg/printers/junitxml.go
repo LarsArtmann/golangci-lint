@@ -43,8 +43,15 @@ func (p JUnitXML) Print(issues []*result.Issue) error {
 			Failure: failureXML{
 				Type:    issue.Severity,
 				Message: issue.Pos.String() + ": " + issue.Text,
-				Content: fmt.Sprintf("%s: %s\nCategory: %s\nFile: %s\nLine: %d\nDetails: %s",
-					issue.Severity, issue.Text, issue.FromLinter, issue.Pos.Filename, issue.Pos.Line, strings.Join(issue.SourceLines, "\n")),
+				Content: fmt.Sprintf(
+					"%s: %s\nCategory: %s\nFile: %s\nLine: %d\nDetails: %s",
+					issue.Severity,
+					issue.Text,
+					issue.FromLinter,
+					issue.Pos.Filename,
+					issue.Pos.Line,
+					strings.Join(issue.SourceLines, "\n"),
+				),
 			},
 		}
 
@@ -59,7 +66,7 @@ func (p JUnitXML) Print(issues []*result.Issue) error {
 
 	var res testSuitesXML
 
-	res.TestSuites = slices.SortedFunc(maps.Values(suites), func(a testSuiteXML, b testSuiteXML) int {
+	res.TestSuites = slices.SortedFunc(maps.Values(suites), func(a, b testSuiteXML) int {
 		return strings.Compare(a.Suite, b.Suite)
 	})
 

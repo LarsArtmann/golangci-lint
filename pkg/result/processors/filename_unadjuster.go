@@ -8,10 +8,9 @@ import (
 	"sync"
 	"time"
 
-	"golang.org/x/tools/go/packages"
-
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
 	"github.com/golangci/golangci-lint/v2/pkg/result"
+	"golang.org/x/tools/go/packages"
 )
 
 var _ Processor = (*FilenameUnadjuster)(nil)

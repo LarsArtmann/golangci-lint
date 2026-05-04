@@ -10,9 +10,9 @@ linters-settings:
   staticcheck:
     checks:
       - all
-      - '-SA1000'
-      - '-SA1001'
-      - '-SA1002'
+      - "-SA1000"
+      - "-SA1001"
+      - "-SA1002"
       - SA1003
       - SA1004
       - SA1005
@@ -108,10 +108,10 @@ linters-settings:
 
   gosimple:
     checks:
-      - '*'
-      - '-S1000'
-      - '-S1001'
-      - '-S1002'
+      - "*"
+      - "-S1000"
+      - "-S1001"
+      - "-S1002"
       - S1003
       - S1004
       - S1005
@@ -148,13 +148,57 @@ linters-settings:
   stylecheck:
     dot-import-whitelist:
       - fmt
-    initialisms: [ "ACL", "API", "ASCII", "CPU", "CSS", "DNS", "EOF", "GUID", "HTML", "HTTP", "HTTPS", "ID", "IP", "JSON", "QPS", "RAM", "RPC", "SLA", "SMTP", "SQL", "SSH", "TCP", "TLS", "TTL", "UDP", "UI", "GID", "UID", "UUID", "URI", "URL", "UTF8", "VM", "XML", "XMPP", "XSRF", "XSS", "SIP", "RTP", "AMQP", "DB", "TS" ]
-    http-status-code-whitelist: [ "200", "400", "404", "500" ]
+    initialisms:
+      [
+        "ACL",
+        "API",
+        "ASCII",
+        "CPU",
+        "CSS",
+        "DNS",
+        "EOF",
+        "GUID",
+        "HTML",
+        "HTTP",
+        "HTTPS",
+        "ID",
+        "IP",
+        "JSON",
+        "QPS",
+        "RAM",
+        "RPC",
+        "SLA",
+        "SMTP",
+        "SQL",
+        "SSH",
+        "TCP",
+        "TLS",
+        "TTL",
+        "UDP",
+        "UI",
+        "GID",
+        "UID",
+        "UUID",
+        "URI",
+        "URL",
+        "UTF8",
+        "VM",
+        "XML",
+        "XMPP",
+        "XSRF",
+        "XSS",
+        "SIP",
+        "RTP",
+        "AMQP",
+        "DB",
+        "TS",
+      ]
+    http-status-code-whitelist: ["200", "400", "404", "500"]
     checks:
       - all
-      - '-ST1000'
-      - '-ST1001'
-      - '-ST1003'
+      - "-ST1000"
+      - "-ST1001"
+      - "-ST1003"
       - ST1005
       - ST1006
       - ST1008

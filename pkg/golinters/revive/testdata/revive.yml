@@ -7,17 +7,17 @@ linters:
       rules:
         - name: exported
         - name: cognitive-complexity
-          arguments: [ 7 ]
+          arguments: [7]
         - name: line-length-limit
-          arguments: [ 130 ]
+          arguments: [130]
         - name: function-result-limit
-          arguments: [ 3 ]
+          arguments: [3]
         - name: argument-limit
-          arguments: [ 4 ]
+          arguments: [4]
         - name: cyclomatic
-          arguments: [ 10 ]
+          arguments: [10]
         - name: max-public-structs
-          arguments: [ 3 ]
+          arguments: [3]
         - name: error-strings
           arguments:
             - "xerrors.New"

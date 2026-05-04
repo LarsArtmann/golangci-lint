@@ -24,8 +24,14 @@ func NewCodeClimate(log logutils.Log, w io.Writer) *CodeClimate {
 		w:   w,
 		sanitizer: severitySanitizer{
 			// https://github.com/codeclimate/platform/blob/HEAD/spec/analyzers/SPEC.md#data-types
-			allowedSeverities: []string{"info", "minor", "major", defaultCodeClimateSeverity, "blocker"},
-			defaultSeverity:   defaultCodeClimateSeverity,
+			allowedSeverities: []string{
+				"info",
+				"minor",
+				"major",
+				defaultCodeClimateSeverity,
+				"blocker",
+			},
+			defaultSeverity: defaultCodeClimateSeverity,
 		},
 	}
 }

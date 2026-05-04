@@ -8,5 +8,5 @@ linters:
           AUTHOR: The Awesome Project Authors
       template: |-
         Copyright 2024 {{ AUTHOR }}
-  
+
         Use of this source code is governed by LICENSE

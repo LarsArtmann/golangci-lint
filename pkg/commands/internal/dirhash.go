@@ -59,7 +59,10 @@ func dirFiles(dir, prefix string) ([]string, error) {
 			}
 
 			// Skip submodules (directories containing go.mod files).
-			if goModInfo, err := os.Lstat(filepath.Join(dir, "go.mod")); err == nil && !goModInfo.IsDir() {
+			if goModInfo, err := os.Lstat(
+				filepath.Join(dir, "go.mod"),
+			); err == nil &&
+				!goModInfo.IsDir() {
 				return filepath.SkipDir
 			}
 

@@ -6,9 +6,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/stretchr/testify/require"
-
 	"github.com/golangci/golangci-lint/v2/test/testshared"
+	"github.com/stretchr/testify/require"
 )
 
 // value: "1"
@@ -82,7 +81,9 @@ func runFix(t *testing.T, extraArgs ...string) {
 			output, err := os.ReadFile(input)
 			require.NoError(t, err)
 
-			expectedOutput, err := os.ReadFile(filepath.Join(testdataDir, "fix", "out", filepath.Base(input)))
+			expectedOutput, err := os.ReadFile(
+				filepath.Join(testdataDir, "fix", "out", filepath.Base(input)),
+			)
 			require.NoError(t, err)
 
 			require.Equal(t, string(expectedOutput), string(output))

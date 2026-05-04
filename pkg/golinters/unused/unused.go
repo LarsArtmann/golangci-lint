@@ -4,16 +4,15 @@ import (
 	"fmt"
 	"sync"
 
+	"github.com/golangci/golangci-lint/v2/pkg/config"
+	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/golangci/golangci-lint/v2/pkg/lint/linter"
+	"github.com/golangci/golangci-lint/v2/pkg/result"
 	"golang.org/x/tools/go/analysis"
 	"honnef.co/go/tools/analysis/facts/directives"
 	"honnef.co/go/tools/analysis/facts/generated"
 	"honnef.co/go/tools/analysis/lint"
 	"honnef.co/go/tools/unused"
-
-	"github.com/golangci/golangci-lint/v2/pkg/config"
-	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
-	"github.com/golangci/golangci-lint/v2/pkg/lint/linter"
-	"github.com/golangci/golangci-lint/v2/pkg/result"
 )
 
 const linterName = "unused"

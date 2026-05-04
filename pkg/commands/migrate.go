@@ -8,10 +8,6 @@ import (
 	"strings"
 
 	"github.com/charmbracelet/lipgloss"
-	"github.com/santhosh-tekuri/jsonschema/v6"
-	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
-
 	"github.com/golangci/golangci-lint/v2/pkg/commands/internal/migrate"
 	"github.com/golangci/golangci-lint/v2/pkg/commands/internal/migrate/fakeloader"
 	"github.com/golangci/golangci-lint/v2/pkg/commands/internal/migrate/parser"
@@ -19,6 +15,9 @@ import (
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/exitcodes"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
+	"github.com/santhosh-tekuri/jsonschema/v6"
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 type migrateOptions struct {
@@ -59,7 +58,9 @@ func newMigrateCommand(log logutils.Log, info BuildInfo) *migrateCommand {
 		PersistentPreRunE: c.persistentPreRunE,
 	}
 
-	migrateCmd.SetOut(logutils.StdOut) // use custom output to properly color it in Windows terminals
+	migrateCmd.SetOut(
+		logutils.StdOut,
+	) // use custom output to properly color it in Windows terminals
 	migrateCmd.SetErr(logutils.StdErr)
 
 	fs := migrateCmd.Flags()
@@ -92,7 +93,9 @@ func (c *migrateCommand) execute(_ *cobra.Command, _ []string) error {
 	}
 
 	c.log.Warnf("The configuration comments are not migrated.")
-	c.log.Warnf("Details about the migration: https://golangci-lint.run/docs/product/migration-guide/")
+	c.log.Warnf(
+		"Details about the migration: https://golangci-lint.run/docs/product/migration-guide/",
+	)
 
 	c.log.Infof("Migrating v1 configuration file: %s", srcPath)
 
@@ -109,7 +112,9 @@ func (c *migrateCommand) execute(_ *cobra.Command, _ []string) error {
 	}
 
 	if c.cfg.Run.Timeout != 0 {
-		c.log.Warnf("The configuration `run.timeout` is ignored. By default, in v2, the timeout is disabled.")
+		c.log.Warnf(
+			"The configuration `run.timeout` is ignored. By default, in v2, the timeout is disabled.",
+		)
 	}
 
 	newCfg := migrate.ToConfig(c.cfg)
@@ -152,7 +157,10 @@ func (c *migrateCommand) preRunE(cmd *cobra.Command, _ []string) error {
 
 	c.log.Infof("Validating v1 configuration file: %s", usedConfigFile)
 
-	err := validateConfiguration("https://golangci-lint.run/jsonschema/golangci.v1.jsonschema.json", usedConfigFile)
+	err := validateConfiguration(
+		"https://golangci-lint.run/jsonschema/golangci.v1.jsonschema.json",
+		usedConfigFile,
+	)
 	if err != nil {
 		var v *jsonschema.ValidationError
 		if !errors.As(err, &v) {
@@ -170,7 +178,13 @@ func (c *migrateCommand) preRunE(cmd *cobra.Command, _ []string) error {
 func (c *migrateCommand) persistentPreRunE(_ *cobra.Command, args []string) error {
 	c.log.Infof("%s", c.buildInfo.String())
 
-	loader := config.NewBaseLoader(c.log.Child(logutils.DebugKeyConfigReader), c.viper, c.opts.LoaderOptions, fakeloader.NewConfig(), args)
+	loader := config.NewBaseLoader(
+		c.log.Child(logutils.DebugKeyConfigReader),
+		c.viper,
+		c.opts.LoaderOptions,
+		fakeloader.NewConfig(),
+		args,
+	)
 
 	// Loads the configuration just to get the effective path of the configuration.
 	err := loader.Load()
@@ -188,7 +202,12 @@ func (c *migrateCommand) persistentPreRunE(_ *cobra.Command, args []string) erro
 }
 
 func (c *migrateCommand) backupConfigurationFile(srcPath string) error {
-	filename := strings.TrimSuffix(filepath.Base(srcPath), filepath.Ext(srcPath)) + ".bck" + filepath.Ext(srcPath)
+	filename := strings.TrimSuffix(
+		filepath.Base(srcPath),
+		filepath.Ext(srcPath),
+	) + ".bck" + filepath.Ext(
+		srcPath,
+	)
 	dstPath := filepath.Join(filepath.Dir(srcPath), filename)
 
 	c.log.Infof("Saving the v1 configuration to: %s", dstPath)

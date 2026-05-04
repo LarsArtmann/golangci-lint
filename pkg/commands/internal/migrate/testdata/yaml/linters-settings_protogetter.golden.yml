@@ -5,8 +5,8 @@ linters:
       skip-generated-by:
         - protoc-gen-go-my-own-generator
       skip-files:
-        - '*.pb.go'
-        - '*/vendor/*'
+        - "*.pb.go"
+        - "*/vendor/*"
         - /full/path/to/file.go
       skip-any-generated: true
       replace-first-arg-in-append: true

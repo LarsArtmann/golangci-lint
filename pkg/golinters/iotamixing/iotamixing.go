@@ -3,7 +3,6 @@ package iotamixing
 import (
 	im "github.com/AdminBenni/iota-mixing/pkg/analyzer"
 	"github.com/AdminBenni/iota-mixing/pkg/analyzer/flags"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 )

@@ -1,10 +1,9 @@
 package rowserrcheck
 
 import (
-	"github.com/jingyugao/rowserrcheck/passes/rowserr"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/jingyugao/rowserrcheck/passes/rowserr"
 )
 
 func New(settings *config.RowsErrCheckSettings) *goanalysis.Linter {

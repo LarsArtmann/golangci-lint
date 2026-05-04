@@ -3,9 +3,8 @@ package goanalysis
 import (
 	"go/token"
 
-	"golang.org/x/tools/go/analysis"
-
 	"github.com/golangci/golangci-lint/v2/pkg/result"
+	"golang.org/x/tools/go/analysis"
 )
 
 type Issue struct {

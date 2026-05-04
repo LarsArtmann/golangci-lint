@@ -1,10 +1,9 @@
 package spancheck
 
 import (
-	"github.com/jjti/go-spancheck"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/jjti/go-spancheck"
 )
 
 func New(settings *config.SpancheckSettings) *goanalysis.Linter {
@@ -20,7 +19,9 @@ func New(settings *config.SpancheckSettings) *goanalysis.Linter {
 		}
 
 		if len(settings.ExtraStartSpanSignatures) > 0 {
-			cfg.StartSpanMatchersSlice = append(cfg.StartSpanMatchersSlice, settings.ExtraStartSpanSignatures...)
+			cfg.StartSpanMatchersSlice = append(
+				cfg.StartSpanMatchersSlice,
+				settings.ExtraStartSpanSignatures...)
 		}
 	}
 

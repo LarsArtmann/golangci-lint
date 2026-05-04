@@ -73,7 +73,11 @@ type NolintFilter struct {
 	pattern *regexp.Regexp
 }
 
-func NewNolintFilter(log logutils.Log, dbManager *lintersdb.Manager, enabledLinters map[string]*linter.Config) *NolintFilter {
+func NewNolintFilter(
+	log logutils.Log,
+	dbManager *lintersdb.Manager,
+	enabledLinters map[string]*linter.Config,
+) *NolintFilter {
 	return &NolintFilter{
 		fileCache:         map[string]*fileData{},
 		dbManager:         dbManager,
@@ -101,21 +105,29 @@ func (p *NolintFilter) Finish() {
 
 	unknownLinters := slices.Sorted(maps.Keys(p.unknownLintersSet))
 
-	p.log.Warnf("Found unknown linters in //nolint directives: %s", strings.Join(unknownLinters, ", "))
+	p.log.Warnf(
+		"Found unknown linters in //nolint directives: %s",
+		strings.Join(unknownLinters, ", "),
+	)
 }
 
 func (p *NolintFilter) shouldPassIssue(issue *result.Issue) (bool, error) {
 	nolintDebugf("got issue: %v", *issue)
 
 	// don't expect disabled linters to cover their nolint statements
-	if issue.FromLinter == nolintlint.LinterName && issue.ExpectNoLint && issue.ExpectedNoLintLinter != "" {
+	if issue.FromLinter == nolintlint.LinterName && issue.ExpectNoLint &&
+		issue.ExpectedNoLintLinter != "" {
 		nolintDebugf("enabled linters: %v", p.enabledLinters)
 
 		if p.enabledLinters[issue.ExpectedNoLintLinter] == nil {
 			return false, nil
 		}
 
-		nolintDebugf("checking that lint issue was used for %s: %v", issue.ExpectedNoLintLinter, issue)
+		nolintDebugf(
+			"checking that lint issue was used for %s: %v",
+			issue.ExpectedNoLintLinter,
+			issue,
+		)
 	}
 
 	fd := p.getOrCreateFileData(issue)
@@ -166,7 +178,11 @@ func (p *NolintFilter) getOrCreateFileData(issue *result.Issue) *fileData {
 	return fd
 }
 
-func (p *NolintFilter) buildIgnoredRangesForFile(f *ast.File, fset *token.FileSet, filePath string) []ignoredRange {
+func (p *NolintFilter) buildIgnoredRangesForFile(
+	f *ast.File,
+	fset *token.FileSet,
+	filePath string,
+) []ignoredRange {
 	inlineRanges := p.extractFileCommentsInlineRanges(fset, f.Comments...)
 	nolintDebugf("file %s: inline nolint ranges are %+v", filePath, inlineRanges)
 
@@ -187,7 +203,10 @@ func (p *NolintFilter) buildIgnoredRangesForFile(f *ast.File, fset *token.FileSe
 	return allRanges
 }
 
-func (p *NolintFilter) extractFileCommentsInlineRanges(fset *token.FileSet, comments ...*ast.CommentGroup) []ignoredRange {
+func (p *NolintFilter) extractFileCommentsInlineRanges(
+	fset *token.FileSet,
+	comments ...*ast.CommentGroup,
+) []ignoredRange {
 	var ret []ignoredRange
 	for _, g := range comments {
 		for _, c := range g.List {
@@ -201,7 +220,11 @@ func (p *NolintFilter) extractFileCommentsInlineRanges(fset *token.FileSet, comm
 	return ret
 }
 
-func (p *NolintFilter) extractInlineRangeFromComment(text string, g ast.Node, fset *token.FileSet) *ignoredRange {
+func (p *NolintFilter) extractInlineRangeFromComment(
+	text string,
+	g ast.Node,
+	fset *token.FileSet,
+) *ignoredRange {
 	text = strings.TrimLeft(text, "/ ")
 	if !p.pattern.MatchString(text) {
 		return nil
@@ -304,7 +327,8 @@ func (issues sortWithNolintlintLast) Len() int {
 }
 
 func (issues sortWithNolintlintLast) Less(i, j int) bool {
-	return issues[i].FromLinter != nolintlint.LinterName && issues[j].FromLinter == nolintlint.LinterName
+	return issues[i].FromLinter != nolintlint.LinterName &&
+		issues[j].FromLinter == nolintlint.LinterName
 }
 
 func (issues sortWithNolintlintLast) Swap(i, j int) {

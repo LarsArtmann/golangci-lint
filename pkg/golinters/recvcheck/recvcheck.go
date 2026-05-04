@@ -1,10 +1,9 @@
 package recvcheck
 
 import (
-	"github.com/raeperd/recvcheck"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/raeperd/recvcheck"
 )
 
 func New(settings *config.RecvcheckSettings) *goanalysis.Linter {

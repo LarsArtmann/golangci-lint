@@ -20,13 +20,6 @@ import (
 	"time"
 
 	"github.com/gofrs/flock"
-	"github.com/ldez/grignotin/goenv"
-	"github.com/spf13/cobra"
-	"github.com/spf13/pflag"
-	"github.com/spf13/viper"
-	"go.yaml.in/yaml/v3"
-	"golang.org/x/mod/sumdb/dirhash"
-
 	"github.com/golangci/golangci-lint/v2/internal/cache"
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/exitcodes"
@@ -41,6 +34,12 @@ import (
 	"github.com/golangci/golangci-lint/v2/pkg/report"
 	"github.com/golangci/golangci-lint/v2/pkg/result"
 	"github.com/golangci/golangci-lint/v2/pkg/timeutils"
+	"github.com/ldez/grignotin/goenv"
+	"github.com/spf13/cobra"
+	"github.com/spf13/pflag"
+	"github.com/spf13/viper"
+	"go.yaml.in/yaml/v3"
+	"golang.org/x/mod/sumdb/dirhash"
 )
 
 const defaultTimeout = 0 * time.Minute
@@ -151,7 +150,14 @@ func (c *runCommand) persistentPreRunE(cmd *cobra.Command, args []string) error 
 
 	c.log.Infof("%s", c.buildInfo.String())
 
-	loader := config.NewLintersLoader(c.log.Child(logutils.DebugKeyConfigReader), c.viper, cmd.Flags(), c.opts.LoaderOptions, c.cfg, args)
+	loader := config.NewLintersLoader(
+		c.log.Child(logutils.DebugKeyConfigReader),
+		c.viper,
+		cmd.Flags(),
+		c.opts.LoaderOptions,
+		c.cfg,
+		args,
+	)
 
 	err := loader.Load(config.LoadOptions{CheckDeprecation: true, Validation: true})
 	if err != nil {
@@ -177,15 +183,25 @@ func (c *runCommand) persistentPostRunE(_ *cobra.Command, _ []string) error {
 }
 
 func (c *runCommand) preRunE(_ *cobra.Command, args []string) error {
-	dbManager, err := lintersdb.NewManager(c.log.Child(logutils.DebugKeyLintersDB), c.cfg,
-		lintersdb.NewLinterBuilder(), lintersdb.NewPluginModuleBuilder(c.log), lintersdb.NewPluginGoBuilder(c.log))
+	dbManager, err := lintersdb.NewManager(
+		c.log.Child(logutils.DebugKeyLintersDB),
+		c.cfg,
+		lintersdb.NewLinterBuilder(),
+		lintersdb.NewPluginModuleBuilder(c.log),
+		lintersdb.NewPluginGoBuilder(c.log),
+	)
 	if err != nil {
 		return err
 	}
 
 	c.dbManager = dbManager
 
-	c.printer, err = printers.NewPrinter(c.log, &c.cfg.Output.Formats, c.reportData, c.cfg.GetBasePath())
+	c.printer, err = printers.NewPrinter(
+		c.log,
+		&c.cfg.Output.Formats,
+		c.reportData,
+		c.cfg.GetBasePath(),
+	)
 	if err != nil {
 		return err
 	}
@@ -204,11 +220,21 @@ func (c *runCommand) preRunE(_ *cobra.Command, args []string) error {
 
 	guard := load.NewGuard()
 
-	pkgLoader := lint.NewPackageLoader(c.log.Child(logutils.DebugKeyLoader), c.cfg, args, c.goenv, guard)
+	pkgLoader := lint.NewPackageLoader(
+		c.log.Child(logutils.DebugKeyLoader),
+		c.cfg,
+		args,
+		c.goenv,
+		guard,
+	)
 
 	c.contextBuilder = lint.NewContextBuilder(c.cfg, pkgLoader, pkgCache, guard)
 
-	if err = initHashSalt(c.log.Child(logutils.DebugKeyGoModSalt), c.buildInfo.Version, c.cfg); err != nil {
+	if err = initHashSalt(
+		c.log.Child(logutils.DebugKeyGoModSalt),
+		c.buildInfo.Version,
+		c.cfg,
+	); err != nil {
 		return fmt.Errorf("failed to init hash salt: %w", err)
 	}
 
@@ -372,7 +398,11 @@ func (c *runCommand) runAnalysis(ctx context.Context) ([]*result.Issue, error) {
 		return nil, err
 	}
 
-	lintCtx, err := c.contextBuilder.Build(ctx, c.log.Child(logutils.DebugKeyLintersContext), lintersToRun)
+	lintCtx, err := c.contextBuilder.Build(
+		ctx,
+		c.log.Child(logutils.DebugKeyLintersContext),
+		lintersToRun,
+	)
 	if err != nil {
 		return nil, fmt.Errorf("context loading failed: %w", err)
 	}
@@ -391,11 +421,11 @@ func (c *runCommand) setOutputToDevNull() (savedStdout, savedStderr *os.File) {
 	devNull, err := os.Open(os.DevNull)
 	if err != nil {
 		c.log.Warnf("Can't open null device %q: %s", os.DevNull, err)
-		return
+		return savedStdout, savedStderr
 	}
 
 	os.Stdout, os.Stderr = devNull, devNull
-	return
+	return savedStdout, savedStderr
 }
 
 func (c *runCommand) setExitCodeIfIssuesFound(issues []*result.Issue) {
@@ -419,7 +449,13 @@ func (c *runCommand) printDeprecatedLinterMessages(enabledLinters map[string]*li
 			extra = fmt.Sprintf("Replaced by %s.", lc.Deprecation.Replacement)
 		}
 
-		c.log.Warnf("The linter '%s' is deprecated (since %s) due to: %s %s", name, lc.Deprecation.Since, lc.Deprecation.Message, extra)
+		c.log.Warnf(
+			"The linter '%s' is deprecated (since %s) due to: %s %s",
+			name,
+			lc.Deprecation.Since,
+			lc.Deprecation.Message,
+			extra,
+		)
 
 		if lc.Deprecation.ConfigSuggestion != nil {
 			suggestion, err := lc.Deprecation.ConfigSuggestion()
@@ -469,7 +505,8 @@ func (c *runCommand) setupExitCode(ctx context.Context) {
 		return
 	}
 
-	needFailOnWarnings := os.Getenv(logutils.EnvTestRun) == "1" || os.Getenv(envFailOnWarnings) == "1"
+	needFailOnWarnings := os.Getenv(logutils.EnvTestRun) == "1" ||
+		os.Getenv(envFailOnWarnings) == "1"
 	if needFailOnWarnings && len(c.reportData.Warnings) != 0 {
 		c.exitCode = exitcodes.WarningInTest
 		return
@@ -521,7 +558,12 @@ func (c *runCommand) releaseFileLock() {
 	}
 }
 
-func watchResources(ctx context.Context, done chan struct{}, logger logutils.Log, debugf logutils.DebugFunc) {
+func watchResources(
+	ctx context.Context,
+	done chan struct{},
+	logger logutils.Log,
+	debugf logutils.DebugFunc,
+) {
 	startedAt := time.Now()
 	debugf("Started tracking time")
 

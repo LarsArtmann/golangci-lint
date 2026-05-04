@@ -3,14 +3,13 @@ package lintersdb
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-	"golang.org/x/tools/go/packages"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 	"github.com/golangci/golangci-lint/v2/pkg/lint/linter"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+	"golang.org/x/tools/go/packages"
 )
 
 func TestManager_GetEnabledLintersMap(t *testing.T) {
@@ -153,11 +152,15 @@ func TestManager_combineGoAnalysisLinters(t *testing.T) {
 	m, err := NewManager(nil, nil)
 	require.NoError(t, err)
 
-	fooTyped := goanalysis.NewLinter("foo", "example foo", nil, nil).WithLoadMode(goanalysis.LoadModeTypesInfo)
-	barTyped := goanalysis.NewLinter("bar", "example bar", nil, nil).WithLoadMode(goanalysis.LoadModeTypesInfo)
+	fooTyped := goanalysis.NewLinter("foo", "example foo", nil, nil).
+		WithLoadMode(goanalysis.LoadModeTypesInfo)
+	barTyped := goanalysis.NewLinter("bar", "example bar", nil, nil).
+		WithLoadMode(goanalysis.LoadModeTypesInfo)
 
-	fooSyntax := goanalysis.NewLinter("foo", "example foo", nil, nil).WithLoadMode(goanalysis.LoadModeSyntax)
-	barSyntax := goanalysis.NewLinter("bar", "example bar", nil, nil).WithLoadMode(goanalysis.LoadModeSyntax)
+	fooSyntax := goanalysis.NewLinter("foo", "example foo", nil, nil).
+		WithLoadMode(goanalysis.LoadModeSyntax)
+	barSyntax := goanalysis.NewLinter("bar", "example bar", nil, nil).
+		WithLoadMode(goanalysis.LoadModeSyntax)
 
 	testCases := []struct {
 		desc     string

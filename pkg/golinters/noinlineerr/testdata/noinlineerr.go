@@ -8,7 +8,7 @@ import (
 
 type MyAliasErr error
 
-type MyCustomError struct {}
+type MyCustomError struct{}
 
 func (mc *MyCustomError) Error() string {
 	return "error"

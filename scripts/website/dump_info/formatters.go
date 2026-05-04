@@ -25,9 +25,12 @@ func saveFormatters(dst string) error {
 		}
 
 		wrapper := types.LinterWrapper{
-			Name:             l.Linter.Name(),
-			Desc:             l.Linter.Desc(),
-			Groups:           slices.AppendSeq(make([]string, 0, len(l.Groups)), maps.Keys(l.Groups)),
+			Name: l.Linter.Name(),
+			Desc: l.Linter.Desc(),
+			Groups: slices.AppendSeq(
+				make([]string, 0, len(l.Groups)),
+				maps.Keys(l.Groups),
+			),
 			LoadMode:         l.LoadMode,
 			AlternativeNames: l.AlternativeNames,
 			OriginalURL:      l.OriginalURL,

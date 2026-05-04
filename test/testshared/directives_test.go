@@ -4,10 +4,9 @@ import (
 	"runtime"
 	"testing"
 
+	"github.com/golangci/golangci-lint/v2/pkg/exitcodes"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-
-	"github.com/golangci/golangci-lint/v2/pkg/exitcodes"
 )
 
 func TestParseTestDirectives(t *testing.T) {

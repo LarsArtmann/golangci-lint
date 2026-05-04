@@ -45,7 +45,8 @@ func newBaseRule(rule *config.BaseRule, prefix string) baseRule {
 }
 
 func (r *baseRule) isEmpty() bool {
-	return r.text == nil && r.source == nil && r.path == nil && r.pathExcept == nil && len(r.linters) == 0
+	return r.text == nil && r.source == nil && r.path == nil && r.pathExcept == nil &&
+		len(r.linters) == 0
 }
 
 func (r *baseRule) match(issue *result.Issue, lines *fsutils.LineCache, log logutils.Log) bool {
@@ -77,10 +78,19 @@ func (r *baseRule) matchLinter(issue *result.Issue) bool {
 	return slices.Contains(r.linters, issue.FromLinter)
 }
 
-func (r *baseRule) matchSource(issue *result.Issue, lineCache *fsutils.LineCache, log logutils.Log) bool {
+func (r *baseRule) matchSource(
+	issue *result.Issue,
+	lineCache *fsutils.LineCache,
+	log logutils.Log,
+) bool {
 	sourceLine, errSourceLine := lineCache.GetLine(issue.FilePath(), issue.Line())
 	if errSourceLine != nil {
-		log.Warnf("Failed to get line %s:%d from line cache: %s", issue.FilePath(), issue.Line(), errSourceLine)
+		log.Warnf(
+			"Failed to get line %s:%d from line cache: %s",
+			issue.FilePath(),
+			issue.Line(),
+			errSourceLine,
+		)
 		return false // can't properly match
 	}
 

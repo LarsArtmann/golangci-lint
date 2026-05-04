@@ -1,10 +1,9 @@
 package grouper
 
 import (
-	grouper "github.com/leonklingele/grouper/pkg/analyzer"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	grouper "github.com/leonklingele/grouper/pkg/analyzer"
 )
 
 func New(settings *config.GrouperSettings) *goanalysis.Linter {

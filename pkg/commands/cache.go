@@ -5,11 +5,10 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/spf13/cobra"
-
 	"github.com/golangci/golangci-lint/v2/internal/cache"
 	"github.com/golangci/golangci-lint/v2/pkg/fsutils"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
+	"github.com/spf13/cobra"
 )
 
 type cacheCommand struct {
@@ -67,7 +66,11 @@ func (*cacheCommand) executeStatus(_ *cobra.Command, _ []string) {
 
 	cacheSizeBytes, err := dirSizeBytes(cacheDir)
 	if err == nil {
-		_, _ = fmt.Fprintf(logutils.StdOut, "Size: %s\n", fsutils.PrettifyBytesCount(cacheSizeBytes))
+		_, _ = fmt.Fprintf(
+			logutils.StdOut,
+			"Size: %s\n",
+			fsutils.PrettifyBytesCount(cacheSizeBytes),
+		)
 	}
 }
 

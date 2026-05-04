@@ -13,13 +13,12 @@ import (
 	"strings"
 
 	"github.com/alecthomas/chroma/v2/quick"
-	rpdiff "github.com/rogpeppe/go-internal/diff"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/fsutils"
 	"github.com/golangci/golangci-lint/v2/pkg/goformatters"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
 	"github.com/golangci/golangci-lint/v2/pkg/result/processors"
+	rpdiff "github.com/rogpeppe/go-internal/diff"
 )
 
 type Runner struct {
@@ -35,7 +34,8 @@ type Runner struct {
 
 func NewRunner(logger logutils.Log,
 	metaFormatter *goformatters.MetaFormatter, matcher *processors.GeneratedFileMatcher,
-	opts RunnerOptions) *Runner {
+	opts RunnerOptions,
+) *Runner {
 	return &Runner{
 		log:           logger,
 		matcher:       matcher,
@@ -221,7 +221,11 @@ type RunnerOptions struct {
 }
 
 func NewRunnerOptions(cfg *config.Config, diff, diffColored, stdin bool) (RunnerOptions, error) {
-	basePath, err := fsutils.GetBasePath(context.Background(), cfg.Run.RelativePathMode, cfg.GetConfigDir())
+	basePath, err := fsutils.GetBasePath(
+		context.Background(),
+		cfg.Run.RelativePathMode,
+		cfg.GetConfigDir(),
+	)
 	if err != nil {
 		return RunnerOptions{}, fmt.Errorf("get base path: %w", err)
 	}

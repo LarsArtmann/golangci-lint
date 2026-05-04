@@ -9,10 +9,9 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"golang.org/x/tools/go/analysis"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"golang.org/x/tools/go/analysis"
 )
 
 const goCommentDirectivePrefix = "//go:"
@@ -47,7 +46,12 @@ func runLll(pass *analysis.Pass, settings *config.LllSettings) error {
 	return nil
 }
 
-func getLLLIssuesForFile(pass *analysis.Pass, file *ast.File, maxLineLen int, tabSpaces string) error {
+func getLLLIssuesForFile(
+	pass *analysis.Pass,
+	file *ast.File,
+	maxLineLen int,
+	tabSpaces string,
+) error {
 	position, isGoFile := goanalysis.GetGoFilePosition(pass, file)
 	if !isGoFile {
 		return nil
@@ -94,9 +98,14 @@ func getLLLIssuesForFile(pass *analysis.Pass, file *ast.File, maxLineLen int, ta
 		lineLen := utf8.RuneCountInString(line)
 		if lineLen > maxLineLen {
 			pass.Report(analysis.Diagnostic{
-				Pos: ft.LineStart(goanalysis.AdjustPos(lineNumber, nonAdjPosition.Line, position.Line)),
-				Message: fmt.Sprintf("The line is %d characters long, which exceeds the maximum of %d characters.",
-					lineLen, maxLineLen),
+				Pos: ft.LineStart(
+					goanalysis.AdjustPos(lineNumber, nonAdjPosition.Line, position.Line),
+				),
+				Message: fmt.Sprintf(
+					"The line is %d characters long, which exceeds the maximum of %d characters.",
+					lineLen,
+					maxLineLen,
+				),
 			})
 		}
 	}
@@ -114,7 +123,9 @@ func getLLLIssuesForFile(pass *analysis.Pass, file *ast.File, maxLineLen int, ta
 		// be discarded for other files, and we'll miss legit error.
 		if errors.Is(err, bufio.ErrTooLong) && maxLineLen < bufio.MaxScanTokenSize {
 			pass.Report(analysis.Diagnostic{
-				Pos:     ft.LineStart(goanalysis.AdjustPos(lineNumber, nonAdjPosition.Line, position.Line)),
+				Pos: ft.LineStart(
+					goanalysis.AdjustPos(lineNumber, nonAdjPosition.Line, position.Line),
+				),
 				Message: fmt.Sprintf("line is more than %d characters", bufio.MaxScanTokenSize),
 			})
 		} else {

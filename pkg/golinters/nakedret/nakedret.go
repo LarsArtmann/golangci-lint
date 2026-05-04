@@ -2,7 +2,6 @@ package nakedret
 
 import (
 	"github.com/alexkohler/nakedret/v2"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 )

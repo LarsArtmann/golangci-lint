@@ -5,7 +5,6 @@ linters:
     staticcheck:
       checks:
         - all
-        - '-SA*'
-        - '-S*'
-        - '-QF*'
-
+        - "-SA*"
+        - "-S*"
+        - "-QF*"

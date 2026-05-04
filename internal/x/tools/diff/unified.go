@@ -100,7 +100,7 @@ func (k opKind) String() string {
 
 // toUnified takes a file contents and a sequence of edits, and calculates
 // a unified diff that represents those edits.
-func toUnified(fromName, toName string, content string, edits []Edit, contextLines int) (unified, error) {
+func toUnified(fromName, toName, content string, edits []Edit, contextLines int) (unified, error) {
 	gap := contextLines * 2
 	u := unified{
 		from: fromName,

@@ -6,9 +6,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/ldez/grignotin/goenv"
-
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
+	"github.com/ldez/grignotin/goenv"
 )
 
 type EnvKey string

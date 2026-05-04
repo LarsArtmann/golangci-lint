@@ -1,9 +1,8 @@
 package zerologlint
 
 import (
-	"github.com/ykadowak/zerologlint"
-
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/ykadowak/zerologlint"
 )
 
 func New() *goanalysis.Linter {

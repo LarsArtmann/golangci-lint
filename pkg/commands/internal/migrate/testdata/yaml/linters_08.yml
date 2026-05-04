@@ -45,4 +45,3 @@ linters:
     - gochecknoinits
     - gochecksumtype
     - gocognit
-

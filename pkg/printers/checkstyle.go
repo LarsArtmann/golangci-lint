@@ -9,7 +9,6 @@ import (
 	"strings"
 
 	"github.com/go-xmlfmt/xmlfmt"
-
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
 	"github.com/golangci/golangci-lint/v2/pkg/result"
 )
@@ -70,7 +69,7 @@ func (p *Checkstyle) Print(issues []*result.Issue) error {
 		p.log.Infof("%v", err)
 	}
 
-	out.Files = slices.SortedFunc(maps.Values(files), func(a *checkstyleFile, b *checkstyleFile) int {
+	out.Files = slices.SortedFunc(maps.Values(files), func(a, b *checkstyleFile) int {
 		return strings.Compare(a.Name, b.Name)
 	})
 

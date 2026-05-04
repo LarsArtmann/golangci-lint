@@ -4,12 +4,11 @@ import (
 	"fmt"
 
 	"github.com/ashanbrown/forbidigo/v2/forbidigo"
-	"go.yaml.in/yaml/v3"
-	"golang.org/x/tools/go/analysis"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
+	"go.yaml.in/yaml/v3"
+	"golang.org/x/tools/go/analysis"
 )
 
 const linterName = "forbidigo"

@@ -14,9 +14,8 @@ import (
 	"time"
 	"unicode"
 
-	"golang.org/x/mod/sumdb/dirhash"
-
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
+	"golang.org/x/mod/sumdb/dirhash"
 )
 
 // Builder runs all the required commands to build a binary.
@@ -185,10 +184,18 @@ func (b Builder) goBuild(ctx context.Context, binaryName string) error {
 	b.log.Infof("version: %s", version)
 
 	//nolint:gosec // the variable is sanitized.
-	cmd := exec.CommandContext(ctx, "go", "build",
+	cmd := exec.CommandContext(
+		ctx,
+		"go",
+		"build",
 		"-ldflags",
-		fmt.Sprintf("-s -w -X 'main.version=%s' -X 'main.date=%s'", version, time.Now().UTC().String()),
-		"-o", binaryName,
+		fmt.Sprintf(
+			"-s -w -X 'main.version=%s' -X 'main.date=%s'",
+			version,
+			time.Now().UTC().String(),
+		),
+		"-o",
+		binaryName,
 		"./cmd/golangci-lint",
 	)
 	cmd.Dir = b.repo
@@ -225,7 +232,11 @@ func (b Builder) copyBinary(binaryName string) error {
 		}
 	}
 
-	dst, err := os.OpenFile(filepath.Join(b.cfg.Destination, binaryName), os.O_RDWR|os.O_CREATE|os.O_TRUNC, info.Mode())
+	dst, err := os.OpenFile(
+		filepath.Join(b.cfg.Destination, binaryName),
+		os.O_RDWR|os.O_CREATE|os.O_TRUNC,
+		info.Mode(),
+	)
 	if err != nil {
 		return fmt.Errorf("create destination file: %w", err)
 	}

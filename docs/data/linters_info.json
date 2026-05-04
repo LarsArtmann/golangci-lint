@@ -158,9 +158,7 @@
   {
     "name": "errcheck",
     "desc": "errcheck is a program for checking for unchecked errors in Go code. These unchecked errors can be critical bugs in some cases",
-    "groups": [
-      "standard"
-    ],
+    "groups": ["standard"],
     "loadMode": 8767,
     "originalURL": "https://github.com/kisielk/errcheck",
     "internal": false,
@@ -465,9 +463,7 @@
   {
     "name": "govet",
     "desc": "Vet examines Go source code and reports suspicious constructs. It is roughly the same as 'go vet' and uses its passes.",
-    "groups": [
-      "standard"
-    ],
+    "groups": ["standard"],
     "loadMode": 8767,
     "originalURL": "https://pkg.go.dev/cmd/vet",
     "internal": false,
@@ -516,9 +512,7 @@
   {
     "name": "ineffassign",
     "desc": "detects when assignments to existing variables are not used",
-    "groups": [
-      "standard"
-    ],
+    "groups": ["standard"],
     "loadMode": 8199,
     "originalURL": "https://github.com/gordonklaus/ineffassign",
     "internal": false,
@@ -843,9 +837,7 @@
   {
     "name": "staticcheck",
     "desc": "It's the set of rules from staticcheck.",
-    "groups": [
-      "standard"
-    ],
+    "groups": ["standard"],
     "loadMode": 8767,
     "originalURL": "https://github.com/dominikh/go-tools",
     "internal": false,
@@ -956,9 +948,7 @@
   {
     "name": "unused",
     "desc": "Checks Go code for unused constants, variables, functions and types",
-    "groups": [
-      "standard"
-    ],
+    "groups": ["standard"],
     "loadMode": 8767,
     "originalURL": "https://github.com/dominikh/go-tools/tree/HEAD/unused",
     "internal": false,

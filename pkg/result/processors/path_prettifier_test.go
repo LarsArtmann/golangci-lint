@@ -5,12 +5,11 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
 	"github.com/golangci/golangci-lint/v2/pkg/result"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func newPPIssue(fn, rp string) *result.Issue {
@@ -25,7 +24,7 @@ func TestPathPrettifier_Process(t *testing.T) {
 		for _, p := range ps {
 			issues = append(issues, newPPIssue("test", p))
 		}
-		return
+		return issues
 	}
 
 	for _, tt := range []struct {
@@ -60,7 +59,10 @@ func TestPathPrettifier_Process(t *testing.T) {
 		},
 	} {
 		t.Run(tt.name, func(t *testing.T) {
-			p := NewPathPrettifier(logutils.NewStderrLog(logutils.DebugKeyEmpty), &config.Output{PathPrefix: tt.prefix})
+			p := NewPathPrettifier(
+				logutils.NewStderrLog(logutils.DebugKeyEmpty),
+				&config.Output{PathPrefix: tt.prefix},
+			)
 
 			got, err := p.Process(tt.issues)
 			require.NoError(t, err)

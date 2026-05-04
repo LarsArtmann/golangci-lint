@@ -473,7 +473,7 @@ type ForbidigoSettings struct {
 }
 
 type ForbidigoPattern struct {
-	Pattern string `yaml:"p" mapstructure:"pattern"`
+	Pattern string `yaml:"p"             mapstructure:"pattern"`
 	Package string `yaml:"pkg,omitempty" mapstructure:"pkg,omitempty"`
 	Msg     string `yaml:"msg,omitempty" mapstructure:"msg,omitempty"`
 }
@@ -931,7 +931,9 @@ type StaticCheckSettings struct {
 }
 
 func (s *StaticCheckSettings) HasConfiguration() bool {
-	return s.Initialisms == nil || s.HTTPStatusCodeWhitelist == nil || s.DotImportWhitelist == nil || s.Checks == nil
+	return s.Initialisms == nil || s.HTTPStatusCodeWhitelist == nil ||
+		s.DotImportWhitelist == nil ||
+		s.Checks == nil
 }
 
 type TagAlignSettings struct {
@@ -946,12 +948,12 @@ type TagliatelleSettings struct {
 }
 
 type TagliatelleCase struct {
-	TagliatelleBase `mapstructure:",squash"`
+	TagliatelleBase `                       mapstructure:",squash"`
 	Overrides       []TagliatelleOverrides `mapstructure:"overrides"`
 }
 
 type TagliatelleOverrides struct {
-	TagliatelleBase `mapstructure:",squash"`
+	TagliatelleBase `       mapstructure:",squash"`
 	Package         string `mapstructure:"pkg"`
 	Ignore          bool   `mapstructure:"ignore"`
 }

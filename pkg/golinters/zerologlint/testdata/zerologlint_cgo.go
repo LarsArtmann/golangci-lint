@@ -41,10 +41,10 @@ func _() {
 
 	// include zerolog.Dict()
 	log.Info(). // want "must be dispatched by Msg or Send method"
-		Str("foo", "bar").
-		Dict("dict", zerolog.Dict().
-			Str("bar", "baz").
-			Int("n", 1),
+			Str("foo", "bar").
+			Dict("dict", zerolog.Dict().
+				Str("bar", "baz").
+				Int("n", 1),
 		)
 
 	// conditional

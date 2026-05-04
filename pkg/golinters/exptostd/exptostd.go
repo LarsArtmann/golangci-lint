@@ -1,9 +1,8 @@
 package exptostd
 
 import (
-	"github.com/ldez/exptostd"
-
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/ldez/exptostd"
 )
 
 func New() *goanalysis.Linter {

@@ -1,8 +1,11 @@
 // Refers a existent, but non-go file with line directive
+//
 //line hello.tmpl:1
 package main
 
 import (
+	"fmt"
+
 	"golang.org/x/tools/go/analysis"
 )
 
@@ -26,7 +29,7 @@ func b() {
 	fmt.Println("foo")
 }
 
-func c(){
+func c() {
 	_ = analysis.Analyzer{}
 }
 
@@ -35,7 +38,7 @@ func wsl() bool {
 	return true
 }
 
-func notFormatted()  {
+func notFormatted() {
 }
 
 // langauge

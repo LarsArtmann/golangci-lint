@@ -23,5 +23,5 @@ func _() {
 }
 
 func GofumptNewLine() {
-	fmt.Println( "foo" ) // want "File is not properly formatted"
+	fmt.Println("foo") // want "File is not properly formatted"
 }

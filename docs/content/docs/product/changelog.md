@@ -19,5 +19,5 @@ If you value it, consider supporting us, we appreciate it!
 ## v1.x.x
 
 {{< cards cols=2 >}}
-    {{< card link="/docs/product/changelog-v1" title="Changelog of golangci-lint v1" icon="collection" >}}
+{{< card link="/docs/product/changelog-v1" title="Changelog of golangci-lint v1" icon="collection" >}}
 {{< /cards >}}

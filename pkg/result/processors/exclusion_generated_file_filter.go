@@ -67,7 +67,12 @@ func (p *GeneratedFileFilter) shouldPassIssue(issue *result.Issue) (bool, error)
 	var err error
 	fs.generated, err = p.matcher.IsGeneratedFile(issue.FilePath(), nil)
 	if err != nil {
-		return false, fmt.Errorf("failed to get doc (%s) of file %s: %w", p.mode, issue.FilePath(), err)
+		return false, fmt.Errorf(
+			"failed to get doc (%s) of file %s: %w",
+			p.mode,
+			issue.FilePath(),
+			err,
+		)
 	}
 
 	p.debugf("file %q is generated: %t", issue.FilePath(), fs.generated)

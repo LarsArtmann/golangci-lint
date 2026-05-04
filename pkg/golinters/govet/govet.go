@@ -4,6 +4,9 @@ import (
 	"slices"
 	"strings"
 
+	"github.com/golangci/golangci-lint/v2/pkg/config"
+	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/golangci/golangci-lint/v2/pkg/logutils"
 	"golang.org/x/tools/go/analysis"
 	"golang.org/x/tools/go/analysis/passes/appends"
 	"golang.org/x/tools/go/analysis/passes/asmdecl"
@@ -55,10 +58,6 @@ import (
 	"golang.org/x/tools/go/analysis/passes/unusedresult"
 	"golang.org/x/tools/go/analysis/passes/unusedwrite"
 	"golang.org/x/tools/go/analysis/passes/waitgroup"
-
-	"github.com/golangci/golangci-lint/v2/pkg/config"
-	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
-	"github.com/golangci/golangci-lint/v2/pkg/logutils"
 )
 
 var (
@@ -193,7 +192,11 @@ func analyzersFromConfig(settings *config.GovetSettings) []*analysis.Analyzer {
 	return enabledAnalyzers
 }
 
-func isAnalyzerEnabled(name string, cfg *config.GovetSettings, defaultAnalyzers []*analysis.Analyzer) bool {
+func isAnalyzerEnabled(
+	name string,
+	cfg *config.GovetSettings,
+	defaultAnalyzers []*analysis.Analyzer,
+) bool {
 	// TODO(ldez) remove loopclosure when go1.24
 	if name == loopclosure.Analyzer.Name && config.IsGoGreaterThanOrEqual(cfg.Go, "1.22") {
 		return false
@@ -213,7 +216,10 @@ func isAnalyzerEnabled(name string, cfg *config.GovetSettings, defaultAnalyzers 
 		return false
 
 	default:
-		return slices.ContainsFunc(defaultAnalyzers, func(a *analysis.Analyzer) bool { return a.Name == name })
+		return slices.ContainsFunc(
+			defaultAnalyzers,
+			func(a *analysis.Analyzer) bool { return a.Name == name },
+		)
 	}
 }
 

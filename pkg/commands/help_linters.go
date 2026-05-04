@@ -8,13 +8,12 @@ import (
 	"strings"
 
 	"github.com/fatih/color"
-	"github.com/spf13/cobra"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goformatters"
 	"github.com/golangci/golangci-lint/v2/pkg/lint/linter"
 	"github.com/golangci/golangci-lint/v2/pkg/lint/lintersdb"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
+	"github.com/spf13/cobra"
 )
 
 type linterHelp struct {
@@ -49,7 +48,11 @@ func newLinterHelp(lc *linter.Config) linterHelp {
 
 func (c *helpCommand) lintersPreRunE(_ *cobra.Command, _ []string) error {
 	// The command doesn't depend on the real configuration.
-	dbManager, err := lintersdb.NewManager(c.log.Child(logutils.DebugKeyLintersDB), config.NewDefault(), lintersdb.NewLinterBuilder())
+	dbManager, err := lintersdb.NewManager(
+		c.log.Child(logutils.DebugKeyLintersDB),
+		config.NewDefault(),
+		lintersdb.NewLinterBuilder(),
+	)
 	if err != nil {
 		return err
 	}

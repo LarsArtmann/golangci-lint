@@ -36,7 +36,11 @@ func Getwd() (string, error) {
 
 		evaluatedWd, err := EvalSymlinks(cachedWd)
 		if err != nil {
-			cachedWd, cachedWdError = "", fmt.Errorf("can't eval symlinks on wd %s: %w", cachedWd, err)
+			cachedWd, cachedWdError = "", fmt.Errorf(
+				"can't eval symlinks on wd %s: %w",
+				cachedWd,
+				err,
+			)
 			return
 		}
 

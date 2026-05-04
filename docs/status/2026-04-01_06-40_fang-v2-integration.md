@@ -3,7 +3,7 @@
 **Date:** 2026-04-01 06:40  
 **Branch:** `feat/fang-v2-integration`  
 **PR:** https://github.com/golangci/golangci-lint/pull/6473  
-**Issue:** https://github.com/golangci/golangci-lint/issues/6464  
+**Issue:** https://github.com/golangci/golangci-lint/issues/6464
 
 ---
 
@@ -47,13 +47,17 @@
 ## D) TOTALLY FUCKED UP
 
 1. **`--version` regression** — The biggest issue. We replaced the custom `--version` handler (`PrintVersion`) with fang's `WithVersion()`. This changes the output from:
+
    ```
    golangci-lint has version 1.64.0 built with go1.26.1 from (abc1234, modified: false, mod sum: "...") on 2026-03-28
    ```
+
    to:
+
    ```
    golangci-lint version (devel)
    ```
+
    Users lose Go version, commit SHA, date, and build info. This breaks CI scripts that parse `--version` output for build metadata.
 
 2. **We removed `rootOptions.PrintVersion`** and the `--version` flag from `rootCmd.Flags()` — this was unnecessary. Fang's `WithVersion()` sets `root.Version` which cobra uses for its built-in `--version` flag. But cobra's built-in `--version` just prints `<cmd> version <string>` — it doesn't call our `BuildInfo.String()`.
@@ -74,33 +78,33 @@
 
 ## F) TOP 25 THINGS TO DO NEXT (priority order)
 
-| # | Task | Impact | Effort |
-|---|------|--------|--------|
-| 1 | Restore `--version` to original rich output (`WithoutVersion()` + custom handler) | HIGH | small |
-| 2 | Fix theme.go comments (remove CSS terminology) | LOW | tiny |
-| 3 | Build, test, verify restored `--version` | HIGH | tiny |
-| 4 | Commit the fix | HIGH | tiny |
-| 5 | Squash all commits into 1 clean commit | MED | small |
-| 6 | Force push | HIGH | tiny |
-| 7 | Update PR description with all changes | MED | small |
-| 8 | Run `go mod tidy` to fix lipgloss direct warning | LOW | tiny |
-| 9 | Investigate `--color` flag conflict with fang | MED | med |
-| 10 | Visual test theme on real terminal (dark + light) | MED | small |
-| 11 | Investigate fang's hidden `man` command | LOW | small |
-| 12 | Investigate fang's completion generation | LOW | small |
-| 13 | Remove remaining `color.GreenString("auto-fix")` in `help_linters.go` | LOW | tiny |
-| 14 | Write test for `--version` output format | MED | small |
-| 15 | Run full CI pipeline | MED | med |
-| 16 | Check if existing CI scripts parse `--version` output | MED | small |
-| 17 | Consider adding `WithoutManpage()` to fang options | LOW | tiny |
-| 18 | Consider adding `WithoutCompletions()` to fang options | LOW | tiny |
-| 19 | Review PR for any other regressions | MED | small |
-| 20 | Test `golangci-lint run` still works end-to-end | HIGH | small |
-| 21 | Test piping output (`golangci-lint run | cat`) | MED | small |
-| 22 | Verify no ANSI codes in piped/non-TTY output | MED | small |
-| 23 | Check gopls diagnostics are clean | LOW | tiny |
-| 24 | Final review of diff before merge | HIGH | small |
-| 25 | Merge when approved | HIGH | tiny |
+| #   | Task                                                                              | Impact | Effort |
+| --- | --------------------------------------------------------------------------------- | ------ | ------ | ----- |
+| 1   | Restore `--version` to original rich output (`WithoutVersion()` + custom handler) | HIGH   | small  |
+| 2   | Fix theme.go comments (remove CSS terminology)                                    | LOW    | tiny   |
+| 3   | Build, test, verify restored `--version`                                          | HIGH   | tiny   |
+| 4   | Commit the fix                                                                    | HIGH   | tiny   |
+| 5   | Squash all commits into 1 clean commit                                            | MED    | small  |
+| 6   | Force push                                                                        | HIGH   | tiny   |
+| 7   | Update PR description with all changes                                            | MED    | small  |
+| 8   | Run `go mod tidy` to fix lipgloss direct warning                                  | LOW    | tiny   |
+| 9   | Investigate `--color` flag conflict with fang                                     | MED    | med    |
+| 10  | Visual test theme on real terminal (dark + light)                                 | MED    | small  |
+| 11  | Investigate fang's hidden `man` command                                           | LOW    | small  |
+| 12  | Investigate fang's completion generation                                          | LOW    | small  |
+| 13  | Remove remaining `color.GreenString("auto-fix")` in `help_linters.go`             | LOW    | tiny   |
+| 14  | Write test for `--version` output format                                          | MED    | small  |
+| 15  | Run full CI pipeline                                                              | MED    | med    |
+| 16  | Check if existing CI scripts parse `--version` output                             | MED    | small  |
+| 17  | Consider adding `WithoutManpage()` to fang options                                | LOW    | tiny   |
+| 18  | Consider adding `WithoutCompletions()` to fang options                            | LOW    | tiny   |
+| 19  | Review PR for any other regressions                                               | MED    | small  |
+| 20  | Test `golangci-lint run` still works end-to-end                                   | HIGH   | small  |
+| 21  | Test piping output (`golangci-lint run                                            | cat`)  | MED    | small |
+| 22  | Verify no ANSI codes in piped/non-TTY output                                      | MED    | small  |
+| 23  | Check gopls diagnostics are clean                                                 | LOW    | tiny   |
+| 24  | Final review of diff before merge                                                 | HIGH   | small  |
+| 25  | Merge when approved                                                               | HIGH   | tiny   |
 
 ---
 

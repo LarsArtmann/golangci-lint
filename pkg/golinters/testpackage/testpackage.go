@@ -3,10 +3,9 @@ package testpackage
 import (
 	"strings"
 
-	"github.com/maratori/testpackage/pkg/testpackage"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/maratori/testpackage/pkg/testpackage"
 )
 
 func New(settings *config.TestpackageSettings) *goanalysis.Linter {

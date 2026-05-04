@@ -182,7 +182,10 @@ func defaultLintersFilter(old versionone.Linters) (enable, disable []string) {
 }
 
 // defaultLintersEnableFilter generates the value of `enable` when using default linters.
-func defaultLintersEnableFilter(old versionone.Linters, effectiveDisabled []LinterInfo) []LinterInfo {
+func defaultLintersEnableFilter(
+	old versionone.Linters,
+	effectiveDisabled []LinterInfo,
+) []LinterInfo {
 	// presets - slow + enable - default - [effective disable] => effective enable
 	return removeLinters(
 		filter(
@@ -880,12 +883,15 @@ func convertStaticcheckLinterNames(names []string) []string {
 }
 
 func convertDisabledStaticcheckLinterNames(names []string) []string {
-	removeStaticcheck := slices.Contains(names, "staticcheck") && slices.Contains(names, "stylecheck") && slices.Contains(names, "gosimple")
+	removeStaticcheck := slices.Contains(names, "staticcheck") &&
+		slices.Contains(names, "stylecheck") &&
+		slices.Contains(names, "gosimple")
 
 	var results []string
 
 	for _, name := range names {
-		if removeStaticcheck && slices.Contains([]string{"stylecheck", "gosimple", "staticcheck"}, name) {
+		if removeStaticcheck &&
+			slices.Contains([]string{"stylecheck", "gosimple", "staticcheck"}, name) {
 			results = append(results, "staticcheck")
 			continue
 		}

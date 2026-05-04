@@ -7,11 +7,10 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/result"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestGeneratedFileFilter_shouldPassIssue(t *testing.T) {
@@ -27,7 +26,9 @@ func TestGeneratedFileFilter_shouldPassIssue(t *testing.T) {
 			issue: &result.Issue{
 				FromLinter: "example",
 				Pos: token.Position{
-					Filename: filepath.FromSlash("testdata/exclusion_generated_file_filter/go_strict_invalid.go"),
+					Filename: filepath.FromSlash(
+						"testdata/exclusion_generated_file_filter/go_strict_invalid.go",
+					),
 				},
 			},
 			assert: assert.False,
@@ -38,7 +39,9 @@ func TestGeneratedFileFilter_shouldPassIssue(t *testing.T) {
 			issue: &result.Issue{
 				FromLinter: "example",
 				Pos: token.Position{
-					Filename: filepath.FromSlash("testdata/exclusion_generated_file_filter/go_strict_invalid.go"),
+					Filename: filepath.FromSlash(
+						"testdata/exclusion_generated_file_filter/go_strict_invalid.go",
+					),
 				},
 			},
 			assert: assert.True,
@@ -80,8 +83,11 @@ func TestGeneratedFileFilter_shouldPassIssue_error(t *testing.T) {
 					Filename: filepath.FromSlash("no-existing.go"),
 				},
 			},
-			expected: fmt.Sprintf("failed to get doc (lax) of file %[1]s: failed to parse file: open %[1]s: %[2]s",
-				filepath.FromSlash("no-existing.go"), notFoundMsg),
+			expected: fmt.Sprintf(
+				"failed to get doc (lax) of file %[1]s: failed to parse file: open %[1]s: %[2]s",
+				filepath.FromSlash("no-existing.go"),
+				notFoundMsg,
+			),
 		},
 		{
 			desc: "non-existing file (strict)",
@@ -92,8 +98,11 @@ func TestGeneratedFileFilter_shouldPassIssue_error(t *testing.T) {
 					Filename: filepath.FromSlash("no-existing.go"),
 				},
 			},
-			expected: fmt.Sprintf("failed to get doc (strict) of file %[1]s: failed to parse file: open %[1]s: %[2]s",
-				filepath.FromSlash("no-existing.go"), notFoundMsg),
+			expected: fmt.Sprintf(
+				"failed to get doc (strict) of file %[1]s: failed to parse file: open %[1]s: %[2]s",
+				filepath.FromSlash("no-existing.go"),
+				notFoundMsg,
+			),
 		},
 	}
 

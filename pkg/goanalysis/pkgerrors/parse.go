@@ -7,9 +7,8 @@ import (
 	"strconv"
 	"strings"
 
-	"golang.org/x/tools/go/packages"
-
 	"github.com/golangci/golangci-lint/v2/pkg/result"
+	"golang.org/x/tools/go/packages"
 )
 
 func parseError(srcErr packages.Error) (*result.Issue, error) {

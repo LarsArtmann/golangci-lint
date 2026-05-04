@@ -8,5 +8,5 @@ func GofmtNotSimplifiedOk() {
 	fmt.Print(x[1:len(x)])
 }
 
-func GofmtBadFormat(){  // want "File is not properly formatted"
+func GofmtBadFormat() { // want "File is not properly formatted"
 }

@@ -2,7 +2,6 @@ package err113
 
 import (
 	"github.com/Djarvur/go-err113"
-
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 )
 

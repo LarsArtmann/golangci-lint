@@ -17,7 +17,7 @@ linters-settings:
       Put here copyright header template for source code files
       For example:
       Note: {{ YEAR }} is a builtin value that returns the year relative to the current machine time.
-      
+
       {{ AUTHOR }} {{ COMPANY }} {{ YEAR }}
       SPDX-License-Identifier: Apache-2.0
 

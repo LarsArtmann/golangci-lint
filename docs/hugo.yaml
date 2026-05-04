@@ -15,7 +15,7 @@ markup:
     extensions:
       passthrough:
         delimiters:
-          block: [['\[', '\]'], ['$$', '$$']]
+          block: [['\[', '\]'], ["$$", "$$"]]
           inline: [['\(', '\)']]
         enable: true
 
@@ -78,12 +78,11 @@ menu:
       url: "https://golangci.github.io/legacy-v1-doc/"
       weight: 3
 
-
 params:
   description: Golangci-lint is a fast linters runner for Go.
 
   banner:
-    key: 'banner-2025-001'
+    key: "banner-2025-001"
     message: |
       If golangci-lint is useful for you, please consider [supporting us](/docs/donate/)! 
       You are the only one who can make a difference!

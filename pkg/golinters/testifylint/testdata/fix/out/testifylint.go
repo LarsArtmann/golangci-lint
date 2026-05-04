@@ -2,7 +2,6 @@
 package testdata
 
 import (
-	"fmt"
 	"io"
 	"testing"
 

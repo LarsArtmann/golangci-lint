@@ -5,13 +5,12 @@ import (
 	"sync"
 
 	gochecksumtype "github.com/alecthomas/go-check-sumtype"
-	"golang.org/x/tools/go/analysis"
-	"golang.org/x/tools/go/packages"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 	"github.com/golangci/golangci-lint/v2/pkg/lint/linter"
 	"github.com/golangci/golangci-lint/v2/pkg/result"
+	"golang.org/x/tools/go/analysis"
+	"golang.org/x/tools/go/packages"
 )
 
 const linterName = "gochecksumtype"
@@ -47,7 +46,10 @@ func New(settings *config.GoChecksumTypeSettings) *goanalysis.Linter {
 		WithLoadMode(goanalysis.LoadModeTypesInfo)
 }
 
-func runGoCheckSumType(pass *analysis.Pass, settings *config.GoChecksumTypeSettings) ([]*goanalysis.Issue, error) {
+func runGoCheckSumType(
+	pass *analysis.Pass,
+	settings *config.GoChecksumTypeSettings,
+) ([]*goanalysis.Issue, error) {
 	var resIssues []*goanalysis.Issue
 
 	pkg := &packages.Package{

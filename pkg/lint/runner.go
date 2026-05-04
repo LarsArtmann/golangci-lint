@@ -86,7 +86,10 @@ func NewRunner(log logutils.Log, cfg *config.Config, goenv *goutil.Env,
 			processors.NewCgo(goenv),
 
 			// Must be after Cgo.
-			processors.NewFilenameUnadjuster(lintCtx.Packages, log.Child(logutils.DebugKeyFilenameUnadjuster)),
+			processors.NewFilenameUnadjuster(
+				lintCtx.Packages,
+				log.Child(logutils.DebugKeyFilenameUnadjuster),
+			),
 
 			// Must be after FilenameUnadjuster.
 			processors.NewInvalidIssue(log.Child(logutils.DebugKeyInvalidIssue)),
@@ -102,7 +105,11 @@ func NewRunner(log logutils.Log, cfg *config.Config, goenv *goutil.Env,
 			processors.NewExclusionRules(log.Child(logutils.DebugKeyExclusionRules), lineCache,
 				&cfg.Linters.Exclusions),
 
-			processors.NewNolintFilter(log.Child(logutils.DebugKeyNolintFilter), dbManager, enabledLinters),
+			processors.NewNolintFilter(
+				log.Child(logutils.DebugKeyNolintFilter),
+				dbManager,
+				enabledLinters,
+			),
 
 			processors.NewDiff(&cfg.Issues),
 
@@ -112,13 +119,25 @@ func NewRunner(log logutils.Log, cfg *config.Config, goenv *goutil.Env,
 			// Must be after the Fixer.
 			processors.NewUniqByLine(cfg.Issues.UniqByLine),
 			processors.NewMaxPerFileFromLinter(cfg),
-			processors.NewMaxSameIssues(cfg.Issues.MaxSameIssues, log.Child(logutils.DebugKeyMaxSameIssues), cfg),
-			processors.NewMaxFromLinter(cfg.Issues.MaxIssuesPerLinter, log.Child(logutils.DebugKeyMaxFromLinter), cfg),
+			processors.NewMaxSameIssues(
+				cfg.Issues.MaxSameIssues,
+				log.Child(logutils.DebugKeyMaxSameIssues),
+				cfg,
+			),
+			processors.NewMaxFromLinter(
+				cfg.Issues.MaxIssuesPerLinter,
+				log.Child(logutils.DebugKeyMaxFromLinter),
+				cfg,
+			),
 
 			// Now we can modify the issues for output.
 			processors.NewSourceCode(lineCache, log.Child(logutils.DebugKeySourceCode)),
 			processors.NewPathShortener(),
-			processors.NewSeverity(log.Child(logutils.DebugKeySeverityRules), lineCache, &cfg.Severity),
+			processors.NewSeverity(
+				log.Child(logutils.DebugKeySeverityRules),
+				lineCache,
+				&cfg.Severity,
+			),
 			processors.NewPathPrettifier(log, &cfg.Output),
 			processors.NewSortResults(&cfg.Output),
 		},
@@ -141,7 +160,11 @@ func (r *Runner) Run(ctx context.Context, linters []*linter.Config) ([]*result.I
 			return r.runLinterSafe(ctx, r.lintCtx, lc)
 		})
 		if err != nil {
-			lintErrors = errors.Join(lintErrors, fmt.Errorf("can't run linter %s", lc.Linter.Name()), err)
+			lintErrors = errors.Join(
+				lintErrors,
+				fmt.Errorf("can't run linter %s", lc.Linter.Name()),
+				err,
+			)
 			r.Log.Warnf("Can't run linter %s: %v", lc.Linter.Name(), err)
 
 			continue
@@ -234,7 +257,11 @@ func (r *Runner) printPerProcessorStat(stat map[string]processorStat) {
 	}
 }
 
-func (r *Runner) processIssues(issues []*result.Issue, sw *timeutils.Stopwatch, statPerProcessor map[string]processorStat) []*result.Issue {
+func (r *Runner) processIssues(
+	issues []*result.Issue,
+	sw *timeutils.Stopwatch,
+	statPerProcessor map[string]processorStat,
+) []*result.Issue {
 	for _, p := range r.Processors {
 		newIssues, err := timeutils.TrackStage(sw, p.Name(), func() ([]*result.Issue, error) {
 			return p.Process(issues)

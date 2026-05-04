@@ -3,12 +3,13 @@
 Extracted from `go/src/cmd/go/internal/cache/`.
 
 The main modifications are:
+
 - The errors management
   - Some methods return error.
   - Some errors are returned instead of being ignored.
 - The name of the env vars:
   - `GOCACHE` -> `GOLANGCI_LINT_CACHE`
-  - `GOCACHEPROG` -> `GOLANGCI_LINT_CACHEPROG` 
+  - `GOCACHEPROG` -> `GOLANGCI_LINT_CACHEPROG`
 
 ## History
 
@@ -31,6 +32,7 @@ The main modifications are:
 ## Previous History
 
 Based on the initial PR/commit the based in a mix between go1.12 and go1.13:
+
 - cache.go (go1.13)
 - cache_test.go (go1.12?)
 - default.go (go1.12?)
@@ -38,6 +40,7 @@ Based on the initial PR/commit the based in a mix between go1.12 and go1.13:
 - hash_test.go -> (go1.12?)
 
 Adapted for golangci-lint:
+
 - https://github.com/golangci/golangci-lint/pull/699: initial code (contains modifications of the files)
 - https://github.com/golangci/golangci-lint/pull/779: just a nolint (`cache.go`)
 - https://github.com/golangci/golangci-lint/pull/788: only directory permissions changes (0777 -> 0744) (`cache.go`, `cache_test.go`, `default.go`)

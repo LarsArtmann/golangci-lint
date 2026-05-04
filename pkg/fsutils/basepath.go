@@ -23,7 +23,12 @@ const (
 const OutputPathModeAbsolute = "abs"
 
 func AllRelativePathModes() []string {
-	return []string{RelativePathModeGoMod, RelativePathModeGitRoot, RelativePathModeCfg, RelativePathModeWd}
+	return []string{
+		RelativePathModeGoMod,
+		RelativePathModeGitRoot,
+		RelativePathModeCfg,
+		RelativePathModeWd,
+	}
 }
 
 func GetBasePath(ctx context.Context, mode, cfgDir string) (string, error) {

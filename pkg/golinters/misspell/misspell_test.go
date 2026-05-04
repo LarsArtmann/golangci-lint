@@ -3,11 +3,10 @@ package misspell
 import (
 	"testing"
 
+	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/misspell"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-
-	"github.com/golangci/golangci-lint/v2/pkg/config"
 )
 
 func Test_appendExtraWords(t *testing.T) {

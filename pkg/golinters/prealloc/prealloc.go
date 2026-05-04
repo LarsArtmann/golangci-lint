@@ -2,10 +2,9 @@ package prealloc
 
 import (
 	"github.com/alexkohler/prealloc/pkg"
-	"golang.org/x/tools/go/analysis"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"golang.org/x/tools/go/analysis"
 )
 
 func New(settings *config.PreallocSettings) *goanalysis.Linter {

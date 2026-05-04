@@ -6,10 +6,9 @@ import (
 	"path/filepath"
 	"testing"
 
+	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-
-	"github.com/golangci/golangci-lint/v2/pkg/config"
 )
 
 func TestGeneratedFileMatcher_isGeneratedFileLax_generated(t *testing.T) {
@@ -84,9 +83,11 @@ func Test_isGeneratedFileStrict(t *testing.T) {
 			assert:   assert.True,
 		},
 		{
-			desc:     "go strict invalid",
-			filepath: filepath.FromSlash("testdata/exclusion_generated_file_filter/go_strict_invalid.go"),
-			assert:   assert.False,
+			desc: "go strict invalid",
+			filepath: filepath.FromSlash(
+				"testdata/exclusion_generated_file_filter/go_strict_invalid.go",
+			),
+			assert: assert.False,
 		},
 	}
 
@@ -94,7 +95,12 @@ func Test_isGeneratedFileStrict(t *testing.T) {
 		t.Run(test.desc, func(t *testing.T) {
 			t.Parallel()
 
-			file, err := parser.ParseFile(token.NewFileSet(), test.filepath, nil, parser.PackageClauseOnly|parser.ParseComments)
+			file, err := parser.ParseFile(
+				token.NewFileSet(),
+				test.filepath,
+				nil,
+				parser.PackageClauseOnly|parser.ParseComments,
+			)
 			require.NoError(t, err)
 
 			generated := isGeneratedFileStrict(file)
@@ -122,7 +128,9 @@ and this text also`,
 			doc:   `DO NOT EDIT`,
 		},
 		{
-			fpath: filepath.FromSlash("testdata/exclusion_generated_file_filter/exclude_block_comment.go"),
+			fpath: filepath.FromSlash(
+				"testdata/exclusion_generated_file_filter/exclude_block_comment.go",
+			),
 			doc: `* first line
  *
  * second line
@@ -134,7 +142,12 @@ this one line comment also`,
 	}
 
 	for _, tc := range testCases {
-		file, err := parser.ParseFile(token.NewFileSet(), tc.fpath, nil, parser.PackageClauseOnly|parser.ParseComments)
+		file, err := parser.ParseFile(
+			token.NewFileSet(),
+			tc.fpath,
+			nil,
+			parser.PackageClauseOnly|parser.ParseComments,
+		)
 		require.NoError(t, err)
 
 		doc := getComments(file)

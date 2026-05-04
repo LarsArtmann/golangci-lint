@@ -5,10 +5,9 @@ import (
 	"fmt"
 	"io"
 
+	"github.com/golangci/golangci-lint/v2/internal/cache"
 	"golang.org/x/tools/go/analysis"
 	"golang.org/x/tools/go/types/objectpath"
-
-	"github.com/golangci/golangci-lint/v2/internal/cache"
 )
 
 type Fact struct {
@@ -74,25 +73,49 @@ func (act *action) persistFactsToCache() error {
 		})
 	}
 
-	factsCacheDebugf("Caching %d facts for package %q and analyzer %s", len(facts), act.Package.Name, act.Analyzer.Name)
+	factsCacheDebugf(
+		"Caching %d facts for package %q and analyzer %s",
+		len(facts),
+		act.Package.Name,
+		act.Analyzer.Name,
+	)
 
-	return act.runner.pkgCache.Put(act.Package, cache.HashModeNeedAllDeps, factCacheKey(analyzer), facts)
+	return act.runner.pkgCache.Put(
+		act.Package,
+		cache.HashModeNeedAllDeps,
+		factCacheKey(analyzer),
+		facts,
+	)
 }
 
 func (act *action) loadPersistedFacts() bool {
 	var facts []Fact
 
-	err := act.runner.pkgCache.Get(act.Package, cache.HashModeNeedAllDeps, factCacheKey(act.Analyzer), &facts)
+	err := act.runner.pkgCache.Get(
+		act.Package,
+		cache.HashModeNeedAllDeps,
+		factCacheKey(act.Analyzer),
+		&facts,
+	)
 	if err != nil {
 		if !errors.Is(err, cache.ErrMissing) && !errors.Is(err, io.EOF) {
 			act.runner.log.Warnf("Failed to get persisted facts: %s", err)
 		}
 
-		factsCacheDebugf("No cached facts for package %q and analyzer %s", act.Package.Name, act.Analyzer.Name)
+		factsCacheDebugf(
+			"No cached facts for package %q and analyzer %s",
+			act.Package.Name,
+			act.Analyzer.Name,
+		)
 		return false
 	}
 
-	factsCacheDebugf("Loaded %d cached facts for package %q and analyzer %s", len(facts), act.Package.Name, act.Analyzer.Name)
+	factsCacheDebugf(
+		"Loaded %d cached facts for package %q and analyzer %s",
+		len(facts),
+		act.Package.Name,
+		act.Analyzer.Name,
+	)
 
 	for _, f := range facts {
 		if f.Path == "" { // this is a package fact

@@ -7,12 +7,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/stretchr/testify/require"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/lint/lintersdb"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
 	"github.com/golangci/golangci-lint/v2/test/testshared"
+	"github.com/stretchr/testify/require"
 )
 
 func TestEnabledLinters(t *testing.T) {
@@ -152,7 +151,11 @@ func getEnabledByDefaultLintersWith(t *testing.T, includes ...string) []string {
 			Default: config.GroupStandard,
 		},
 	}
-	dbManager, err := lintersdb.NewManager(logutils.NewStderrLog("skip"), cfg, lintersdb.NewLinterBuilder())
+	dbManager, err := lintersdb.NewManager(
+		logutils.NewStderrLog("skip"),
+		cfg,
+		lintersdb.NewLinterBuilder(),
+	)
 	require.NoError(t, err)
 
 	ebdl, err := dbManager.GetEnabledLintersMap()
@@ -179,7 +182,11 @@ func getAllLintersFromGroupFast(t *testing.T) []string {
 		},
 	}
 
-	dbManager, err := lintersdb.NewManager(logutils.NewStderrLog("skip"), cfg, lintersdb.NewLinterBuilder())
+	dbManager, err := lintersdb.NewManager(
+		logutils.NewStderrLog("skip"),
+		cfg,
+		lintersdb.NewLinterBuilder(),
+	)
 	require.NoError(t, err)
 
 	ebdl, err := dbManager.GetEnabledLintersMap()

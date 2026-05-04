@@ -14,4 +14,3 @@ linters:
     - format
     - metalinter
     - module
-

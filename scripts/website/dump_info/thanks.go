@@ -52,7 +52,10 @@ func getThanksList() []*authorDetails {
 		switch {
 		case info.FromGitHub():
 			if _, ok := addedAuthors[info.Author]; ok {
-				addedAuthors[info.Author].Linters = append(addedAuthors[info.Author].Linters, lc.Name())
+				addedAuthors[info.Author].Linters = append(
+					addedAuthors[info.Author].Linters,
+					lc.Name(),
+				)
 			} else {
 				addedAuthors[info.Author] = &authorDetails{
 					Name:    info.Author,
@@ -64,7 +67,10 @@ func getThanksList() []*authorDetails {
 
 		case info.FromGitLab():
 			if _, ok := addedAuthors[info.Author]; ok {
-				addedAuthors[info.Author].Linters = append(addedAuthors[info.Author].Linters, lc.Name())
+				addedAuthors[info.Author].Linters = append(
+					addedAuthors[info.Author].Linters,
+					lc.Name(),
+				)
 			} else {
 				ghAuthor := info.Author
 				if info.Author == "bosi" {
@@ -81,7 +87,10 @@ func getThanksList() []*authorDetails {
 
 		case info.FromCodeberg():
 			if _, ok := addedAuthors[info.Author]; ok {
-				addedAuthors[info.Author].Linters = append(addedAuthors[info.Author].Linters, lc.Name())
+				addedAuthors[info.Author].Linters = append(
+					addedAuthors[info.Author].Linters,
+					lc.Name(),
+				)
 			} else {
 				addedAuthors[info.Author] = &authorDetails{
 					Name:    info.Author,
@@ -93,7 +102,7 @@ func getThanksList() []*authorDetails {
 		}
 	}
 
-	authors := slices.SortedFunc(maps.Keys(addedAuthors), func(a string, b string) int {
+	authors := slices.SortedFunc(maps.Keys(addedAuthors), func(a, b string) int {
 		return strings.Compare(strings.ToLower(a), strings.ToLower(b))
 	})
 

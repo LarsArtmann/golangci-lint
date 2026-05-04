@@ -4,5 +4,5 @@ linters:
   settings:
     mnd:
       ignored-numbers:
-        - '5'
-        - '0777'
+        - "5"
+        - "0777"

@@ -4,10 +4,9 @@ import (
 	"errors"
 	"fmt"
 
-	"golang.org/x/tools/go/packages"
-
 	"github.com/golangci/golangci-lint/v2/pkg/lint/linter"
 	"github.com/golangci/golangci-lint/v2/pkg/result"
+	"golang.org/x/tools/go/packages"
 )
 
 type IllTypedError struct {
@@ -44,7 +43,13 @@ func BuildIssuesFromIllTypedError(errs []error, lintCtx *linter.Context) ([]*res
 				uniqReportedIssues[err.Msg] = true
 				lintCtx.Log.Errorf("typechecking error: %s", err.Msg)
 			} else {
-				key := fmt.Sprintf("%s.%d.%d.%s", issue.FilePath(), issue.Line(), issue.Column(), issue.Text)
+				key := fmt.Sprintf(
+					"%s.%d.%d.%s",
+					issue.FilePath(),
+					issue.Line(),
+					issue.Column(),
+					issue.Text,
+				)
 				if uniqReportedIssues[key] {
 					continue
 				}

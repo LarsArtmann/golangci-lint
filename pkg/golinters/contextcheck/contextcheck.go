@@ -1,12 +1,11 @@
 package contextcheck
 
 import (
+	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/golangci/golangci-lint/v2/pkg/lint/linter"
 	"github.com/kkHAIKE/contextcheck"
 	"golang.org/x/tools/go/analysis/passes/ctrlflow"
 	"golang.org/x/tools/go/analysis/passes/inspect"
-
-	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
-	"github.com/golangci/golangci-lint/v2/pkg/lint/linter"
 )
 
 func New() *goanalysis.Linter {

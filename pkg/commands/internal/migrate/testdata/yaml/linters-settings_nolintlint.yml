@@ -9,6 +9,6 @@ issues:
 linters-settings:
   nolintlint:
     allow-unused: true
-    allow-no-explanation: [ ]
+    allow-no-explanation: []
     require-explanation: true
     require-specific: true

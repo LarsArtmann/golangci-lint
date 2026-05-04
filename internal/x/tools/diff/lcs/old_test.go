@@ -160,7 +160,7 @@ func TestDiffAPI(t *testing.T) {
 
 func BenchmarkTwoOld(b *testing.B) {
 	tests := genBench(rng(b), "abc", 96)
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		for _, tt := range tests {
 			_, two := compute(stringSeqs{tt.before, tt.after}, twosided, 100)
 			if !two.valid() {
@@ -172,7 +172,7 @@ func BenchmarkTwoOld(b *testing.B) {
 
 func BenchmarkForwOld(b *testing.B) {
 	tests := genBench(rng(b), "abc", 96)
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		for _, tt := range tests {
 			_, two := compute(stringSeqs{tt.before, tt.after}, forward, 100)
 			if !two.valid() {

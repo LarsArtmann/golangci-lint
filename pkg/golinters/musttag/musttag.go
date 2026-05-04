@@ -1,10 +1,9 @@
 package musttag
 
 import (
-	"go-simpler.org/musttag"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"go-simpler.org/musttag"
 )
 
 func New(settings *config.MustTagSettings) *goanalysis.Linter {

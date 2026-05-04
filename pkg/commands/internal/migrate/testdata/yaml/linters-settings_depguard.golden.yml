@@ -6,7 +6,7 @@ linters:
         main:
           list-mode: lax
           files:
-            - '!**/*_a _file.go'
+            - "!**/*_a _file.go"
           allow:
             - $gostd
             - github.com/OpenPeeDeeP

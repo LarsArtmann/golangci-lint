@@ -6,11 +6,10 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/stretchr/testify/require"
-	_ "github.com/valyala/quicktemplate"
-
 	"github.com/golangci/golangci-lint/v2/pkg/exitcodes"
 	"github.com/golangci/golangci-lint/v2/test/testshared"
+	"github.com/stretchr/testify/require"
+	_ "github.com/valyala/quicktemplate"
 )
 
 const minimalPkg = "minimalpkg"
@@ -504,7 +503,11 @@ func TestAbsPathDirAnalysis(t *testing.T) {
 }
 
 func TestAbsPathFileAnalysis(t *testing.T) {
-	dir := filepath.Join("testdata_etc", "abspath", "with_issue.go") // abs paths don't work with testdata dir
+	dir := filepath.Join(
+		"testdata_etc",
+		"abspath",
+		"with_issue.go",
+	) // abs paths don't work with testdata dir
 	absDir, err := filepath.Abs(dir)
 	require.NoError(t, err)
 

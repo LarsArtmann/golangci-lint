@@ -35,13 +35,21 @@ func (r *Run) Validate() error {
 	allowedModes := []string{"mod", "readonly", "vendor"}
 
 	if r.ModulesDownloadMode != "" && !slices.Contains(allowedModes, r.ModulesDownloadMode) {
-		return fmt.Errorf("invalid modules download path %s, only (%s) allowed", r.ModulesDownloadMode, strings.Join(allowedModes, "|"))
+		return fmt.Errorf(
+			"invalid modules download path %s, only (%s) allowed",
+			r.ModulesDownloadMode,
+			strings.Join(allowedModes, "|"),
+		)
 	}
 
 	pathRelativeToModes := fsutils.AllRelativePathModes()
 
 	if r.RelativePathMode != "" && !slices.Contains(pathRelativeToModes, r.RelativePathMode) {
-		return fmt.Errorf("invalid relative path mode %s, only (%s) allowed", r.RelativePathMode, strings.Join(pathRelativeToModes, "|"))
+		return fmt.Errorf(
+			"invalid relative path mode %s, only (%s) allowed",
+			r.RelativePathMode,
+			strings.Join(pathRelativeToModes, "|"),
+		)
 	}
 
 	return nil

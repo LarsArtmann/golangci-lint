@@ -6,14 +6,13 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goformat"
 	"github.com/golangci/golangci-lint/v2/pkg/goformatters"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
 	"github.com/golangci/golangci-lint/v2/pkg/result/processors"
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 type fmtOptions struct {
@@ -68,7 +67,12 @@ func newFmtCommand(logger logutils.Log, info BuildInfo) *fmtCommand {
 	setupFormattersFlagSet(c.viper, fs)
 
 	fs.BoolVarP(&c.opts.diff, "diff", "d", false, "Display diffs instead of rewriting files")
-	fs.BoolVar(&c.opts.diffColored, "diff-colored", false, "Display diffs instead of rewriting files (with colors)")
+	fs.BoolVar(
+		&c.opts.diffColored,
+		"diff-colored",
+		false,
+		"Display diffs instead of rewriting files (with colors)",
+	)
 	fs.BoolVar(&c.opts.stdin, "stdin", false, "Use standard input for piping source files")
 
 	c.cmd = fmtCmd
@@ -79,7 +83,14 @@ func newFmtCommand(logger logutils.Log, info BuildInfo) *fmtCommand {
 func (c *fmtCommand) persistentPreRunE(cmd *cobra.Command, args []string) error {
 	c.log.Infof("%s", c.buildInfo.String())
 
-	loader := config.NewFormattersLoader(c.log.Child(logutils.DebugKeyConfigReader), c.viper, cmd.Flags(), c.opts.LoaderOptions, c.cfg, args)
+	loader := config.NewFormattersLoader(
+		c.log.Child(logutils.DebugKeyConfigReader),
+		c.viper,
+		cmd.Flags(),
+		c.opts.LoaderOptions,
+		c.cfg,
+		args,
+	)
 
 	err := loader.Load(config.LoadOptions{CheckDeprecation: true, Validation: true})
 	if err != nil {

@@ -1,10 +1,9 @@
 package wrapcheck
 
 import (
-	"github.com/tomarrell/wrapcheck/v2/wrapcheck"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/tomarrell/wrapcheck/v2/wrapcheck"
 )
 
 func New(settings *config.WrapcheckSettings) *goanalysis.Linter {

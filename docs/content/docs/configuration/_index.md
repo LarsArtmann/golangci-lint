@@ -13,6 +13,6 @@ Slice options (e.g. list of enabled/disabled linters) are combined from the comm
 ## More
 
 {{< cards cols=2 >}}
-  {{< card link="/docs/configuration/cli" title="Command Line" icon="terminal" >}}
-  {{< card link="/docs/configuration/file" title="Configuration File" icon="adjustments" >}}
+{{< card link="/docs/configuration/cli" title="Command Line" icon="terminal" >}}
+{{< card link="/docs/configuration/file" title="Configuration File" icon="adjustments" >}}
 {{< /cards >}}

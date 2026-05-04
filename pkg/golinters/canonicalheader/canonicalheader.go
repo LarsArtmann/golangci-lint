@@ -1,9 +1,8 @@
 package canonicalheader
 
 import (
-	"github.com/lasiar/canonicalheader"
-
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/lasiar/canonicalheader"
 )
 
 func New() *goanalysis.Linter {

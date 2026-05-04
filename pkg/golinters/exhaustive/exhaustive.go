@@ -1,10 +1,9 @@
 package exhaustive
 
 import (
-	"github.com/nishanths/exhaustive"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/nishanths/exhaustive"
 )
 
 func New(settings *config.ExhaustiveSettings) *goanalysis.Linter {

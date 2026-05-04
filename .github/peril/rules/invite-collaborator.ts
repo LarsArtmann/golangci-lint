@@ -36,15 +36,11 @@ export const inviteCollaborator = async () => {
 
     // If we’ve already invited them, don’t spam them with more messages.
     if (isInvited) {
-      console.log(
-        `@${username} has already been invited to this org. Doing nothing.`
-      );
+      console.log(`@${username} has already been invited to this org. Doing nothing.`);
       return;
     }
   } catch (err) {
-    console.info(
-      `Error checking membership of ${username} in team ${teamId}: ${err.stack}`
-    );
+    console.info(`Error checking membership of ${username} in team ${teamId}: ${err.stack}`);
     // If the user hasn’t been invited, the invite check throws an error.
   }
 
@@ -55,9 +51,7 @@ export const inviteCollaborator = async () => {
     } as any);
 
     if (invite.data.state === "active") {
-      console.log(
-        `@${username} is already a ${invite.data.role} for this team.`
-      );
+      console.log(`@${username} is already a ${invite.data.role} for this team.`);
     } else {
       console.log(`We’ve invited @${username} to join this team.`);
     }

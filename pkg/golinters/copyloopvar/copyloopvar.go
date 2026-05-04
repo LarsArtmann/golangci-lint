@@ -1,10 +1,9 @@
 package copyloopvar
 
 import (
-	"github.com/karamaru-alpha/copyloopvar"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/karamaru-alpha/copyloopvar"
 )
 
 func New(settings *config.CopyLoopVarSettings) *goanalysis.Linter {

@@ -4,7 +4,6 @@ import (
 	"strings"
 
 	"github.com/breml/bidichk/pkg/bidichk"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 )

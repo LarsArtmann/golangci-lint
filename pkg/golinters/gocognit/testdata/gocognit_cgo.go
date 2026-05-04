@@ -23,7 +23,7 @@ func _() {
 }
 
 func _(number int) string { // want "cognitive complexity 4 of func .* is high .*"
-	if number == 1 {          // +1
+	if number == 1 { // +1
 		return "one"
 	} else if number == 2 { // +1
 		return "a couple"

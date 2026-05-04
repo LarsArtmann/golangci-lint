@@ -59,7 +59,10 @@ func (b *BaseRule) Validate(minConditionsCount int) error {
 	}
 
 	if nonBlank < minConditionsCount {
-		return fmt.Errorf("at least %d of (text, source, path[-except], linters) should be set", minConditionsCount)
+		return fmt.Errorf(
+			"at least %d of (text, source, path[-except], linters) should be set",
+			minConditionsCount,
+		)
 	}
 
 	return nil

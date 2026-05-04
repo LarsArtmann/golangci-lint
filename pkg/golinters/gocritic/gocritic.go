@@ -12,13 +12,12 @@ import (
 
 	"github.com/go-critic/go-critic/checkers"
 	gocriticlinter "github.com/go-critic/go-critic/linter"
-	_ "github.com/quasilyte/go-ruleguard/dsl"
-	"golang.org/x/tools/go/analysis"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 	"github.com/golangci/golangci-lint/v2/pkg/lint/linter"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
+	_ "github.com/quasilyte/go-ruleguard/dsl"
+	"golang.org/x/tools/go/analysis"
 )
 
 const linterName = "gocritic"
@@ -60,7 +59,11 @@ type goCriticWrapper struct {
 	once            sync.Once
 }
 
-func (w *goCriticWrapper) init(logger logutils.Log, settings *config.GoCriticSettings, replacer *strings.Replacer) {
+func (w *goCriticWrapper) init(
+	logger logutils.Log,
+	settings *config.GoCriticSettings,
+	replacer *strings.Replacer,
+) {
 	if settings == nil {
 		return
 	}
@@ -68,7 +71,11 @@ func (w *goCriticWrapper) init(logger logutils.Log, settings *config.GoCriticSet
 	w.once.Do(func() {
 		err := checkers.InitEmbeddedRules()
 		if err != nil {
-			logger.Fatalf("%s: %v: setting an explicit GOROOT can fix this problem", linterName, err)
+			logger.Fatalf(
+				"%s: %v: setting an explicit GOROOT can fix this problem",
+				linterName,
+				err,
+			)
 		}
 	})
 
@@ -114,7 +121,9 @@ func (w *goCriticWrapper) run(pass *analysis.Pass) error {
 	return nil
 }
 
-func (w *goCriticWrapper) buildEnabledCheckers(linterCtx *gocriticlinter.Context) ([]*gocriticlinter.Checker, error) {
+func (w *goCriticWrapper) buildEnabledCheckers(
+	linterCtx *gocriticlinter.Context,
+) ([]*gocriticlinter.Checker, error) {
 	allLowerCasedParams := w.settingsWrapper.GetLowerCasedParams()
 
 	var enabledCheckers []*gocriticlinter.Checker

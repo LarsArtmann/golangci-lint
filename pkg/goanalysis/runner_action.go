@@ -22,7 +22,12 @@ func newActionAllocator(maxCount int) *actionAllocator {
 
 func (actAlloc *actionAllocator) alloc() *action {
 	if actAlloc.nextFreeIndex == len(actAlloc.allocatedActions) {
-		panic(fmt.Sprintf("Made too many allocations of actions: %d allowed", len(actAlloc.allocatedActions)))
+		panic(
+			fmt.Sprintf(
+				"Made too many allocations of actions: %d allowed",
+				len(actAlloc.allocatedActions),
+			),
+		)
 	}
 	act := &actAlloc.allocatedActions[actAlloc.nextFreeIndex]
 	actAlloc.nextFreeIndex++
@@ -48,11 +53,25 @@ func (act *action) analyzeSafe() {
 				// This line allows to display "hidden" panic with analyzers like buildssa.
 				// Some linters are dependent of sub-analyzers but when a sub-analyzer fails the linter is not aware of that,
 				// this results to another panic (ex: "interface conversion: interface {} is nil, not *buildssa.SSA").
-				act.runner.log.Errorf("%s: panic during analysis: %v, %s", act.Analyzer.Name, p, string(debug.Stack()))
+				act.runner.log.Errorf(
+					"%s: panic during analysis: %v, %s",
+					act.Analyzer.Name,
+					p,
+					string(debug.Stack()),
+				)
 			}
 
-			act.Err = errorutil.NewPanicError(fmt.Sprintf("%s: package %q (isInitialPkg: %t, needAnalyzeSource: %t): %s",
-				act.Analyzer.Name, act.Package.Name, act.isInitialPkg, act.needAnalyzeSource, p), debug.Stack())
+			act.Err = errorutil.NewPanicError(
+				fmt.Sprintf(
+					"%s: package %q (isInitialPkg: %t, needAnalyzeSource: %t): %s",
+					act.Analyzer.Name,
+					act.Package.Name,
+					act.isInitialPkg,
+					act.needAnalyzeSource,
+					p,
+				),
+				debug.Stack(),
+			)
 		}
 	}()
 

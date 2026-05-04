@@ -3,10 +3,9 @@ package decorder
 import (
 	"strings"
 
-	"gitlab.com/bosi/decorder"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"gitlab.com/bosi/decorder"
 )
 
 func New(settings *config.DecorderSettings) *goanalysis.Linter {

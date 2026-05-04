@@ -8,12 +8,11 @@ import (
 	"sync/atomic"
 	"time"
 
-	"golang.org/x/tools/go/analysis"
-	"golang.org/x/tools/go/packages"
-
 	"github.com/golangci/golangci-lint/v2/internal/cache"
 	"github.com/golangci/golangci-lint/v2/pkg/lint/linter"
 	"github.com/golangci/golangci-lint/v2/pkg/result"
+	"golang.org/x/tools/go/analysis"
+	"golang.org/x/tools/go/packages"
 )
 
 func saveIssuesToCache(allPkgs []*packages.Package, pkgsFromCache map[*packages.Package]bool,
@@ -51,8 +50,18 @@ func saveIssuesToCache(allPkgs []*packages.Package, pkgsFromCache map[*packages.
 				}
 
 				atomic.AddInt64(&savedIssuesCount, int64(len(encodedIssues)))
-				if err := lintCtx.PkgCache.Put(pkg, cache.HashModeNeedAllDeps, lintResKey, encodedIssues); err != nil {
-					lintCtx.Log.Infof("Failed to save package %s issues (%d) to cache: %s", pkg, len(pkgIssues), err)
+				if err := lintCtx.PkgCache.Put(
+					pkg,
+					cache.HashModeNeedAllDeps,
+					lintResKey,
+					encodedIssues,
+				); err != nil {
+					lintCtx.Log.Infof(
+						"Failed to save package %s issues (%d) to cache: %s",
+						pkg,
+						len(pkgIssues),
+						err,
+					)
 				} else {
 					issuesCacheDebugf("Saved package %s issues (%d) to cache", pkg, len(pkgIssues))
 				}
@@ -72,7 +81,12 @@ func saveIssuesToCache(allPkgs []*packages.Package, pkgsFromCache map[*packages.
 
 	lintCtx.PkgCache.Close()
 
-	issuesCacheDebugf("Saved %d issues from %d packages to cache in %s", savedIssuesCount, len(allPkgs), time.Since(startedAt))
+	issuesCacheDebugf(
+		"Saved %d issues from %d packages to cache in %s",
+		savedIssuesCount,
+		len(allPkgs),
+		time.Since(startedAt),
+	)
 }
 
 func loadIssuesFromCache(pkgs []*packages.Package, lintCtx *linter.Context,

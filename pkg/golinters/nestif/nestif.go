@@ -1,11 +1,10 @@
 package nestif
 
 import (
-	"github.com/nakabonne/nestif"
-	"golang.org/x/tools/go/analysis"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/nakabonne/nestif"
+	"golang.org/x/tools/go/analysis"
 )
 
 func New(settings *config.NestifSettings) *goanalysis.Linter {
@@ -44,7 +43,9 @@ func runNestIf(pass *analysis.Pass, settings *config.NestifSettings) {
 
 		for _, issue := range issues {
 			pass.Report(analysis.Diagnostic{
-				Pos:     f.LineStart(goanalysis.AdjustPos(issue.Pos.Line, nonAdjPosition.Line, position.Line)),
+				Pos: f.LineStart(
+					goanalysis.AdjustPos(issue.Pos.Line, nonAdjPosition.Line, position.Line),
+				),
 				Message: issue.Message,
 			})
 		}

@@ -7,10 +7,9 @@ import (
 	"fmt"
 	"strings"
 
-	"golang.org/x/tools/go/analysis"
-
 	"github.com/golangci/golangci-lint/v2/pkg/lint/linter"
 	"github.com/golangci/golangci-lint/v2/pkg/result"
+	"golang.org/x/tools/go/analysis"
 )
 
 type LoadMode int
@@ -46,7 +45,11 @@ type Linter struct {
 	needUseOriginalPackages bool
 }
 
-func NewLinter(name, desc string, analyzers []*analysis.Analyzer, cfg map[string]map[string]any) *Linter {
+func NewLinter(
+	name, desc string,
+	analyzers []*analysis.Analyzer,
+	cfg map[string]map[string]any,
+) *Linter {
 	return &Linter{name: name, desc: desc, analyzers: analyzers, cfg: cfg}
 }
 

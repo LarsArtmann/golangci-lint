@@ -9,4 +9,3 @@ issues:
 run:
   allow-parallel-runners: true
   allow-serial-runners: true
-

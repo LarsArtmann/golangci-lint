@@ -2,7 +2,6 @@ package noinlineerr
 
 import (
 	"github.com/AlwxSin/noinlineerr"
-
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 )
 

@@ -12,7 +12,7 @@ linters:
           - github.com/uudashr/go-module:
               recommendations:
                 - golang.org/x/mod
-              reason: '`mod` is the official go.mod parser library.'
+              reason: "`mod` is the official go.mod parser library."
         versions:
           - github.com/mitchellh/go-homedir:
               version: < 1.1.0

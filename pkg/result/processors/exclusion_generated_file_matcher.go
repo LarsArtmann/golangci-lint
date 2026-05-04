@@ -48,7 +48,12 @@ func (p *GeneratedFileMatcher) IsGeneratedFile(filepath string, src any) (bool, 
 		return false, nil
 	}
 
-	file, err := parser.ParseFile(token.NewFileSet(), filepath, src, parser.PackageClauseOnly|parser.ParseComments)
+	file, err := parser.ParseFile(
+		token.NewFileSet(),
+		filepath,
+		src,
+		parser.PackageClauseOnly|parser.ParseComments,
+	)
 	if err != nil {
 		return false, fmt.Errorf("failed to parse file: %w", err)
 	}

@@ -5,11 +5,10 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/kulti/thelper/pkg/analyzer"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 	"github.com/golangci/golangci-lint/v2/pkg/golinters/internal"
+	"github.com/kulti/thelper/pkg/analyzer"
 )
 
 func New(settings *config.ThelperSettings) *goanalysis.Linter {

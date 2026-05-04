@@ -11,12 +11,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	"github.com/golangci/golangci-lint/v2/pkg/exitcodes"
 	"github.com/golangci/golangci-lint/v2/pkg/fsutils"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 // value: "1"
@@ -222,7 +221,12 @@ func (r *Runner) Run() *RunnerResult {
 	runArgs := append([]string{r.command}, r.args...)
 
 	defer func(startedAt time.Time) {
-		r.log.Infof("ran [%s %s] in %s", r.binPath, strings.Join(runArgs, " "), time.Since(startedAt))
+		r.log.Infof(
+			"ran [%s %s] in %s",
+			r.binPath,
+			strings.Join(runArgs, " "),
+			time.Since(startedAt),
+		)
 	}(time.Now())
 
 	cmd := r.Command()
@@ -292,7 +296,14 @@ func (r *RunnerResult) ExpectExitCode(possibleCodes ...int) *RunnerResult {
 		return r
 	}
 
-	assert.Fail(r.tb, "invalid exit code", "exit code (%d) must be one of %v: %s", r.exitCode, possibleCodes, r.output)
+	assert.Fail(
+		r.tb,
+		"invalid exit code",
+		"exit code (%d) must be one of %v: %s",
+		r.exitCode,
+		possibleCodes,
+		r.output,
+	)
 	return r
 }
 

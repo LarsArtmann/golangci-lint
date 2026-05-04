@@ -5,10 +5,9 @@ import (
 	"path/filepath"
 	"testing"
 
+	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-
-	"github.com/golangci/golangci-lint/v2/pkg/config"
 )
 
 func TestRunnerOptions_MatchAnyPattern(t *testing.T) {

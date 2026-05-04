@@ -6,7 +6,7 @@ aliases:
 ---
 
 {{< callout type="warning" >}}
-  **We recommend using [Module Plugin System](/docs/plugins/module-plugins) instead of the Go Plugin System.**
+**We recommend using [Module Plugin System](/docs/plugins/module-plugins) instead of the Go Plugin System.**
 {{< /callout >}}
 
 Private linters can be added through [Go's plugin system](https://pkg.go.dev/plugin).
@@ -31,6 +31,7 @@ You can see the versions by running `go version -m golangci-lint`.
 You'll also need to create a Go file like `plugin/example.go`.
 
 This file MUST be in the package `main`, and MUST define an exposed function called `New` with the following signature:
+
 ```go
 func New(conf any) ([]*analysis.Analyzer, error) {
 	// ...
@@ -40,6 +41,7 @@ func New(conf any) ([]*analysis.Analyzer, error) {
 See [plugin/example.go](https://github.com/golangci/example-plugin-linter/blob/HEAD/plugin/example.go) for more info.
 
 To build the plugin, from the root project directory, run:
+
 ```bash
 go build -buildmode=plugin plugin/example.go
 ```
@@ -56,23 +58,24 @@ If you're looking for instructions on how to configure your own custom linter, t
 
 1. If the project you want to lint does not have one already, copy the [.golangci.yml](https://github.com/golangci/golangci-lint/blob/HEAD/.golangci.yml) to the root directory.
 2. Adjust the YAML to appropriate `linters.settings.custom` entries as so:
-  ```yaml {filename=".golangci.yml"}
-  version: "2"
 
-  linters:
-    settings:
-      custom:
-        example:
-          path: /example.so
-          description: The description of the linter
-          original-url: github.com/golangci/example-linter
-          settings: # Settings are optional.
-            one: Foo
-            two:
-              - name: Bar
-            three:
-              name: Bar
-  ```
+```yaml {filename=".golangci.yml"}
+version: "2"
+
+linters:
+  settings:
+    custom:
+      example:
+        path: /example.so
+        description: The description of the linter
+        original-url: github.com/golangci/example-linter
+        settings: # Settings are optional.
+          one: Foo
+          two:
+            - name: Bar
+          three:
+            name: Bar
+```
 
 That is all the configuration that is required to run a custom linter in your project.
 

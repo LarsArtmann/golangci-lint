@@ -4,11 +4,10 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/fsutils"
 	"github.com/golangci/golangci-lint/v2/pkg/result"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestExclusionRules_Process_multiple(t *testing.T) {
@@ -60,7 +59,11 @@ func TestExclusionRules_Process_multiple(t *testing.T) {
 		{Path: "e_test.go", Text: "testonly", Linter: "linter"},
 		{Path: "e.go", Text: "nontestonly", Linter: "linter"},
 		{Path: "e_test.go", Text: "nontestonly", Linter: "linter"},
-		{Path: filepath.FromSlash("testdata/exclusion_rules/exclusion_rules.go"), Line: 3, Linter: "lll"},
+		{
+			Path:   filepath.FromSlash("testdata/exclusion_rules/exclusion_rules.go"),
+			Line:   3,
+			Linter: "lll",
+		},
 	}
 
 	var issues []*result.Issue
@@ -175,7 +178,11 @@ func TestExclusionRules_Process_caseSensitive_multiple(t *testing.T) {
 		{Path: "e_test.go", Text: "another", Linter: "linter"},
 		{Path: "e_test.go", Text: "testonly", Linter: "linter"},
 		{Path: "e_test.go", Text: "testOnly", Linter: "linter"},
-		{Path: filepath.FromSlash("testdata/exclusion_rules/case_sensitive.go"), Line: 3, Linter: "lll"},
+		{
+			Path:   filepath.FromSlash("testdata/exclusion_rules/case_sensitive.go"),
+			Line:   3,
+			Linter: "lll",
+		},
 	}
 
 	var issues []*result.Issue
@@ -201,7 +208,11 @@ func TestExclusionRules_Process_caseSensitive_multiple(t *testing.T) {
 		{Path: "e_Test.go", Text: "normal", Linter: "testlinter"},
 		{Path: "e_test.go", Text: "another", Linter: "linter"},
 		{Path: "e_test.go", Text: "testOnly", Linter: "linter"},
-		{Path: filepath.FromSlash("testdata/exclusion_rules/case_sensitive.go"), Line: 3, Linter: "lll"},
+		{
+			Path:   filepath.FromSlash("testdata/exclusion_rules/case_sensitive.go"),
+			Line:   3,
+			Linter: "lll",
+		},
 	}
 
 	assert.Equal(t, expectedCases, resultingCases)

@@ -3,11 +3,10 @@ package godot
 import (
 	"cmp"
 
-	"github.com/tetafro/godot"
-	"golang.org/x/tools/go/analysis"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/tetafro/godot"
+	"golang.org/x/tools/go/analysis"
 )
 
 func New(settings *config.GodotSettings) *goanalysis.Linter {

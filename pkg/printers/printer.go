@@ -39,7 +39,12 @@ type Printer struct {
 }
 
 // NewPrinter creates a new Printer.
-func NewPrinter(log logutils.Log, cfg *config.Formats, reportData *report.Data, basePath string) (*Printer, error) {
+func NewPrinter(
+	log logutils.Log,
+	cfg *config.Formats,
+	reportData *report.Data,
+	basePath string,
+) (*Printer, error) {
 	if log == nil {
 		return nil, errors.New("missing log argument in constructor")
 	}

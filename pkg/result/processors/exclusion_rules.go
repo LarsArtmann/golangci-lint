@@ -24,7 +24,11 @@ type ExclusionRules struct {
 	rules []excludeRule
 }
 
-func NewExclusionRules(log logutils.Log, lines *fsutils.LineCache, cfg *config.LinterExclusions) *ExclusionRules {
+func NewExclusionRules(
+	log logutils.Log,
+	lines *fsutils.LineCache,
+	cfg *config.LinterExclusions,
+) *ExclusionRules {
 	p := &ExclusionRules{
 		log:            log,
 		lines:          lines,

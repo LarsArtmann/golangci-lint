@@ -2,7 +2,10 @@
 //golangcitest:expected_exitcode 0
 package testdata
 
-import "os"
+import (
+	"errors"
+	"os"
+)
 
 func SimpleEqual(e1, e2 error) bool {
 	return errors.Is(e1, e2)

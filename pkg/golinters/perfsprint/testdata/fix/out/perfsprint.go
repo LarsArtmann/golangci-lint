@@ -3,7 +3,10 @@
 package testdata
 
 import (
+	"encoding/hex"
+	"errors"
 	"fmt"
+	"strconv"
 )
 
 func TestPerfsprint() {

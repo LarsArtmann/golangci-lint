@@ -98,7 +98,7 @@ linters:
             - ""
         - name: context-as-argument
           arguments:
-            - allowTypesBefore: '*testing.T,*github.com/user/repo/testing.Harness'
+            - allowTypesBefore: "*testing.T,*github.com/user/repo/testing.Harness"
           severity: warning
           disabled: false
           exclude:

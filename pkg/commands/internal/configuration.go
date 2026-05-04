@@ -57,7 +57,9 @@ func (c *Configuration) Validate() error {
 		}
 
 		if strings.TrimSpace(plugin.Path) != "" && strings.TrimSpace(plugin.Version) != "" {
-			return errors.New("invalid configuration: 'version' and 'path' should not be provided at the same time")
+			return errors.New(
+				"invalid configuration: 'version' and 'path' should not be provided at the same time",
+			)
 		}
 
 		if strings.TrimSpace(plugin.Path) == "" {

@@ -5,10 +5,9 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/spf13/cobra"
-
 	"github.com/golangci/golangci-lint/v2/pkg/lint/lintersdb"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
+	"github.com/spf13/cobra"
 )
 
 type helpOptions struct {

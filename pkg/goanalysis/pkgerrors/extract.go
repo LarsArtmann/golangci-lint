@@ -82,7 +82,10 @@ func extractErrors(pkg *packages.Package) []packages.Error {
 	return uniqErrors
 }
 
-func extractErrorsImpl(pkg *packages.Package, seenPackages map[*packages.Package]bool) []packages.Error {
+func extractErrorsImpl(
+	pkg *packages.Package,
+	seenPackages map[*packages.Package]bool,
+) []packages.Error {
 	if seenPackages[pkg] {
 		return nil
 	}

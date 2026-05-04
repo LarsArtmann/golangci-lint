@@ -30,7 +30,7 @@ linters-settings:
         severity: warning
         disabled: false
         exclude: [""]
-        arguments: [ 4 ]
+        arguments: [4]
       - name: atomic
         severity: warning
         disabled: false
@@ -39,7 +39,7 @@ linters-settings:
         severity: warning
         disabled: false
         exclude: [""]
-        arguments: [ "Ω","Σ","σ", "7" ]
+        arguments: ["Ω", "Σ", "σ", "7"]
       - name: bare-return
         severity: warning
         disabled: false
@@ -60,7 +60,7 @@ linters-settings:
         severity: warning
         disabled: false
         exclude: [""]
-        arguments: [ 7 ]
+        arguments: [7]
       - name: comment-spacings
         severity: warning
         disabled: false
@@ -72,7 +72,7 @@ linters-settings:
         severity: warning
         disabled: false
         exclude: [""]
-        arguments: [ 15 ]
+        arguments: [15]
       - name: confusing-naming
         severity: warning
         disabled: false
@@ -99,7 +99,7 @@ linters-settings:
         severity: warning
         disabled: false
         exclude: [""]
-        arguments: [ 3 ]
+        arguments: [3]
       - name: datarace
         severity: warning
         disabled: false
@@ -113,12 +113,12 @@ linters-settings:
         disabled: false
         exclude: [""]
         arguments:
-          - [ "call-chain", "loop" ]
+          - ["call-chain", "loop"]
       - name: dot-imports
         severity: warning
         disabled: false
         exclude: [""]
-        arguments: [ ]
+        arguments: []
       - name: duplicated-imports
         severity: warning
         disabled: false
@@ -211,12 +211,12 @@ linters-settings:
         severity: warning
         disabled: false
         exclude: [""]
-        arguments: [ 10, 0 ]
+        arguments: [10, 0]
       - name: function-result-limit
         severity: warning
         disabled: false
         exclude: [""]
-        arguments: [ 3 ]
+        arguments: [3]
       - name: get-return
         severity: warning
         disabled: false
@@ -260,17 +260,17 @@ linters-settings:
         severity: warning
         disabled: false
         exclude: [""]
-        arguments: [ 80 ]
+        arguments: [80]
       - name: max-control-nesting
         severity: warning
         disabled: false
         exclude: [""]
-        arguments: [ 3 ]
+        arguments: [3]
       - name: max-public-structs
         severity: warning
         disabled: false
         exclude: [""]
-        arguments: [ 3 ]
+        arguments: [3]
       - name: modifies-parameter
         severity: warning
         disabled: false
@@ -326,10 +326,10 @@ linters-settings:
         disabled: false
         exclude: [""]
         arguments:
-          - - 'core.WriteError[1].Message'
-            - '/^([^A-Z]|$)/'
+          - - "core.WriteError[1].Message"
+            - "/^([^A-Z]|$)/"
             - must not start with a capital letter
-          - - 'fmt.Errorf[0]'
+          - - "fmt.Errorf[0]"
             - '/(^|[^\.!?])$/'
             - must not end in punctuation
           - - panic
@@ -426,8 +426,8 @@ linters-settings:
         disabled: false
         exclude: [""]
         arguments:
-          - [ "ID" ]
-          - [ "VM" ]
+          - ["ID"]
+          - ["VM"]
           - - upperCaseConst: true
       - name: waitgroup-by-value
         severity: warning

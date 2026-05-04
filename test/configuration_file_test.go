@@ -20,7 +20,10 @@ func Test_validateTestConfigurationFiles(t *testing.T) {
 }
 
 func Test_validateTestConfigurationFilesLinters(t *testing.T) {
-	err := validateTestConfigurationFiles("../jsonschema/golangci.next.jsonschema.json", "../pkg/golinters")
+	err := validateTestConfigurationFiles(
+		"../jsonschema/golangci.next.jsonschema.json",
+		"../pkg/golinters",
+	)
 	require.NoError(t, err)
 }
 
@@ -93,7 +96,8 @@ func findConfigurationFiles(targetDir string) ([]string, error) {
 			return err
 		}
 
-		if !d.IsDir() && (strings.EqualFold(filepath.Ext(d.Name()), ".yml") || strings.EqualFold(filepath.Ext(d.Name()), ".yaml")) {
+		if !d.IsDir() &&
+			(strings.EqualFold(filepath.Ext(d.Name()), ".yml") || strings.EqualFold(filepath.Ext(d.Name()), ".yaml")) {
 			yamlFiles = append(yamlFiles, path)
 		}
 

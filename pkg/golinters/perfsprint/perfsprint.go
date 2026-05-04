@@ -2,7 +2,6 @@ package perfsprint
 
 import (
 	"github.com/catenacyber/perfsprint/analyzer"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 )

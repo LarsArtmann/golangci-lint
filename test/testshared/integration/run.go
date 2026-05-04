@@ -8,10 +8,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/require"
-
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
 	"github.com/golangci/golangci-lint/v2/test/testshared"
+	"github.com/stretchr/testify/require"
 )
 
 const testdataDir = "testdata"
@@ -93,7 +92,13 @@ func testOneSource(t *testing.T, log *logutils.StderrLog, binPath, sourcePath st
 			require.ErrorAs(t, err, &exitErr)
 		}
 
-		require.Equal(t, rc.ExitCode, cmd.ProcessState.ExitCode(), "Unexpected exit code: %s", string(output))
+		require.Equal(
+			t,
+			rc.ExitCode,
+			cmd.ProcessState.ExitCode(),
+			"Unexpected exit code: %s",
+			string(output),
+		)
 
 		testshared.Analyze(t, sourcePath, output)
 	}

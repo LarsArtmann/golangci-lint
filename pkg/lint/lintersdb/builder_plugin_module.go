@@ -4,12 +4,11 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/golangci/plugin-module-register/register"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 	"github.com/golangci/golangci-lint/v2/pkg/lint/linter"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
+	"github.com/golangci/plugin-module-register/register"
 )
 
 const modulePluginType = "module"

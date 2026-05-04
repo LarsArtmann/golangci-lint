@@ -2,7 +2,6 @@ package mirror
 
 import (
 	"github.com/butuzov/mirror"
-
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 )
 

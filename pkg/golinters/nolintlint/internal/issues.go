@@ -22,9 +22,11 @@ func formatNotSpecific(fullDirective, directiveWithOptionalLeadingSpace string) 
 }
 
 func formatParseError(fullDirective, directiveWithOptionalLeadingSpace string) string {
-	return fmt.Sprintf("directive `%s` should match `%s[:<comma-separated-linters>] [// <explanation>]`",
+	return fmt.Sprintf(
+		"directive `%s` should match `%s[:<comma-separated-linters>] [// <explanation>]`",
 		fullDirective,
-		directiveWithOptionalLeadingSpace)
+		directiveWithOptionalLeadingSpace,
+	)
 }
 
 func formatNoExplanation(fullDirective, fullDirectiveWithoutExplanation string) string {

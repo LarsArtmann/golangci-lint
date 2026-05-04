@@ -5,7 +5,6 @@ import (
 
 	wslv4 "github.com/bombsimon/wsl/v4"
 	wslv5 "github.com/bombsimon/wsl/v5"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 	"github.com/golangci/golangci-lint/v2/pkg/golinters/internal"
@@ -71,15 +70,21 @@ func Migration(old *config.WSLv4Settings) any {
 	}
 
 	if old.AllowMultiLineAssignCuddle {
-		internal.LinterLogger.Warnf("`allow-multiline-assign` is deprecated and always allowed in wsl >= v5")
+		internal.LinterLogger.Warnf(
+			"`allow-multiline-assign` is deprecated and always allowed in wsl >= v5",
+		)
 	}
 
 	if old.AllowTrailingComment {
-		internal.LinterLogger.Warnf("`allow-trailing-comment` is deprecated and always allowed in wsl >= v5")
+		internal.LinterLogger.Warnf(
+			"`allow-trailing-comment` is deprecated and always allowed in wsl >= v5",
+		)
 	}
 
 	if old.AllowSeparatedLeadingComment {
-		internal.LinterLogger.Warnf("`allow-separated-leading-comment` is deprecated and always allowed in wsl >= v5")
+		internal.LinterLogger.Warnf(
+			"`allow-separated-leading-comment` is deprecated and always allowed in wsl >= v5",
+		)
 	}
 
 	if old.AllowCuddleDeclaration {

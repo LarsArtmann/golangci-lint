@@ -1,10 +1,9 @@
 package paralleltest
 
 import (
-	"github.com/kunwardeep/paralleltest/pkg/paralleltest"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/kunwardeep/paralleltest/pkg/paralleltest"
 )
 
 func New(settings *config.ParallelTestSettings) *goanalysis.Linter {

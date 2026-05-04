@@ -4,4 +4,4 @@ linters:
   settings:
     dupword:
       ignore:
-      - "the"
+        - "the"

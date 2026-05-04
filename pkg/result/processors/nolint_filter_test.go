@@ -5,15 +5,14 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/mock"
-	"github.com/stretchr/testify/require"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/golinters/nolintlint"
 	"github.com/golangci/golangci-lint/v2/pkg/lint/lintersdb"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
 	"github.com/golangci/golangci-lint/v2/pkg/result"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/mock"
+	"github.com/stretchr/testify/require"
 )
 
 func newNolintFileIssue(line int, fromLinter string) *result.Issue {
@@ -69,11 +68,19 @@ func TestTestNolintFilter_Process(t *testing.T) {
 	processAssertEmpty(t, p, newNolintFileIssue(10, "any")) // preceding comment for var
 	processAssertEmpty(t, p, newNolintFileIssue(9, "any"))  // preceding comment for var itself
 
-	processAssertSame(t, p, newNolintFileIssue(14, "any"))  // preceding comment with extra \n
-	processAssertEmpty(t, p, newNolintFileIssue(12, "any")) // preceding comment with extra \n itself
+	processAssertSame(t, p, newNolintFileIssue(14, "any")) // preceding comment with extra \n
+	processAssertEmpty(
+		t,
+		p,
+		newNolintFileIssue(12, "any"),
+	) // preceding comment with extra \n itself
 
-	processAssertSame(t, p, newNolintFileIssue(17, "any"))  // preceding comment on different column
-	processAssertEmpty(t, p, newNolintFileIssue(16, "any")) // preceding comment on different column itself
+	processAssertSame(t, p, newNolintFileIssue(17, "any")) // preceding comment on different column
+	processAssertEmpty(
+		t,
+		p,
+		newNolintFileIssue(16, "any"),
+	) // preceding comment on different column itself
 
 	// preceding comment for func name and comment itself
 	for i := 19; i <= 23; i++ {
@@ -272,7 +279,9 @@ func TestNolintFilter_Process_unused(t *testing.T) {
 		enabledSetLog := logutils.NewMockLog()
 		enabledSetLog.On("Infof", "Active %d linters: %s", len(enabledLinters), enabledLinters)
 
-		cfg := &config.Config{Linters: config.Linters{Default: config.GroupNone, Enable: enabledLinters}}
+		cfg := &config.Config{
+			Linters: config.Linters{Default: config.GroupNone, Enable: enabledLinters},
+		}
 
 		dbManager, err := lintersdb.NewManager(enabledSetLog, cfg, lintersdb.NewLinterBuilder())
 		require.NoError(t, err)
@@ -305,19 +314,25 @@ func TestNolintFilter_Process_unused(t *testing.T) {
 		ExpectedNoLintLinter: "misspell",
 	}
 
-	t.Run("when an issue does not occur, it is not removed from the nolintlint issues", func(t *testing.T) {
-		p := createProcessor(t, log, []string{"misspell", "nolintlint"})
-		defer p.Finish()
+	t.Run(
+		"when an issue does not occur, it is not removed from the nolintlint issues",
+		func(t *testing.T) {
+			p := createProcessor(t, log, []string{"misspell", "nolintlint"})
+			defer p.Finish()
 
-		processAssertSame(t, p, nolintlintIssueMisspell)
-	})
+			processAssertSame(t, p, nolintlintIssueMisspell)
+		},
+	)
 
-	t.Run("when an issue does not occur but nolintlint is nolinted, it is removed from the nolintlint issues", func(t *testing.T) {
-		p := createProcessor(t, log, []string{"misspell", "nolintlint"})
-		defer p.Finish()
+	t.Run(
+		"when an issue does not occur but nolintlint is nolinted, it is removed from the nolintlint issues",
+		func(t *testing.T) {
+			p := createProcessor(t, log, []string{"misspell", "nolintlint"})
+			defer p.Finish()
 
-		processAssertEmpty(t, p, nolintlintIssueMisspellUnusedOK)
-	})
+			processAssertEmpty(t, p, nolintlintIssueMisspellUnusedOK)
+		},
+	)
 
 	t.Run("when an issue occurs, it is removed from the nolintlint issues", func(t *testing.T) {
 		p := createProcessor(t, log, []string{"misspell", "nolintlint"})
@@ -332,21 +347,26 @@ func TestNolintFilter_Process_unused(t *testing.T) {
 		}, nolintlintIssueMisspell}...)
 	})
 
-	t.Run("when a linter is not enabled, it is removed from the nolintlint unused issues", func(t *testing.T) {
-		enabledSetLog := logutils.NewMockLog()
-		enabledSetLog.On("Infof", "Active %d linters: %s", 1, []string{"nolintlint"})
+	t.Run(
+		"when a linter is not enabled, it is removed from the nolintlint unused issues",
+		func(t *testing.T) {
+			enabledSetLog := logutils.NewMockLog()
+			enabledSetLog.On("Infof", "Active %d linters: %s", 1, []string{"nolintlint"})
 
-		cfg := &config.Config{Linters: config.Linters{Default: config.GroupNone, Enable: []string{"nolintlint"}}}
+			cfg := &config.Config{
+				Linters: config.Linters{Default: config.GroupNone, Enable: []string{"nolintlint"}},
+			}
 
-		dbManager, err := lintersdb.NewManager(enabledSetLog, cfg, lintersdb.NewLinterBuilder())
-		require.NoError(t, err)
+			dbManager, err := lintersdb.NewManager(enabledSetLog, cfg, lintersdb.NewLinterBuilder())
+			require.NoError(t, err)
 
-		enabledLintersMap, err := dbManager.GetEnabledLintersMap()
-		require.NoError(t, err)
+			enabledLintersMap, err := dbManager.GetEnabledLintersMap()
+			require.NoError(t, err)
 
-		p := NewNolintFilter(log, dbManager, enabledLintersMap)
-		defer p.Finish()
+			p := NewNolintFilter(log, dbManager, enabledLintersMap)
+			defer p.Finish()
 
-		processAssertEmpty(t, p, nolintlintIssueMisspell)
-	})
+			processAssertEmpty(t, p, nolintlintIssueMisspell)
+		},
+	)
 }

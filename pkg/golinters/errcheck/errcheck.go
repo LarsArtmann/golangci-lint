@@ -6,15 +6,14 @@ import (
 	"regexp"
 	"sync"
 
-	"github.com/kisielk/errcheck/errcheck"
-	"golang.org/x/tools/go/analysis"
-	"golang.org/x/tools/go/packages"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 	"github.com/golangci/golangci-lint/v2/pkg/golinters/internal"
 	"github.com/golangci/golangci-lint/v2/pkg/lint/linter"
 	"github.com/golangci/golangci-lint/v2/pkg/result"
+	"github.com/kisielk/errcheck/errcheck"
+	"golang.org/x/tools/go/analysis"
+	"golang.org/x/tools/go/packages"
 )
 
 const linterName = "errcheck"
@@ -106,7 +105,9 @@ func getChecker(errCfg *config.ErrcheckSettings) *errcheck.Checker {
 	}
 
 	if !errCfg.DisableDefaultExclusions {
-		checker.Exclusions.Symbols = append(checker.Exclusions.Symbols, errcheck.DefaultExcludedSymbols...)
+		checker.Exclusions.Symbols = append(
+			checker.Exclusions.Symbols,
+			errcheck.DefaultExcludedSymbols...)
 	}
 
 	checker.Exclusions.Symbols = append(checker.Exclusions.Symbols, errCfg.ExcludeFunctions...)

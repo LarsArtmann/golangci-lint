@@ -3,9 +3,8 @@ package versionone
 import (
 	"encoding"
 
-	"go.yaml.in/yaml/v3"
-
 	"github.com/golangci/golangci-lint/v2/pkg/commands/internal/migrate/ptr"
+	"go.yaml.in/yaml/v3"
 )
 
 type LintersSettings struct {
@@ -239,14 +238,14 @@ type ForbidigoPattern struct {
 	//
 	// If the entry is a map, then the other fields are set as usual by mapstructure.
 	patternString *string
-	Pattern       *string `yaml:"p" mapstructure:"p"`
+	Pattern       *string `yaml:"p"             mapstructure:"p"`
 	Package       *string `yaml:"pkg,omitempty" mapstructure:"pkg,omitempty"`
 	Msg           *string `yaml:"msg,omitempty" mapstructure:"msg,omitempty"`
 }
 
 func (p *ForbidigoPattern) UnmarshalText(text []byte) error {
 	// Validation happens when instantiating forbidigo.
-	p.patternString = ptr.Pointer(string(text))
+	p.patternString = new(string(text))
 	return nil
 }
 
@@ -641,12 +640,12 @@ type TagliatelleSettings struct {
 }
 
 type TagliatelleCase struct {
-	TagliatelleBase `mapstructure:",squash"`
+	TagliatelleBase `                       mapstructure:",squash"`
 	Overrides       []TagliatelleOverrides `mapstructure:"overrides"`
 }
 
 type TagliatelleOverrides struct {
-	TagliatelleBase `mapstructure:",squash"`
+	TagliatelleBase `        mapstructure:",squash"`
 	Package         *string `mapstructure:"pkg"`
 	Ignore          *bool   `mapstructure:"ignore"`
 }

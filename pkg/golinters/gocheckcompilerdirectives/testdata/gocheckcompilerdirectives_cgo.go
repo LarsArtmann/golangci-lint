@@ -12,8 +12,8 @@ package testdata
 import "C"
 
 import (
-	"unsafe"
 	_ "embed"
+	"unsafe"
 )
 
 func _() {

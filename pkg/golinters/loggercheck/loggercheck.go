@@ -1,10 +1,9 @@
 package loggercheck
 
 import (
-	"github.com/timonwong/loggercheck"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/timonwong/loggercheck"
 )
 
 func New(settings *config.LoggerCheckSettings) *goanalysis.Linter {

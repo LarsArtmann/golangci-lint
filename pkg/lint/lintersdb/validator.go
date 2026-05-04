@@ -61,8 +61,10 @@ func (v Validator) validateLintersNames(cfg *config.Linters) error {
 	}
 
 	if len(unknownNames) > 0 {
-		return fmt.Errorf("unknown linters: '%v', run 'golangci-lint help linters' to see the list of supported linters",
-			strings.Join(unknownNames, ","))
+		return fmt.Errorf(
+			"unknown linters: '%v', run 'golangci-lint help linters' to see the list of supported linters",
+			strings.Join(unknownNames, ","),
+		)
 	}
 
 	return nil
@@ -90,9 +92,17 @@ func (v Validator) alternativeNamesDeprecation(cfg *config.Linters) error {
 		}
 
 		if len(lc) > 1 {
-			v.m.log.Warnf("The linter named %q is deprecated. It has been split into: %s.", name, strings.Join(lc, ", "))
+			v.m.log.Warnf(
+				"The linter named %q is deprecated. It has been split into: %s.",
+				name,
+				strings.Join(lc, ", "),
+			)
 		} else {
-			v.m.log.Warnf("The name %q is deprecated. The linter has been renamed to: %s.", name, lc[0])
+			v.m.log.Warnf(
+				"The name %q is deprecated. The linter has been renamed to: %s.",
+				name,
+				lc[0],
+			)
 		}
 	}
 

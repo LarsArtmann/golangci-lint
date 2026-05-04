@@ -19,24 +19,26 @@ The site is based on [hextra](https://github.com/imfing/hextra) theme.
 
 ## Templating
 
-We use [shortcodes](https://gohugo.io/templates/types/#shortcode) and [partials](https://gohugo.io/templates/types/#partial) based on files from `./docs/.tmp/` and `./docs/data/`. 
+We use [shortcodes](https://gohugo.io/templates/types/#shortcode) and [partials](https://gohugo.io/templates/types/#partial) based on files from `./docs/.tmp/` and `./docs/data/`.
 
 - The files in `./docs/.tmp/` are used to be embedded with the shortcode `{{%/* golangci/embed file="filename.ext" */%}}`.
-- The files in `./docs/data/` are used as [data sources](https://gohugo.io/content-management/data-sources/). 
+- The files in `./docs/data/` are used as [data sources](https://gohugo.io/content-management/data-sources/).
 
 These files are created by running:
 
-- `make website_expand_templates` in the root of the repository.  
+- `make website_expand_templates` in the root of the repository.
 - `make website_dump_info` in the root of the repository. (only during a release)
 
 ### Some Notes
 
 [shortcodes](https://gohugo.io/templates/types/#shortcode):
+
 - cannot be used inside another shortcode
 - can only be used inside a page
 - can contain Markdown or HTML, but the tag is different: `{{%/* shortcode */%}}` vs `{{</* shortcode */>}}`
 
 [partials](https://gohugo.io/templates/types/#partial):
+
 - are reusable HTML blocks or "functions"
 - cannot be used inside a page
 - can be used inside another partial
@@ -85,6 +87,7 @@ To do this, run:
 # (in the root of the repository)
 make docs_build
 ```
+
 or
 
 ```bash

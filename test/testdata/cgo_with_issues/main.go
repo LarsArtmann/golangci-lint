@@ -22,7 +22,7 @@ func Example() {
 	C.free(unsafe.Pointer(cs))
 }
 
-func notFormattedForGofmt()  {
+func notFormattedForGofmt() {
 }
 
 func errorForRevive(p *int) error {
@@ -32,4 +32,3 @@ func errorForRevive(p *int) error {
 		return nil
 	}
 }
-

@@ -4,12 +4,11 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/fsutils"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
 	"github.com/golangci/golangci-lint/v2/pkg/result"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestSeverity_multiple(t *testing.T) {
@@ -86,7 +85,11 @@ func TestSeverity_multiple(t *testing.T) {
 		{Path: "e.go", Text: "nontestonly", Linter: "testlinter"},
 		{Path: "e_test.go", Text: "nontestonly", Linter: "testlinter"},
 		{Path: filepath.FromSlash("testdata/severity/exclude_rules.go"), Line: 3, Linter: "lll"},
-		{Path: filepath.FromSlash("testdata/severity/severity_rules.go"), Line: 3, Linter: "invalidgo"},
+		{
+			Path:   filepath.FromSlash("testdata/severity/severity_rules.go"),
+			Line:   3,
+			Linter: "invalidgo",
+		},
 		{Path: "someotherlinter.go", Text: "someotherlinter", Linter: "someotherlinter"},
 		{Path: "somenotmatchlinter.go", Text: "somenotmatchlinter", Linter: "somenotmatchlinter"},
 		{Path: "empty.go", Text: "empty", Linter: "empty"},
@@ -114,12 +117,42 @@ func TestSeverity_multiple(t *testing.T) {
 		{Path: "ssl.go", Text: "ssl", Linter: "gosec", Severity: "info"},
 		{Path: "e.go", Text: "some", Linter: "linter", Severity: "info"},
 		{Path: "e_test.go", Text: "testonly", Linter: "testlinter", Severity: "info"},
-		{Path: "e.go", Text: "nontestonly", Linter: "testlinter", Severity: "info"},       // matched
-		{Path: "e_test.go", Text: "nontestonly", Linter: "testlinter", Severity: "error"}, // not matched
-		{Path: filepath.FromSlash("testdata/severity/exclude_rules.go"), Line: 3, Linter: "lll", Severity: "error"},
-		{Path: filepath.FromSlash("testdata/severity/severity_rules.go"), Line: 3, Linter: "invalidgo", Severity: "info"},
-		{Path: "someotherlinter.go", Text: "someotherlinter", Linter: "someotherlinter", Severity: "info"},
-		{Path: "somenotmatchlinter.go", Text: "somenotmatchlinter", Linter: "somenotmatchlinter", Severity: "error"},
+		{
+			Path:     "e.go",
+			Text:     "nontestonly",
+			Linter:   "testlinter",
+			Severity: "info",
+		}, // matched
+		{
+			Path:     "e_test.go",
+			Text:     "nontestonly",
+			Linter:   "testlinter",
+			Severity: "error",
+		}, // not matched
+		{
+			Path:     filepath.FromSlash("testdata/severity/exclude_rules.go"),
+			Line:     3,
+			Linter:   "lll",
+			Severity: "error",
+		},
+		{
+			Path:     filepath.FromSlash("testdata/severity/severity_rules.go"),
+			Line:     3,
+			Linter:   "invalidgo",
+			Severity: "info",
+		},
+		{
+			Path:     "someotherlinter.go",
+			Text:     "someotherlinter",
+			Linter:   "someotherlinter",
+			Severity: "info",
+		},
+		{
+			Path:     "somenotmatchlinter.go",
+			Text:     "somenotmatchlinter",
+			Linter:   "somenotmatchlinter",
+			Severity: "error",
+		},
 		{Path: "empty.go", Text: "empty", Linter: "empty", Severity: "error"},
 	}
 

@@ -3,10 +3,9 @@ package gosmopolitan
 import (
 	"strings"
 
-	"github.com/xen0n/gosmopolitan"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/xen0n/gosmopolitan"
 )
 
 func New(settings *config.GosmopolitanSettings) *goanalysis.Linter {

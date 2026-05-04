@@ -12,7 +12,14 @@ type FlagFunc[T any] func(name string, value T, usage string) *T
 type FlagPFunc[T any] func(name, shorthand string, value T, usage string) *T
 
 // AddFlagAndBind adds a Cobra/pflag flag and binds it with Viper.
-func AddFlagAndBind[T any](v *viper.Viper, fs *pflag.FlagSet, pfn FlagFunc[T], name, bind string, value T, usage string) {
+func AddFlagAndBind[T any](
+	v *viper.Viper,
+	fs *pflag.FlagSet,
+	pfn FlagFunc[T],
+	name, bind string,
+	value T,
+	usage string,
+) {
 	pfn(name, value, usage)
 
 	err := v.BindPFlag(bind, fs.Lookup(name))
@@ -22,7 +29,14 @@ func AddFlagAndBind[T any](v *viper.Viper, fs *pflag.FlagSet, pfn FlagFunc[T], n
 }
 
 // AddFlagAndBindP adds a Cobra/pflag flag and binds it with Viper.
-func AddFlagAndBindP[T any](v *viper.Viper, fs *pflag.FlagSet, pfn FlagPFunc[T], name, shorthand, bind string, value T, usage string) {
+func AddFlagAndBindP[T any](
+	v *viper.Viper,
+	fs *pflag.FlagSet,
+	pfn FlagPFunc[T],
+	name, shorthand, bind string,
+	value T,
+	usage string,
+) {
 	pfn(name, shorthand, value, usage)
 
 	err := v.BindPFlag(bind, fs.Lookup(name))
@@ -32,7 +46,14 @@ func AddFlagAndBindP[T any](v *viper.Viper, fs *pflag.FlagSet, pfn FlagPFunc[T],
 }
 
 // AddDeprecatedFlagAndBind similar to AddFlagAndBind but deprecate the flag.
-func AddDeprecatedFlagAndBind[T any](v *viper.Viper, fs *pflag.FlagSet, pfn FlagFunc[T], name, bind string, value T, usage string) {
+func AddDeprecatedFlagAndBind[T any](
+	v *viper.Viper,
+	fs *pflag.FlagSet,
+	pfn FlagFunc[T],
+	name, bind string,
+	value T,
+	usage string,
+) {
 	AddFlagAndBind(v, fs, pfn, name, bind, value, usage)
 	deprecateFlag(fs, name)
 }

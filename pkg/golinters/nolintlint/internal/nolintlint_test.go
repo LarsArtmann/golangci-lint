@@ -6,11 +6,10 @@ import (
 	"go/token"
 	"testing"
 
+	"github.com/golangci/golangci-lint/v2/pkg/result"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"golang.org/x/tools/go/analysis"
-
-	"github.com/golangci/golangci-lint/v2/pkg/result"
 )
 
 func TestLinter_Run(t *testing.T) {
@@ -40,22 +39,42 @@ func foo() {
 				{
 					FromLinter: "nolintlint",
 					Text:       "directive `//nolint` should provide explanation such as `//nolint // this is why`",
-					Pos:        token.Position{Filename: "testing.go", Offset: 24, Line: 4, Column: 1},
+					Pos: token.Position{
+						Filename: "testing.go",
+						Offset:   24,
+						Line:     4,
+						Column:   1,
+					},
 				},
 				{
 					FromLinter: "nolintlint",
 					Text:       "directive `//nolint` should provide explanation such as `//nolint // this is why`",
-					Pos:        token.Position{Filename: "testing.go", Offset: 54, Line: 6, Column: 9},
+					Pos: token.Position{
+						Filename: "testing.go",
+						Offset:   54,
+						Line:     6,
+						Column:   9,
+					},
 				},
 				{
 					FromLinter: "nolintlint",
 					Text:       "directive `//nolint //` should provide explanation such as `//nolint // this is why`",
-					Pos:        token.Position{Filename: "testing.go", Offset: 71, Line: 7, Column: 9},
+					Pos: token.Position{
+						Filename: "testing.go",
+						Offset:   71,
+						Line:     7,
+						Column:   9,
+					},
 				},
 				{
 					FromLinter: "nolintlint",
 					Text:       "directive `//nolint // ` should provide explanation such as `//nolint // this is why`",
-					Pos:        token.Position{Filename: "testing.go", Offset: 91, Line: 8, Column: 9},
+					Pos: token.Position{
+						Filename: "testing.go",
+						Offset:   91,
+						Line:     8,
+						Column:   9,
+					},
 				},
 			},
 		},
@@ -69,11 +88,13 @@ func foo() {
 //nolint:dupl
 func foo() {}
 `,
-			expected: []*result.Issue{{
-				FromLinter: "nolintlint",
-				Text:       "directive `//nolint:dupl` should provide explanation such as `//nolint:dupl // this is why`",
-				Pos:        token.Position{Filename: "testing.go", Offset: 47, Line: 5, Column: 1},
-			}},
+			expected: []*result.Issue{
+				{
+					FromLinter: "nolintlint",
+					Text:       "directive `//nolint:dupl` should provide explanation such as `//nolint:dupl // this is why`",
+					Pos:        token.Position{Filename: "testing.go", Offset: 47, Line: 5, Column: 1},
+				},
+			},
 		},
 		{
 			desc:     "when no explanation is needed for a specific linter",
@@ -101,12 +122,22 @@ func foo() {
 				{
 					FromLinter: "nolintlint",
 					Text:       "directive `//nolint` should mention specific linter such as `//nolint:my-linter`",
-					Pos:        token.Position{Filename: "testing.go", Offset: 62, Line: 5, Column: 9},
+					Pos: token.Position{
+						Filename: "testing.go",
+						Offset:   62,
+						Line:     5,
+						Column:   9,
+					},
 				},
 				{
 					FromLinter: "nolintlint",
 					Text:       "directive `//nolint // because` should mention specific linter such as `//nolint:my-linter`",
-					Pos:        token.Position{Filename: "testing.go", Offset: 79, Line: 6, Column: 9},
+					Pos: token.Position{
+						Filename: "testing.go",
+						Offset:   79,
+						Line:     6,
+						Column:   9,
+					},
 				},
 			},
 		},
@@ -124,7 +155,12 @@ func foo() {
 				{
 					FromLinter: "nolintlint",
 					Text:       "directive `// nolint` should be written without leading space as `//nolint`",
-					Pos:        token.Position{Filename: "testing.go", Offset: 34, Line: 4, Column: 9},
+					Pos: token.Position{
+						Filename: "testing.go",
+						Offset:   34,
+						Line:     4,
+						Column:   9,
+					},
 					SuggestedFixes: []analysis.SuggestedFix{{
 						TextEdits: []analysis.TextEdit{{
 							Pos:     34,
@@ -136,7 +172,12 @@ func foo() {
 				{
 					FromLinter: "nolintlint",
 					Text:       "directive `//   nolint` should be written without leading space as `//nolint`",
-					Pos:        token.Position{Filename: "testing.go", Offset: 52, Line: 5, Column: 9},
+					Pos: token.Position{
+						Filename: "testing.go",
+						Offset:   52,
+						Line:     5,
+						Column:   9,
+					},
 					SuggestedFixes: []analysis.SuggestedFix{{
 						TextEdits: []analysis.TextEdit{{
 							Pos:     52,
@@ -158,11 +199,13 @@ func foo() {
   good() //nolint: linter1, linter2
 }
 `,
-			expected: []*result.Issue{{
-				FromLinter: "nolintlint",
-				Text:       "directive `//nolint:linter1 linter2` should match `//nolint[:<comma-separated-linters>] [// <explanation>]`",
-				Pos:        token.Position{Filename: "testing.go", Offset: 71, Line: 5, Column: 9},
-			}},
+			expected: []*result.Issue{
+				{
+					FromLinter: "nolintlint",
+					Text:       "directive `//nolint:linter1 linter2` should match `//nolint[:<comma-separated-linters>] [// <explanation>]`",
+					Pos:        token.Position{Filename: "testing.go", Offset: 71, Line: 5, Column: 9},
+				},
+			},
 		},
 		{
 			desc: "multi-line comments don't confuse parser",
@@ -254,16 +297,26 @@ func foo() {
 `,
 			expected: []*result.Issue{
 				{
-					FromLinter:           "nolintlint",
-					Text:                 "directive `//nolint:linter1,linter2` is unused for linter \"linter1\"",
-					Pos:                  token.Position{Filename: "testing.go", Offset: 34, Line: 4, Column: 9},
+					FromLinter: "nolintlint",
+					Text:       "directive `//nolint:linter1,linter2` is unused for linter \"linter1\"",
+					Pos: token.Position{
+						Filename: "testing.go",
+						Offset:   34,
+						Line:     4,
+						Column:   9,
+					},
 					ExpectNoLint:         true,
 					ExpectedNoLintLinter: "linter1",
 				},
 				{
-					FromLinter:           "nolintlint",
-					Text:                 "directive `//nolint:linter1,linter2` is unused for linter \"linter2\"",
-					Pos:                  token.Position{Filename: "testing.go", Offset: 34, Line: 4, Column: 9},
+					FromLinter: "nolintlint",
+					Text:       "directive `//nolint:linter1,linter2` is unused for linter \"linter2\"",
+					Pos: token.Position{
+						Filename: "testing.go",
+						Offset:   34,
+						Line:     4,
+						Column:   9,
+					},
 					ExpectNoLint:         true,
 					ExpectedNoLintLinter: "linter2",
 				},

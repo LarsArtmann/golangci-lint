@@ -2,3 +2,8 @@ go.sum linguist-generated
 assets/* linguist-generated
 *       text=auto eol=lf
 *.ps1   text eol=crlf
+# Exclude from language statistics
+docs/status/*.md linguist-documentation
+# Exclude from language statistics
+*.pb.go linguist-generated
+*_mock.go linguist-generated

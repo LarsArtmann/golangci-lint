@@ -4,10 +4,9 @@ import (
 	"context"
 	"fmt"
 
-	"golang.org/x/tools/go/analysis"
-
 	"github.com/golangci/golangci-lint/v2/pkg/lint/linter"
 	"github.com/golangci/golangci-lint/v2/pkg/result"
+	"golang.org/x/tools/go/analysis"
 )
 
 type MetaLinter struct {

@@ -21,7 +21,11 @@ type MetaFormatter struct {
 	formatters []Formatter
 }
 
-func NewMetaFormatter(log logutils.Log, cfg *config.Formatters, runCfg *config.Run) (*MetaFormatter, error) {
+func NewMetaFormatter(
+	log logutils.Log,
+	cfg *config.Formatters,
+	runCfg *config.Run,
+) (*MetaFormatter, error) {
 	for _, formatter := range cfg.Enable {
 		if !IsFormatter(formatter) {
 			return nil, fmt.Errorf("invalid formatter %q", formatter)
@@ -91,5 +95,8 @@ func (m *MetaFormatter) Format(filename string, src []byte) []byte {
 }
 
 func IsFormatter(name string) bool {
-	return slices.Contains([]string{gofmt.Name, gofumpt.Name, goimports.Name, gci.Name, golines.Name, swaggo.Name}, name)
+	return slices.Contains(
+		[]string{gofmt.Name, gofumpt.Name, goimports.Name, gci.Name, golines.Name, swaggo.Name},
+		name,
+	)
 }

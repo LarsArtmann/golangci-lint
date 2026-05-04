@@ -12,14 +12,13 @@ import (
 	"strings"
 	"time"
 
+	"github.com/golangci/golangci-lint/v2/pkg/exitcodes"
 	hcversion "github.com/hashicorp/go-version"
 	"github.com/pelletier/go-toml/v2"
 	"github.com/santhosh-tekuri/jsonschema/v6"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 	"go.yaml.in/yaml/v3"
-
-	"github.com/golangci/golangci-lint/v2/pkg/exitcodes"
 )
 
 type verifyOptions struct {
@@ -38,7 +37,11 @@ func (c *configCommand) executeVerify(cmd *cobra.Command, _ []string) error {
 		return fmt.Errorf("get JSON schema: %w", err)
 	}
 
-	c.log.Infof("Verifying the configuration file %q with the JSON Schema from %s", usedConfigFile, schemaURL)
+	c.log.Infof(
+		"Verifying the configuration file %q with the JSON Schema from %s",
+		usedConfigFile,
+		schemaURL,
+	)
 
 	err = validateConfiguration(schemaURL, usedConfigFile)
 	if err != nil {
@@ -78,8 +81,10 @@ func createSchemaURL(flags *pflag.FlagSet, buildInfo BuildInfo) (string, error) 
 				return "", err
 			}
 
-			return fmt.Sprintf("https://raw.githubusercontent.com/golangci/golangci-lint/%s/jsonschema/golangci.next.jsonschema.json",
-				commit), nil
+			return fmt.Sprintf(
+				"https://raw.githubusercontent.com/golangci/golangci-lint/%s/jsonschema/golangci.next.jsonschema.json",
+				commit,
+			), nil
 		}
 
 		return fmt.Sprintf("https://golangci-lint.run/jsonschema/golangci.v%d.%d.jsonschema.json",
@@ -91,8 +96,10 @@ func createSchemaURL(flags *pflag.FlagSet, buildInfo BuildInfo) (string, error) 
 			return "", err
 		}
 
-		return fmt.Sprintf("https://raw.githubusercontent.com/golangci/golangci-lint/%s/jsonschema/golangci.next.jsonschema.json",
-			commit), nil
+		return fmt.Sprintf(
+			"https://raw.githubusercontent.com/golangci/golangci-lint/%s/jsonschema/golangci.next.jsonschema.json",
+			commit,
+		), nil
 
 	default:
 		return "", errors.New("version not found")
@@ -167,8 +174,16 @@ func printValidationDetail(cmd *cobra.Command, detail *jsonschema.OutputUnit) {
 		data, _ := json.Marshal(detail.Error)
 		details, _ := strconv.Unquote(string(data))
 
-		cmd.PrintErrf("jsonschema: %q does not validate with %q: %s\n",
-			strings.ReplaceAll(strings.TrimPrefix(detail.InstanceLocation, "/"), "/", "."), detail.KeywordLocation, details)
+		cmd.PrintErrf(
+			"jsonschema: %q does not validate with %q: %s\n",
+			strings.ReplaceAll(
+				strings.TrimPrefix(detail.InstanceLocation, "/"),
+				"/",
+				".",
+			),
+			detail.KeywordLocation,
+			details,
+		)
 	}
 
 	for _, d := range detail.Errors {

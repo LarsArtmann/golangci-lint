@@ -6,12 +6,11 @@ import (
 	"path/filepath"
 	"testing"
 
+	"github.com/golangci/golangci-lint/v2/pkg/logutils"
+	"github.com/golangci/golangci-lint/v2/pkg/timeutils"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"golang.org/x/tools/go/packages"
-
-	"github.com/golangci/golangci-lint/v2/pkg/logutils"
-	"github.com/golangci/golangci-lint/v2/pkg/timeutils"
 )
 
 func setupCache(t *testing.T) *Cache {
@@ -95,7 +94,11 @@ func TestCache_buildKey(t *testing.T) {
 	actionID, err := pkgCache.buildKey(pkg, HashModeNeedAllDeps, "")
 	require.NoError(t, err)
 
-	assert.Equal(t, "f32bf1bf010aa9b570e081c64ec9e22e17aafa1e822990ba952905ec5fdf8d9d", fmt.Sprintf("%x", actionID))
+	assert.Equal(
+		t,
+		"f32bf1bf010aa9b570e081c64ec9e22e17aafa1e822990ba952905ec5fdf8d9d",
+		fmt.Sprintf("%x", actionID),
+	)
 }
 
 func TestCache_pkgActionID(t *testing.T) {
@@ -106,7 +109,11 @@ func TestCache_pkgActionID(t *testing.T) {
 	actionID, err := pkgCache.pkgActionID(pkg, HashModeNeedAllDeps)
 	require.NoError(t, err)
 
-	assert.Equal(t, "f690f05acd1024386ae912d9ad9c04080523b9a899f6afe56ab3108d88215c1d", fmt.Sprintf("%x", actionID))
+	assert.Equal(
+		t,
+		"f690f05acd1024386ae912d9ad9c04080523b9a899f6afe56ab3108d88215c1d",
+		fmt.Sprintf("%x", actionID),
+	)
 }
 
 func TestCache_packageHash_load(t *testing.T) {
@@ -139,9 +146,21 @@ func TestCache_packageHash_store(t *testing.T) {
 
 	require.Len(t, hashRes, 3)
 
-	assert.Equal(t, "8978e3d76c6f99e9663558d7147a7790f229a676804d1fde706a611898547b74", hashRes[HashModeNeedOnlySelf])
-	assert.Equal(t, "b1aef902a0619b5cbfc2d6e2e91a73dd58dd448e58274b2d7a5ff8efd97aefa4", hashRes[HashModeNeedDirectDeps])
-	assert.Equal(t, "9c602ef861197b6807e82c99caa7c4042eb03c1a92886303fb02893744355131", hashRes[HashModeNeedAllDeps])
+	assert.Equal(
+		t,
+		"8978e3d76c6f99e9663558d7147a7790f229a676804d1fde706a611898547b74",
+		hashRes[HashModeNeedOnlySelf],
+	)
+	assert.Equal(
+		t,
+		"b1aef902a0619b5cbfc2d6e2e91a73dd58dd448e58274b2d7a5ff8efd97aefa4",
+		hashRes[HashModeNeedDirectDeps],
+	)
+	assert.Equal(
+		t,
+		"9c602ef861197b6807e82c99caa7c4042eb03c1a92886303fb02893744355131",
+		hashRes[HashModeNeedAllDeps],
+	)
 }
 
 func TestCache_computeHash(t *testing.T) {
@@ -154,9 +173,21 @@ func TestCache_computeHash(t *testing.T) {
 
 	require.Len(t, results, 3)
 
-	assert.Equal(t, "8978e3d76c6f99e9663558d7147a7790f229a676804d1fde706a611898547b74", results[HashModeNeedOnlySelf])
-	assert.Equal(t, "b1aef902a0619b5cbfc2d6e2e91a73dd58dd448e58274b2d7a5ff8efd97aefa4", results[HashModeNeedDirectDeps])
-	assert.Equal(t, "9c602ef861197b6807e82c99caa7c4042eb03c1a92886303fb02893744355131", results[HashModeNeedAllDeps])
+	assert.Equal(
+		t,
+		"8978e3d76c6f99e9663558d7147a7790f229a676804d1fde706a611898547b74",
+		results[HashModeNeedOnlySelf],
+	)
+	assert.Equal(
+		t,
+		"b1aef902a0619b5cbfc2d6e2e91a73dd58dd448e58274b2d7a5ff8efd97aefa4",
+		results[HashModeNeedDirectDeps],
+	)
+	assert.Equal(
+		t,
+		"9c602ef861197b6807e82c99caa7c4042eb03c1a92886303fb02893744355131",
+		results[HashModeNeedAllDeps],
+	)
 }
 
 func TestCache_computeHash_module(t *testing.T) {
@@ -165,7 +196,7 @@ func TestCache_computeHash_module(t *testing.T) {
 	// This creates a new random directory for each test run, but the hash will stay consistent.
 	tempDir := t.TempDir()
 
-	err := os.WriteFile(filepath.Join(tempDir, "foo.go"), []byte("package foo"), 0600)
+	err := os.WriteFile(filepath.Join(tempDir, "foo.go"), []byte("package foo"), 0o600)
 	require.NoError(t, err)
 
 	pkg := fakePackage()
@@ -180,7 +211,19 @@ func TestCache_computeHash_module(t *testing.T) {
 
 	require.Len(t, results, 3)
 
-	assert.Equal(t, "ac5d79f4630d6b5f1e4ac88bfa9974698ea44ea1f53760bc75001bd7c9ce9064", results[HashModeNeedOnlySelf])
-	assert.Equal(t, "73fd7ef46b20efdd1bff7eaedade26b1655ee727d83f4210b7934bf4d4a1ac1d", results[HashModeNeedDirectDeps])
-	assert.Equal(t, "063ffbaa2ea6b2a9a02724effe2a616b88672a4d8c3c4c6c8d777bfe5a49e7b4", results[HashModeNeedAllDeps])
+	assert.Equal(
+		t,
+		"ac5d79f4630d6b5f1e4ac88bfa9974698ea44ea1f53760bc75001bd7c9ce9064",
+		results[HashModeNeedOnlySelf],
+	)
+	assert.Equal(
+		t,
+		"73fd7ef46b20efdd1bff7eaedade26b1655ee727d83f4210b7934bf4d4a1ac1d",
+		results[HashModeNeedDirectDeps],
+	)
+	assert.Equal(
+		t,
+		"063ffbaa2ea6b2a9a02724effe2a616b88672a4d8c3c4c6c8d777bfe5a49e7b4",
+		results[HashModeNeedAllDeps],
+	)
 }

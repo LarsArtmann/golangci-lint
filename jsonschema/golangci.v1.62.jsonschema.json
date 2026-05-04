@@ -114,14 +114,7 @@
       ]
     },
     "gocritic-tags": {
-      "enum": [
-        "diagnostic",
-        "style",
-        "performance",
-        "experimental",
-        "opinionated",
-        "security"
-      ]
+      "enum": ["diagnostic", "style", "performance", "experimental", "opinionated", "security"]
     },
     "gosec-rules": {
       "enum": [
@@ -298,11 +291,7 @@
       ]
     },
     "iface-analyzers": {
-      "enum": [
-        "identical",
-        "unused",
-        "opaque"
-      ]
+      "enum": ["identical", "unused", "opaque"]
     },
     "linters": {
       "$comment": "anyOf with enum is used to allow auto completion of non-custom linters",
@@ -502,7 +491,7 @@
                 "default": "stdout",
                 "anyOf": [
                   {
-                    "enum": [ "stdout", "stderr" ]
+                    "enum": ["stdout", "stderr"]
                   },
                   {
                     "type": "string"
@@ -1080,14 +1069,7 @@
               "items": {
                 "anyOf": [
                   {
-                    "enum": [
-                      "standard",
-                      "default",
-                      "blank",
-                      "dot",
-                      "alias",
-                      "localmodule"
-                    ]
+                    "enum": ["standard", "default", "blank", "dot", "alias", "localmodule"]
                   },
                   {
                     "type": "string"
@@ -1293,7 +1275,7 @@
                   "type": "object",
                   "additionalProperties": false,
                   "properties": {
-                    "paramsOnly" : {
+                    "paramsOnly": {
                       "type": "boolean",
                       "default": true
                     }
@@ -1303,7 +1285,7 @@
                   "type": "object",
                   "additionalProperties": false,
                   "properties": {
-                    "minLength" : {
+                    "minLength": {
                       "type": "number",
                       "default": 15
                     }
@@ -1313,7 +1295,7 @@
                   "type": "object",
                   "additionalProperties": false,
                   "properties": {
-                    "skipBalanced" : {
+                    "skipBalanced": {
                       "type": "boolean",
                       "default": true
                     }
@@ -1323,7 +1305,7 @@
                   "type": "object",
                   "additionalProperties": false,
                   "properties": {
-                    "sizeThreshold" : {
+                    "sizeThreshold": {
                       "type": "number",
                       "default": 80
                     }
@@ -1333,7 +1315,7 @@
                   "type": "object",
                   "additionalProperties": false,
                   "properties": {
-                    "minThreshold" : {
+                    "minThreshold": {
                       "type": "number",
                       "default": 2
                     }
@@ -1343,7 +1325,7 @@
                   "type": "object",
                   "additionalProperties": false,
                   "properties": {
-                    "bodyWidth" : {
+                    "bodyWidth": {
                       "type": "number",
                       "default": 5
                     }
@@ -1353,11 +1335,11 @@
                   "type": "object",
                   "additionalProperties": false,
                   "properties": {
-                    "sizeThreshold" : {
+                    "sizeThreshold": {
                       "type": "number",
                       "default": 512
                     },
-                    "skipTestFuncs" : {
+                    "skipTestFuncs": {
                       "type": "boolean",
                       "default": true
                     }
@@ -1367,11 +1349,11 @@
                   "type": "object",
                   "additionalProperties": false,
                   "properties": {
-                    "sizeThreshold" : {
+                    "sizeThreshold": {
                       "type": "number",
                       "default": 128
                     },
-                    "skipTestFuncs" : {
+                    "skipTestFuncs": {
                       "type": "boolean",
                       "default": true
                     }
@@ -1381,19 +1363,19 @@
                   "type": "object",
                   "additionalProperties": false,
                   "properties": {
-                    "debug" : {
+                    "debug": {
                       "type": "string"
                     },
-                    "enable" : {
+                    "enable": {
                       "type": "string"
                     },
-                    "disable" : {
+                    "disable": {
                       "type": "string"
                     },
-                    "failOn" : {
+                    "failOn": {
                       "type": "string"
                     },
-                    "rules" : {
+                    "rules": {
                       "type": "string"
                     }
                   }
@@ -1402,7 +1384,7 @@
                   "type": "object",
                   "additionalProperties": false,
                   "properties": {
-                    "maxResults" : {
+                    "maxResults": {
                       "type": "number",
                       "default": 5
                     }
@@ -1412,7 +1394,7 @@
                   "type": "object",
                   "additionalProperties": false,
                   "properties": {
-                    "skipArchDependent" : {
+                    "skipArchDependent": {
                       "type": "boolean",
                       "default": true
                     }
@@ -1422,7 +1404,7 @@
                   "type": "object",
                   "additionalProperties": false,
                   "properties": {
-                    "skipRecvDeref" : {
+                    "skipRecvDeref": {
                       "type": "boolean",
                       "default": true
                     }
@@ -1432,7 +1414,7 @@
                   "type": "object",
                   "additionalProperties": false,
                   "properties": {
-                    "checkExported" : {
+                    "checkExported": {
                       "type": "boolean",
                       "default": false
                     }
@@ -1615,10 +1597,7 @@
               "examples": ["my_header_template.txt"]
             }
           },
-          "oneOf": [
-            { "required": ["template"] },
-            { "required": ["template-path"] }
-          ]
+          "oneOf": [{ "required": ["template"] }, { "required": ["template-path"] }]
         },
         "goimports": {
           "type": "object",
@@ -2283,14 +2262,7 @@
               "description": "The list of enabled checks, see https://github.com/tommy-muehle/go-mnd/#checks for description.",
               "type": "array",
               "items": {
-                "enum": [
-                  "argument",
-                  "case",
-                  "condition",
-                  "operation",
-                  "return",
-                  "assign"
-                ]
+                "enum": ["argument", "case", "condition", "operation", "return", "assign"]
               }
             }
           }
@@ -2719,15 +2691,7 @@
                   }
                 ]
               },
-              "default": [
-                "all",
-                "-ST1000",
-                "-ST1003",
-                "-ST1016",
-                "-ST1020",
-                "-ST1021",
-                "-ST1022"
-              ]
+              "default": ["all", "-ST1000", "-ST1003", "-ST1016", "-ST1020", "-ST1021", "-ST1022"]
             },
             "dot-import-whitelist": {
               "description": "By default, ST1001 forbids all uses of dot imports in non-test packages. This setting allows setting a whitelist of import paths that can be dot-imported anywhere.",
@@ -2882,17 +2846,7 @@
                 "type": "string"
               },
               "default": [],
-              "examples": [
-                [
-                  "json",
-                  "yaml",
-                  "yml",
-                  "toml",
-                  "mapstructure",
-                  "binding",
-                  "validate"
-                ]
-              ]
+              "examples": [["json", "yaml", "yml", "toml", "mapstructure", "binding", "validate"]]
             },
             "strict": {
               "description": "Whether enable strict style.",
@@ -3048,9 +3002,7 @@
                   "suite-thelper",
                   "useless-assert"
                 ],
-                "default": [
-                  "suite-thelper"
-                ]
+                "default": ["suite-thelper"]
               }
             },
             "bool-compare": {
@@ -3412,9 +3364,7 @@
               "items": {
                 "type": "string"
               },
-              "examples": [
-                ["c echo.Context", "t testing.T", "f *foo.Bar", "const C"]
-              ]
+              "examples": [["c echo.Context", "t testing.T", "f *foo.Bar", "const C"]]
             }
           }
         },
@@ -3603,7 +3553,7 @@
               "oneOf": [
                 {
                   "properties": {
-                    "type": {"enum": ["module"] }
+                    "type": { "enum": ["module"] }
                   },
                   "required": ["type"]
                 },

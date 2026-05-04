@@ -9,17 +9,16 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/golangci/golangci-lint/v2/pkg/config"
+	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/golangci/golangci-lint/v2/pkg/lint/linter"
+	"github.com/golangci/golangci-lint/v2/pkg/result"
 	"github.com/securego/gosec/v2"
 	"github.com/securego/gosec/v2/analyzers"
 	"github.com/securego/gosec/v2/issue"
 	"github.com/securego/gosec/v2/rules"
 	"golang.org/x/tools/go/analysis"
 	"golang.org/x/tools/go/packages"
-
-	"github.com/golangci/golangci-lint/v2/pkg/config"
-	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
-	"github.com/golangci/golangci-lint/v2/pkg/lint/linter"
-	"github.com/golangci/golangci-lint/v2/pkg/result"
 )
 
 const linterName = "gosec"
@@ -59,7 +58,14 @@ func New(settings *config.GoSecSettings) *goanalysis.Linter {
 		WithContextSetter(func(lintCtx *linter.Context) {
 			analyzer.Run = func(pass *analysis.Pass) (any, error) {
 				// The `gosecAnalyzer` is here because of concurrency issue.
-				gosecAnalyzer := gosec.NewAnalyzer(conf, true, false, false, settings.Concurrency, logger)
+				gosecAnalyzer := gosec.NewAnalyzer(
+					conf,
+					true,
+					false,
+					false,
+					settings.Concurrency,
+					logger,
+				)
 
 				gosecAnalyzer.LoadRules(ruleDefinitions.RulesInfo())
 				gosecAnalyzer.LoadAnalyzers(analyzerDefinitions.AnalyzersInfo())
@@ -79,7 +85,12 @@ func New(settings *config.GoSecSettings) *goanalysis.Linter {
 		WithLoadMode(goanalysis.LoadModeTypesInfo)
 }
 
-func runGoSec(lintCtx *linter.Context, pass *analysis.Pass, settings *config.GoSecSettings, analyzer *gosec.Analyzer) []*goanalysis.Issue {
+func runGoSec(
+	lintCtx *linter.Context,
+	pass *analysis.Pass,
+	settings *config.GoSecSettings,
+	analyzer *gosec.Analyzer,
+) []*goanalysis.Issue {
 	pkg := &packages.Package{
 		Fset:      pass.Fset,
 		Syntax:    pass.Files,
@@ -117,7 +128,12 @@ func runGoSec(lintCtx *linter.Context, pass *analysis.Pass, settings *config.GoS
 		if err != nil {
 			r = &result.Range{}
 			if n, rerr := fmt.Sscanf(i.Line, "%d-%d", &r.From, &r.To); rerr != nil || n != 2 {
-				lintCtx.Log.Warnf("Can't convert gosec line number %q of %v to int: %s", i.Line, i, err)
+				lintCtx.Log.Warnf(
+					"Can't convert gosec line number %q of %v to int: %s",
+					i.Line,
+					i,
+					err,
+				)
 				continue
 			}
 			line = r.From
@@ -125,7 +141,12 @@ func runGoSec(lintCtx *linter.Context, pass *analysis.Pass, settings *config.GoS
 
 		column, err := strconv.Atoi(i.Col)
 		if err != nil {
-			lintCtx.Log.Warnf("Can't convert gosec column number %q of %v to int: %s", i.Col, i, err)
+			lintCtx.Log.Warnf(
+				"Can't convert gosec column number %q of %v to int: %s",
+				i.Col,
+				i,
+				err,
+			)
 			continue
 		}
 
@@ -236,7 +257,10 @@ func convertToScore(str string) (issue.Score, error) {
 	case "high":
 		return issue.High, nil
 	default:
-		return issue.Low, fmt.Errorf("'%s' is invalid, use low instead. Valid options: low, medium, high", str)
+		return issue.Low, fmt.Errorf(
+			"'%s' is invalid, use low instead. Valid options: low, medium, high",
+			str,
+		)
 	}
 }
 

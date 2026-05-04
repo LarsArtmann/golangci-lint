@@ -7,9 +7,8 @@ import (
 	"os"
 	"path/filepath"
 
-	hcversion "github.com/hashicorp/go-version"
-
 	"github.com/golangci/golangci-lint/v2/scripts/website/github"
+	hcversion "github.com/hashicorp/go-version"
 )
 
 func main() {
@@ -55,7 +54,11 @@ func copyLatestSchema(dstDir string) error {
 
 	files := []string{
 		fmt.Sprintf("golangci.v%d.jsonschema.json", version.Segments()[0]),
-		fmt.Sprintf("golangci.v%d.%d.jsonschema.json", version.Segments()[0], version.Segments()[1]),
+		fmt.Sprintf(
+			"golangci.v%d.%d.jsonschema.json",
+			version.Segments()[0],
+			version.Segments()[1],
+		),
 	}
 
 	for _, dst := range files {

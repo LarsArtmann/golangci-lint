@@ -29,8 +29,11 @@ func CheckGoVersion(goVersion string) error {
 	}
 
 	if runtimeVersion.LessThan(targetedVersion) {
-		return fmt.Errorf("the Go language version (%s) used to build golangci-lint is lower than the targeted Go version (%s)",
-			langVersion, goVersion)
+		return fmt.Errorf(
+			"the Go language version (%s) used to build golangci-lint is lower than the targeted Go version (%s)",
+			langVersion,
+			goVersion,
+		)
 	}
 
 	return nil

@@ -1,10 +1,9 @@
 package embeddedstructfieldcheck
 
 import (
-	"github.com/manuelarte/embeddedstructfieldcheck/analyzer"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/manuelarte/embeddedstructfieldcheck/analyzer"
 )
 
 func New(settings *config.EmbeddedStructFieldCheckSettings) *goanalysis.Linter {

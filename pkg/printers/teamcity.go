@@ -102,8 +102,17 @@ type InspectionType struct {
 }
 
 func (i InspectionType) Print(w io.Writer, escaper *strings.Replacer) (int, error) {
-	return fmt.Fprintf(w, "##teamcity[inspectionType id='%s' name='%s' description='%s' category='%s']\n",
-		cutVal(i.id, smallLimit), cutVal(i.name, smallLimit), cutVal(escaper.Replace(i.description), largeLimit), cutVal(i.category, smallLimit))
+	return fmt.Fprintf(
+		w,
+		"##teamcity[inspectionType id='%s' name='%s' description='%s' category='%s']\n",
+		cutVal(
+			i.id,
+			smallLimit,
+		),
+		cutVal(i.name, smallLimit),
+		cutVal(escaper.Replace(i.description), largeLimit),
+		cutVal(i.category, smallLimit),
+	)
 }
 
 // InspectionInstance reports a specific defect, warning, error message.
@@ -118,11 +127,15 @@ type InspectionInstance struct {
 }
 
 func (i InspectionInstance) Print(w io.Writer, replacer *strings.Replacer) (int, error) {
-	return fmt.Fprintf(w, "##teamcity[inspection typeId='%s' message='%s' file='%s' line='%d' SEVERITY='%s']\n",
+	return fmt.Fprintf(
+		w,
+		"##teamcity[inspection typeId='%s' message='%s' file='%s' line='%d' SEVERITY='%s']\n",
 		cutVal(i.typeID, smallLimit),
 		cutVal(replacer.Replace(i.message), largeLimit),
 		cutVal(i.file, largeLimit),
-		i.line, i.severity)
+		i.line,
+		i.severity,
+	)
 }
 
 func cutVal(s string, limit int) string {

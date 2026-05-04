@@ -11,15 +11,14 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ldez/grignotin/goenv"
-	"golang.org/x/tools/go/packages"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/exitcodes"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis/load"
 	"github.com/golangci/golangci-lint/v2/pkg/goutil"
 	"github.com/golangci/golangci-lint/v2/pkg/lint/linter"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
+	"github.com/ldez/grignotin/goenv"
+	"golang.org/x/tools/go/packages"
 )
 
 // PackageLoader loads packages based on [golang.org/x/tools/go/packages.Load].
@@ -39,7 +38,13 @@ type PackageLoader struct {
 }
 
 // NewPackageLoader creates a new PackageLoader.
-func NewPackageLoader(log logutils.Log, cfg *config.Config, args []string, env *goutil.Env, loadGuard *load.Guard) *PackageLoader {
+func NewPackageLoader(
+	log logutils.Log,
+	cfg *config.Config,
+	args []string,
+	env *goutil.Env,
+	loadGuard *load.Guard,
+) *PackageLoader {
 	return &PackageLoader{
 		cfg:         cfg,
 		args:        args,
@@ -52,7 +57,10 @@ func NewPackageLoader(log logutils.Log, cfg *config.Config, args []string, env *
 }
 
 // Load loads packages.
-func (l *PackageLoader) Load(ctx context.Context, linters []*linter.Config) (pkgs, deduplicatedPkgs []*packages.Package, err error) {
+func (l *PackageLoader) Load(
+	ctx context.Context,
+	linters []*linter.Config,
+) (pkgs, deduplicatedPkgs []*packages.Package, err error) {
 	loadMode := findLoadMode(linters)
 
 	pkgs, err = l.loadPackages(ctx, loadMode)
@@ -63,9 +71,16 @@ func (l *PackageLoader) Load(ctx context.Context, linters []*linter.Config) (pkg
 	return pkgs, l.filterDuplicatePackages(pkgs), nil
 }
 
-func (l *PackageLoader) loadPackages(ctx context.Context, loadMode packages.LoadMode) ([]*packages.Package, error) {
+func (l *PackageLoader) loadPackages(
+	ctx context.Context,
+	loadMode packages.LoadMode,
+) ([]*packages.Package, error) {
 	defer func(startedAt time.Time) {
-		l.log.Infof("Go packages loading at mode %s took %s", stringifyLoadMode(loadMode), time.Since(startedAt))
+		l.log.Infof(
+			"Go packages loading at mode %s took %s",
+			stringifyLoadMode(loadMode),
+			time.Since(startedAt),
+		)
 	}(time.Now())
 
 	l.prepareBuildContext()

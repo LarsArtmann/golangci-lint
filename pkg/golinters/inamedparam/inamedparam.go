@@ -1,10 +1,9 @@
 package inamedparam
 
 import (
-	"github.com/macabu/inamedparam"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/macabu/inamedparam"
 )
 
 func New(settings *config.INamedParamSettings) *goanalysis.Linter {

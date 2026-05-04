@@ -5,10 +5,9 @@ import (
 	"strings"
 
 	goheader "github.com/denis-tingaikin/go-header"
-	"golang.org/x/tools/go/analysis"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"golang.org/x/tools/go/analysis"
 )
 
 const linterName = "goheader"
@@ -89,7 +88,11 @@ func runGoHeader(pass *analysis.Pass, conf *goheader.Configuration) error {
 		}
 
 		diag := analysis.Diagnostic{
-			Pos:     f.LineStart(issue.Location().Line+1) + token.Pos(issue.Location().Position-offset), // The position of the first divergence.
+			Pos: f.LineStart(
+				issue.Location().Line+1,
+			) + token.Pos(
+				issue.Location().Position-offset,
+			), // The position of the first divergence.
 			Message: issue.Message(),
 		}
 

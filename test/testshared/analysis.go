@@ -13,9 +13,8 @@ import (
 	"testing"
 	"text/scanner"
 
-	"github.com/stretchr/testify/require"
-
 	"github.com/golangci/golangci-lint/v2/pkg/result"
+	"github.com/stretchr/testify/require"
 )
 
 const keyword = "want"
@@ -60,7 +59,13 @@ func Analyze(t *testing.T, sourcePath string, rawData []byte) {
 	var surplus []string
 	for key, expects := range want {
 		for _, exp := range expects {
-			err := fmt.Sprintf("%s:%d: no %s was reported matching %#q", key.file, key.line, exp.kind, exp.rx)
+			err := fmt.Sprintf(
+				"%s:%d: no %s was reported matching %#q",
+				key.file,
+				key.line,
+				exp.kind,
+				exp.rx,
+			)
 			surplus = append(surplus, err)
 		}
 	}
@@ -175,7 +180,12 @@ func parseExpectations(text string) (lineDelta int, expects []expectation, err e
 
 // Inspired by:
 // https://github.com/golang/tools/blob/1261a24ceb1867ea7439eda244e53e7ace4ad777/go/analysis/analysistest/analysistest.go#L594-L617
-func checkMessage(t *testing.T, want map[key][]expectation, posn token.Position, kind, name, message string) {
+func checkMessage(
+	t *testing.T,
+	want map[key][]expectation,
+	posn token.Position,
+	kind, name, message string,
+) {
 	t.Helper()
 
 	k := key{posn.Filename, posn.Line}

@@ -93,11 +93,13 @@ docker run --rm -v $(pwd):/app -w /app golangci/golangci-lint:{{< golangci/lates
 ```
 
 Colored output:
+
 ```bash
 docker run -t --rm -v $(pwd):/app -w /app golangci/golangci-lint:{{< golangci/latest-version >}} golangci-lint run
 ```
 
 Preserving caches between consecutive runs:
+
 ```bash
 docker run --rm -t -v $(pwd):/app -w /app \
 --user $(id -u):$(id -g) \

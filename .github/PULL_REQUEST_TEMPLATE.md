@@ -17,6 +17,6 @@ you are the original author of the linter, AND there are important changes requi
 WARNING:
 
 Pull requests from a fork inside a GitHub organization are not allowed.
-Only pull requests from personal forks are allowed. 
+Only pull requests from personal forks are allowed.
 
 -->

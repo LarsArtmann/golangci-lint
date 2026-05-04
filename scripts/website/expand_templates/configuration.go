@@ -9,10 +9,9 @@ import (
 	"reflect"
 	"strings"
 
-	"go.yaml.in/yaml/v3"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/scripts/website/types"
+	"go.yaml.in/yaml/v3"
 )
 
 const (
@@ -48,13 +47,18 @@ func (e *ExampleSnippetsExtractor) GetExampleSnippets() (*SettingSnippets, error
 
 	snippets, err := e.extractExampleSnippets(reference)
 	if err != nil {
-		return nil, fmt.Errorf("can't extract example snippets from .golangci.reference.yml: %w", err)
+		return nil, fmt.Errorf(
+			"can't extract example snippets from .golangci.reference.yml: %w",
+			err,
+		)
 	}
 
 	return snippets, nil
 }
 
-func (e *ExampleSnippetsExtractor) extractExampleSnippets(example []byte) (*SettingSnippets, error) {
+func (e *ExampleSnippetsExtractor) extractExampleSnippets(
+	example []byte,
+) (*SettingSnippets, error) {
 	var data yaml.Node
 	if err := yaml.Unmarshal(example, &data); err != nil {
 		return nil, err
@@ -93,11 +97,14 @@ func (e *ExampleSnippetsExtractor) extractExampleSnippets(example []byte) (*Sett
 			Kind: nextNode.Kind,
 			Content: []*yaml.Node{
 				{
-					HeadComment: fmt.Sprintf("See the dedicated %q documentation section.", node.Value),
-					Kind:        node.Kind,
-					Style:       node.Style,
-					Tag:         node.Tag,
-					Value:       "option",
+					HeadComment: fmt.Sprintf(
+						"See the dedicated %q documentation section.",
+						node.Value,
+					),
+					Kind:  node.Kind,
+					Style: node.Style,
+					Tag:   node.Tag,
+					Value: "option",
 				},
 				{
 					Kind:  node.Kind,
@@ -144,11 +151,15 @@ func (e *ExampleSnippetsExtractor) extractExampleSnippets(example []byte) (*Sett
 
 				nextNode.Content[i+1].Content = []*yaml.Node{
 					{
-						HeadComment: fmt.Sprintf(`See the dedicated "%s.%s" documentation section.`, node.Value, nextNode.Content[i].Value),
-						Kind:        node.Kind,
-						Style:       node.Style,
-						Tag:         node.Tag,
-						Value:       "option",
+						HeadComment: fmt.Sprintf(
+							`See the dedicated "%s.%s" documentation section.`,
+							node.Value,
+							nextNode.Content[i].Value,
+						),
+						Kind:  node.Kind,
+						Style: node.Style,
+						Tag:   node.Tag,
+						Value: "option",
 					},
 					{
 						Kind:  node.Kind,
@@ -196,7 +207,9 @@ func (e *ExampleSnippetsExtractor) extractExampleSnippets(example []byte) (*Sett
 	return &snippets, nil
 }
 
-func (e *ExampleSnippetsExtractor) getSettingSections(node, nextNode *yaml.Node) (map[string]string, error) {
+func (e *ExampleSnippetsExtractor) getSettingSections(
+	node, nextNode *yaml.Node,
+) (map[string]string, error) {
 	// Extract YAML settings
 	allNodes := make(map[string]*yaml.Node)
 
@@ -233,7 +246,9 @@ func (e *ExampleSnippetsExtractor) getSettingSections(node, nextNode *yaml.Node)
 	linterSettings := make(map[string]string)
 
 	// Using linter information
-	linters, err := readJSONFile[[]*types.LinterWrapper](filepath.Join(e.assetsPath, fmt.Sprintf("%s_info.json", node.Value)))
+	linters, err := readJSONFile[[]*types.LinterWrapper](
+		filepath.Join(e.assetsPath, fmt.Sprintf("%s_info.json", node.Value)),
+	)
 	if err != nil {
 		return nil, err
 	}
@@ -274,16 +289,16 @@ func (e *ExampleSnippetsExtractor) getSettingSections(node, nextNode *yaml.Node)
 func hasSettings(name string) bool {
 	tp := reflect.TypeFor[config.LintersSettings]()
 
-	for i := range tp.NumField() {
-		if strings.EqualFold(name, tp.Field(i).Name) {
+	for field := range tp.Fields() {
+		if strings.EqualFold(name, field.Name) {
 			return true
 		}
 	}
 
 	tp = reflect.TypeFor[config.FormatterSettings]()
 
-	for i := range tp.NumField() {
-		if strings.EqualFold(name, tp.Field(i).Name) {
+	for field := range tp.Fields() {
+		if strings.EqualFold(name, field.Name) {
 			return true
 		}
 	}

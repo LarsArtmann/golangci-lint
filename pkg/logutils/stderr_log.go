@@ -5,9 +5,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/sirupsen/logrus"
-
 	"github.com/golangci/golangci-lint/v2/pkg/exitcodes"
+	"github.com/sirupsen/logrus"
 )
 
 const (

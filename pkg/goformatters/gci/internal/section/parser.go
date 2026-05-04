@@ -14,7 +14,7 @@ func Parse(data []string) (section.SectionList, error) {
 	}
 
 	var list section.SectionList
-	var errString string
+	var errString strings.Builder
 	for _, d := range data {
 		s := strings.ToLower(d)
 		if len(s) == 0 {
@@ -41,11 +41,11 @@ func Parse(data []string) (section.SectionList, error) {
 			// pointer because we need to mutate the section at configuration time
 			list = append(list, &section.LocalModule{})
 		} else {
-			errString += fmt.Sprintf(" %s", s)
+			errString.WriteString(fmt.Sprintf(" %s", s))
 		}
 	}
-	if errString != "" {
-		return nil, errors.New(fmt.Sprintf("invalid params:%s", errString))
+	if errString.String() != "" {
+		return nil, errors.New(fmt.Sprintf("invalid params:%s", errString.String()))
 	}
 	return list, nil
 }

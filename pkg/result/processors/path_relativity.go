@@ -47,7 +47,10 @@ func (p *PathRelativity) Process(issues []*result.Issue) ([]*result.Issue, error
 			return nil
 		}
 
-		newIssue.WorkingDirectoryRelativePath, err = filepath.Rel(p.workingDirectory, issue.FilePath())
+		newIssue.WorkingDirectoryRelativePath, err = filepath.Rel(
+			p.workingDirectory,
+			issue.FilePath(),
+		)
 		if err != nil {
 			p.log.Warnf("Getting relative path (wd): %v", err)
 			return nil

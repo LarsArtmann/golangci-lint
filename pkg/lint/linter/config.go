@@ -4,10 +4,9 @@ import (
 	"bytes"
 	"fmt"
 
+	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"go.yaml.in/yaml/v3"
 	"golang.org/x/tools/go/packages"
-
-	"github.com/golangci/golangci-lint/v2/pkg/config"
 )
 
 // LastLinter nolintlint must be last because it looks at the results of all the previous linters for unused nolint directives.
@@ -122,7 +121,11 @@ func (lc *Config) WithSince(version string) *Config {
 	return lc
 }
 
-func (lc *Config) Deprecated(message, version string, level DeprecationLevel, opts ...func(*Deprecation)) *Config {
+func (lc *Config) Deprecated(
+	message, version string,
+	level DeprecationLevel,
+	opts ...func(*Deprecation),
+) *Config {
 	lc.Deprecation = &Deprecation{
 		Since:   version,
 		Message: message,
@@ -156,7 +159,10 @@ func (lc *Config) Name() string {
 	return lc.Linter.Name()
 }
 
-func (lc *Config) WithNoopFallback(cfg *config.Config, cond func(cfg *config.Config) error) *Config {
+func (lc *Config) WithNoopFallback(
+	cfg *config.Config,
+	cond func(cfg *config.Config) error,
+) *Config {
 	if err := cond(cfg); err != nil {
 		lc.Linter = NewNoop(lc.Linter, err.Error())
 		lc.LoadMode = 0
@@ -216,6 +222,10 @@ func isGoLowerThanGo(v string) func(cfg *config.Config) error {
 			return nil
 		}
 
-		return fmt.Errorf("this linter is disabled because the Go version (%s) of your project is lower than Go %s", cfg.Run.Go, v)
+		return fmt.Errorf(
+			"this linter is disabled because the Go version (%s) of your project is lower than Go %s",
+			cfg.Run.Go,
+			v,
+		)
 	}
 }

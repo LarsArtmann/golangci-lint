@@ -5,10 +5,9 @@ import (
 	"log"
 	"os"
 
-	"github.com/spf13/cobra"
-
 	"github.com/golangci/golangci-lint/v2/pkg/commands/internal"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
+	"github.com/spf13/cobra"
 )
 
 const envKeepTempFiles = "CUSTOM_GCL_KEEP_TEMP_FILES"
@@ -44,9 +43,19 @@ func newCustomCommand(logger logutils.Log) *customCommand {
 	flagSet := customCmd.PersistentFlags()
 	flagSet.SortFlags = false // sort them as they are defined here
 
-	flagSet.StringVar(&c.opts.version, "version", "", "The golangci-lint version used to build the custom binary")
+	flagSet.StringVar(
+		&c.opts.version,
+		"version",
+		"",
+		"The golangci-lint version used to build the custom binary",
+	)
 	flagSet.StringVar(&c.opts.name, "name", "", "The name of the custom binary")
-	flagSet.StringVar(&c.opts.destination, "destination", "", "The directory path used to store the custom binary")
+	flagSet.StringVar(
+		&c.opts.destination,
+		"destination",
+		"",
+		"The directory path used to store the custom binary",
+	)
 
 	c.cmd = customCmd
 
@@ -89,7 +98,11 @@ func (c *customCommand) runE(cmd *cobra.Command, _ []string) error {
 
 	defer func() {
 		if os.Getenv(envKeepTempFiles) != "" {
-			log.Printf("WARN: The env var %s has been detected: the temporary directory is preserved: %s", envKeepTempFiles, tmp)
+			log.Printf(
+				"WARN: The env var %s has been detected: the temporary directory is preserved: %s",
+				envKeepTempFiles,
+				tmp,
+			)
 
 			return
 		}

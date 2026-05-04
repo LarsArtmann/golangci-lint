@@ -1,9 +1,8 @@
 package nilerr
 
 import (
-	"github.com/gostaticanalysis/nilerr"
-
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/gostaticanalysis/nilerr"
 )
 
 func New() *goanalysis.Linter {

@@ -5,8 +5,8 @@ linters:
     importas:
       alias:
         - pkg: fmt
-          alias: ''
+          alias: ""
         - pkg: os
-          alias: ''
+          alias: ""
         - pkg: math
-          alias: ''
+          alias: ""

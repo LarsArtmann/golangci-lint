@@ -5,6 +5,9 @@ import (
 	"strings"
 	"unicode"
 
+	"github.com/golangci/golangci-lint/v2/pkg/config"
+	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/golangci/golangci-lint/v2/pkg/logutils"
 	"golang.org/x/tools/go/analysis"
 	"honnef.co/go/tools/analysis/lint"
 	scconfig "honnef.co/go/tools/config"
@@ -12,10 +15,6 @@ import (
 	"honnef.co/go/tools/simple"
 	"honnef.co/go/tools/staticcheck"
 	"honnef.co/go/tools/stylecheck"
-
-	"github.com/golangci/golangci-lint/v2/pkg/config"
-	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
-	"github.com/golangci/golangci-lint/v2/pkg/logutils"
 )
 
 var (
@@ -31,21 +30,34 @@ func New(settings *config.StaticCheckSettings) *goanalysis.Linter {
 		return cfg, nil
 	}
 
-	allAnalyzers := slices.Concat(staticcheck.Analyzers, stylecheck.Analyzers, simple.Analyzers, quickfix.Analyzers)
+	allAnalyzers := slices.Concat(
+		staticcheck.Analyzers,
+		stylecheck.Analyzers,
+		simple.Analyzers,
+		quickfix.Analyzers,
+	)
 
 	analyzers := setupAnalyzers(allAnalyzers, cfg.Checks)
 
 	if isDebug {
 		allAnalyzerNames := extractAnalyzerNames(allAnalyzers)
 		slices.Sort(allAnalyzerNames)
-		debugf("All available checks (%d): %s", len(allAnalyzers), strings.Join(allAnalyzerNames, ","))
+		debugf(
+			"All available checks (%d): %s",
+			len(allAnalyzers),
+			strings.Join(allAnalyzerNames, ","),
+		)
 
 		var cfgAnalyzerNames []string
 		for _, a := range analyzers {
 			cfgAnalyzerNames = append(cfgAnalyzerNames, a.Name)
 		}
 		slices.Sort(cfgAnalyzerNames)
-		debugf("Enabled by config checks (%d): %s", len(analyzers), strings.Join(cfgAnalyzerNames, ","))
+		debugf(
+			"Enabled by config checks (%d): %s",
+			len(analyzers),
+			strings.Join(cfgAnalyzerNames, ","),
+		)
 
 		debugf("staticcheck configuration: %#v", cfg)
 	}
@@ -59,7 +71,15 @@ func New(settings *config.StaticCheckSettings) *goanalysis.Linter {
 }
 
 func createConfig(settings *config.StaticCheckSettings) *scconfig.Config {
-	defaultChecks := []string{"all", "-ST1000", "-ST1003", "-ST1016", "-ST1020", "-ST1021", "-ST1022"}
+	defaultChecks := []string{
+		"all",
+		"-ST1000",
+		"-ST1003",
+		"-ST1016",
+		"-ST1020",
+		"-ST1021",
+		"-ST1022",
+	}
 
 	var cfg *scconfig.Config
 
@@ -88,11 +108,15 @@ func createConfig(settings *config.StaticCheckSettings) *scconfig.Config {
 	}
 
 	if cfg.DotImportWhitelist == nil {
-		cfg.DotImportWhitelist = append(cfg.DotImportWhitelist, scconfig.DefaultConfig.DotImportWhitelist...)
+		cfg.DotImportWhitelist = append(
+			cfg.DotImportWhitelist,
+			scconfig.DefaultConfig.DotImportWhitelist...)
 	}
 
 	if cfg.HTTPStatusCodeWhitelist == nil {
-		cfg.HTTPStatusCodeWhitelist = append(cfg.HTTPStatusCodeWhitelist, scconfig.DefaultConfig.HTTPStatusCodeWhitelist...)
+		cfg.HTTPStatusCodeWhitelist = append(
+			cfg.HTTPStatusCodeWhitelist,
+			scconfig.DefaultConfig.HTTPStatusCodeWhitelist...)
 	}
 
 	cfg.Checks = normalizeList(cfg.Checks)
@@ -151,7 +175,7 @@ func extractAnalyzerNames(analyzers []*lint.Analyzer) []string {
 // https://github.com/dominikh/go-tools/blob/9bf17c0388a65710524ba04c2d821469e639fdc2/lintcmd/lint.go#L437-L477
 //
 //nolint:gocritic // Keep the original source code.
-func filterAnalyzerNames(analyzers []string, checks []string) map[string]bool {
+func filterAnalyzerNames(analyzers, checks []string) map[string]bool {
 	allowedChecks := map[string]bool{}
 
 	for _, check := range checks {
@@ -169,7 +193,10 @@ func filterAnalyzerNames(analyzers []string, checks []string) map[string]bool {
 		} else if strings.HasSuffix(check, "*") {
 			// Glob
 			prefix := check[:len(check)-1]
-			isCat := strings.IndexFunc(prefix, func(r rune) bool { return unicode.IsNumber(r) }) == -1
+			isCat := strings.IndexFunc(
+				prefix,
+				func(r rune) bool { return unicode.IsNumber(r) },
+			) == -1
 
 			for _, a := range analyzers {
 				idx := strings.IndexFunc(a, func(r rune) bool { return unicode.IsNumber(r) })

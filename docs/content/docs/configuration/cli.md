@@ -8,20 +8,20 @@ weight: 1
 ## `run`
 
 {{< cards >}}
-    {{< card link="/docs/linters" title="Linters Overview" icon="collection" >}}
-    {{< card link="/docs/configuration/file/#linters-configuration" title="Global Configuration" icon="adjustments" >}}
-    {{< card link="/docs/linters/configuration/" title="Linter Settings" icon="adjustments" >}}
+{{< card link="/docs/linters" title="Linters Overview" icon="collection" >}}
+{{< card link="/docs/configuration/file/#linters-configuration" title="Global Configuration" icon="adjustments" >}}
+{{< card link="/docs/linters/configuration/" title="Linter Settings" icon="adjustments" >}}
 {{< /cards >}}
 
 > [!NOTE]
 > This command executes enabled linters, and the formatters defined in [`formatters`](/docs/configuration/file/#formatters-configuration),
 > but it does not format the code.
-> 
+>
 > To only format code, use [`golangci-lint fmt`](/docs/configuration/cli/#fmt).
-> To apply both linter fixes and formatting, use `golangci-lint run --fix`. 
-> 
-> The formatters cannot be enabled or disabled inside the [`linters`](/docs/configuration/file/#linters-configuration) section or the flags `-E/--enable`, `-D/--disable` of the command  [`golangci-lint run`](/docs/configuration/cli/#run).
-> 
+> To apply both linter fixes and formatting, use `golangci-lint run --fix`.
+>
+> The formatters cannot be enabled or disabled inside the [`linters`](/docs/configuration/file/#linters-configuration) section or the flags `-E/--enable`, `-D/--disable` of the command [`golangci-lint run`](/docs/configuration/cli/#run).
+>
 > The formatters can be enabled/disabled by defining them inside the [`formatters`](/docs/configuration/file/#formatters-configuration) section or by using the flags `-E/--enable`, `-D/--disable` of command [`golangci-lint fmt`](/docs/configuration/cli/#fmt).
 
 {{% golangci/cli-output cmd="run" %}}

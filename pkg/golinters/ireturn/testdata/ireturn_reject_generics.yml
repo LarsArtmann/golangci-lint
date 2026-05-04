@@ -4,4 +4,4 @@ linters:
   settings:
     ireturn:
       reject:
-      - generic
+        - generic

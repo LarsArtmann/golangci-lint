@@ -1,9 +1,8 @@
 package golines
 
 import (
-	"github.com/golangci/golines/shorten"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
+	"github.com/golangci/golines/shorten"
 )
 
 const Name = "golines"

@@ -22,14 +22,16 @@ func nolintFuncByPrecedingComment() *string {
 	return &xv
 }
 
-//nolint:all
 // second line
+//
+//nolint:all
 func nolintFuncByPrecedingMultilineComment1() *string {
 	xv := "v"
 	return &xv
 }
 
 // first line
+//
 //nolint:all
 func nolintFuncByPrecedingMultilineComment2() *string {
 	xv := "v"
@@ -37,8 +39,9 @@ func nolintFuncByPrecedingMultilineComment2() *string {
 }
 
 // first line
-//nolint:all
 // third line
+//
+//nolint:all
 func nolintFuncByPrecedingMultilineComment3() *string {
 	xv := "v"
 	return &xv

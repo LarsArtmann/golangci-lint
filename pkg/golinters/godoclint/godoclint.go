@@ -8,7 +8,6 @@ import (
 	glcompose "github.com/godoc-lint/godoc-lint/pkg/compose"
 	glconfig "github.com/godoc-lint/godoc-lint/pkg/config"
 	"github.com/godoc-lint/godoc-lint/pkg/model"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 	"github.com/golangci/golangci-lint/v2/pkg/golinters/internal"
@@ -46,18 +45,18 @@ func New(settings *config.GodoclintSettings) *goanalysis.Linter {
 			Disable: settings.Disable,
 			Options: &glconfig.PlainRuleOptions{
 				MaxLenLength:                     settings.Options.MaxLen.Length,
-				MaxLenIncludeTests:               pointer(true),
+				MaxLenIncludeTests:               new(true),
 				MaxLenIgnorePatterns:             []string{`^\+kubebuilder:`},
-				PkgDocIncludeTests:               pointer(false),
-				SinglePkgDocIncludeTests:         pointer(true),
-				RequirePkgDocIncludeTests:        pointer(false),
-				RequireDocIncludeTests:           pointer(true),
+				PkgDocIncludeTests:               new(false),
+				SinglePkgDocIncludeTests:         new(true),
+				RequirePkgDocIncludeTests:        new(false),
+				RequireDocIncludeTests:           new(true),
 				RequireDocIgnoreExported:         settings.Options.RequireDoc.IgnoreExported,
 				RequireDocIgnoreUnexported:       settings.Options.RequireDoc.IgnoreUnexported,
-				StartWithNameIncludeTests:        pointer(false),
+				StartWithNameIncludeTests:        new(false),
 				StartWithNameIncludeUnexported:   settings.Options.StartWithName.IncludeUnexported,
-				RequireStdlibDoclinkIncludeTests: pointer(true),
-				NoUnusedLinkIncludeTests:         pointer(true),
+				RequireStdlibDoclinkIncludeTests: new(true),
+				NoUnusedLinkIncludeTests:         new(true),
 			},
 		}
 
@@ -93,13 +92,19 @@ func checkSettings(settings *config.GodoclintSettings) error {
 	default:
 		for _, rule := range settings.Enable {
 			if slices.Contains(settings.Disable, rule) {
-				return fmt.Errorf("a rule cannot be enabled and disabled at the same time: '%s'", rule)
+				return fmt.Errorf(
+					"a rule cannot be enabled and disabled at the same time: '%s'",
+					rule,
+				)
 			}
 		}
 
 		for _, rule := range settings.Disable {
 			if slices.Contains(settings.Enable, rule) {
-				return fmt.Errorf("a rule cannot be enabled and disabled at the same time: '%s'", rule)
+				return fmt.Errorf(
+					"a rule cannot be enabled and disabled at the same time: '%s'",
+					rule,
+				)
 			}
 		}
 	}
@@ -107,7 +112,8 @@ func checkSettings(settings *config.GodoclintSettings) error {
 	return nil
 }
 
-func pointer[T any](v T) *T { return &v }
+//go:fix inline
+func pointer[T any](v T) *T { return new(v) }
 
 func deref[T any](v *T) T {
 	if v == nil {

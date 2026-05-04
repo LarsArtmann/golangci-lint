@@ -56,7 +56,8 @@ func (*Severity) Finish() {}
 func (p *Severity) transform(issue *result.Issue) *result.Issue {
 	for _, rule := range p.rules {
 		if rule.match(issue, p.lines, p.log) {
-			if rule.severity == severityFromLinter || (rule.severity == "" && p.defaultSeverity == severityFromLinter) {
+			if rule.severity == severityFromLinter ||
+				(rule.severity == "" && p.defaultSeverity == severityFromLinter) {
 				return issue
 			}
 

@@ -4,14 +4,13 @@ import (
 	"fmt"
 	"sync"
 
-	goconstAPI "github.com/jgautheron/goconst"
-	"golang.org/x/tools/go/analysis"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 	"github.com/golangci/golangci-lint/v2/pkg/golinters/internal"
 	"github.com/golangci/golangci-lint/v2/pkg/lint/linter"
 	"github.com/golangci/golangci-lint/v2/pkg/result"
+	goconstAPI "github.com/jgautheron/goconst"
+	"golang.org/x/tools/go/analysis"
 )
 
 const linterName = "goconst"
@@ -47,7 +46,10 @@ func New(settings *config.GoConstSettings) *goanalysis.Linter {
 		WithLoadMode(goanalysis.LoadModeTypesInfo)
 }
 
-func runGoconst(pass *analysis.Pass, settings *config.GoConstSettings) ([]*goanalysis.Issue, error) {
+func runGoconst(
+	pass *analysis.Pass,
+	settings *config.GoConstSettings,
+) ([]*goanalysis.Issue, error) {
 	cfg := goconstAPI.Config{
 		IgnoreStrings:        settings.IgnoreStringValues,
 		MatchWithConstants:   settings.MatchWithConstants,
@@ -85,12 +87,19 @@ func runGoconst(pass *analysis.Pass, settings *config.GoConstSettings) ([]*goana
 
 		switch {
 		case issue.OccurrencesCount > 0:
-			text = fmt.Sprintf("string %s has %d occurrences", internal.FormatCode(issue.Str), issue.OccurrencesCount)
+			text = fmt.Sprintf(
+				"string %s has %d occurrences",
+				internal.FormatCode(issue.Str),
+				issue.OccurrencesCount,
+			)
 
 			if issue.MatchingConst == "" {
 				text += ", make it a constant"
 			} else {
-				text += fmt.Sprintf(", but such constant %s already exists", internal.FormatCode(issue.MatchingConst))
+				text += fmt.Sprintf(
+					", but such constant %s already exists",
+					internal.FormatCode(issue.MatchingConst),
+				)
 			}
 
 		case issue.DuplicateConst != "":

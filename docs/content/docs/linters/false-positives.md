@@ -24,8 +24,8 @@ linters:
     staticcheck:
       checks:
         - all
-        - '-SA1000' # disable the rule SA1000
-        - '-SA1004' # disable the rule SA1004
+        - "-SA1000" # disable the rule SA1000
+        - "-SA1004" # disable the rule SA1004
 ```
 
 ## Exclude
@@ -169,11 +169,13 @@ You can see more examples of using `nolint` directives in [our tests](https://gi
 > https://go.dev/doc/comment#syntax
 
 This means that no spaces are allowed between:
+
 - `//` and `nolint`
 - `nolint` and `:`
 - `:` and the name of the linter.
 
 Invalid syntax:
+
 ```go
 // nolint
 // nolint:xxx
@@ -182,6 +184,7 @@ Invalid syntax:
 ```
 
 Valid syntax:
+
 ```go
 //nolint:xxx
 ```

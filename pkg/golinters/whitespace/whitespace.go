@@ -1,10 +1,9 @@
 package whitespace
 
 import (
-	"github.com/ultraware/whitespace"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/ultraware/whitespace"
 )
 
 func New(settings *config.WhitespaceSettings) *goanalysis.Linter {

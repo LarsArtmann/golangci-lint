@@ -12,18 +12,17 @@ import (
 	"sync"
 
 	"github.com/BurntSushi/toml"
-	hcversion "github.com/hashicorp/go-version"
-	reviveConfig "github.com/mgechev/revive/config"
-	"github.com/mgechev/revive/lint"
-	"github.com/mgechev/revive/rule"
-	"golang.org/x/tools/go/analysis"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 	"github.com/golangci/golangci-lint/v2/pkg/golinters/internal"
 	"github.com/golangci/golangci-lint/v2/pkg/lint/linter"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
 	"github.com/golangci/golangci-lint/v2/pkg/result"
+	hcversion "github.com/hashicorp/go-version"
+	reviveConfig "github.com/mgechev/revive/config"
+	"github.com/mgechev/revive/lint"
+	"github.com/mgechev/revive/rule"
+	"golang.org/x/tools/go/analysis"
 )
 
 const linterName = "revive"
@@ -458,8 +457,16 @@ func displayRules(conf *lint.Config) {
 
 	slices.Sort(enabledRules)
 
-	debugf("All available rules (%d): %s.", len(allRules), strings.Join(extractRulesName(allRules), ", "))
-	debugf("Default rules (%d): %s.", len(defaultRules), strings.Join(extractRulesName(defaultRules), ", "))
+	debugf(
+		"All available rules (%d): %s.",
+		len(allRules),
+		strings.Join(extractRulesName(allRules), ", "),
+	)
+	debugf(
+		"Default rules (%d): %s.",
+		len(defaultRules),
+		strings.Join(extractRulesName(defaultRules), ", "),
+	)
 	debugf("Enabled by config rules (%d): %s.", len(enabledRules), strings.Join(enabledRules, ", "))
 
 	debugf("revive configuration: %#v", conf)

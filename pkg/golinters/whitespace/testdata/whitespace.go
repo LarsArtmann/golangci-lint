@@ -24,7 +24,6 @@ func oneNewlineFunc() {
 
 func twoNewlinesFunc() {
 
-
 }
 
 func noNewlineWithCommentFunc() {
@@ -42,7 +41,6 @@ func oneLeadingNewlineWithCommentFunc() {
 }
 
 func twoLeadingNewlines() { // want "unnecessary leading newline"
-
 
 	fmt.Println("Hello world")
 }
@@ -63,7 +61,7 @@ func multiIfFunc() {
 			if true {
 				if 1 == 1 &&
 					2 == 2 { // want "multi-line statement should be followed by a newline"
-						fmt.Println("Hello nested multi-line world")
+					fmt.Println("Hello nested multi-line world")
 				}
 			}
 		}
@@ -72,11 +70,6 @@ func multiIfFunc() {
 
 func notGoFmted() { // want "unnecessary leading newline"
 
-
-
-
-         fmt.Println("Hello world")
-
-
+	fmt.Println("Hello world")
 
 } // want "unnecessary trailing newline"

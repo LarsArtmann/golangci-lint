@@ -3,10 +3,9 @@ package predeclared
 import (
 	"strings"
 
-	"github.com/nishanths/predeclared/passes/predeclared"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/nishanths/predeclared/passes/predeclared"
 )
 
 func New(settings *config.PredeclaredSettings) *goanalysis.Linter {

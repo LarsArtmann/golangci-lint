@@ -8,11 +8,10 @@ import (
 	"slices"
 	"strings"
 
-	diffpkg "github.com/sourcegraph/go-diff/diff"
-	"golang.org/x/tools/go/analysis"
-
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
+	diffpkg "github.com/sourcegraph/go-diff/diff"
+	"golang.org/x/tools/go/analysis"
 )
 
 type Change struct {
@@ -103,9 +102,13 @@ func (p *hunkChangesParser) handleOriginalLine(lines []diffLine, line diffLine, 
 	}
 
 	change := Change{
-		From:     line.originalNumber,
-		To:       line.originalNumber,
-		NewLines: slices.Concat(p.replacementLinesToPrepend, []string{line.data}, followingAddedLines),
+		From: line.originalNumber,
+		To:   line.originalNumber,
+		NewLines: slices.Concat(
+			p.replacementLinesToPrepend,
+			[]string{line.data},
+			followingAddedLines,
+		),
 	}
 	p.changes = append(p.changes, change)
 
@@ -149,9 +152,13 @@ func (p *hunkChangesParser) handleAddedOnlyLines(addedLines []string) {
 
 	// add-only change merged into the last original line with possible prepending
 	change := Change{
-		From:     p.lastOriginalLine.originalNumber,
-		To:       p.lastOriginalLine.originalNumber,
-		NewLines: slices.Concat(p.replacementLinesToPrepend, []string{p.lastOriginalLine.data}, addedLines),
+		From: p.lastOriginalLine.originalNumber,
+		To:   p.lastOriginalLine.originalNumber,
+		NewLines: slices.Concat(
+			p.replacementLinesToPrepend,
+			[]string{p.lastOriginalLine.data},
+			addedLines,
+		),
 	}
 
 	p.changes = append(p.changes, change)
@@ -227,7 +234,13 @@ func ExtractDiagnosticFromPatch(
 
 	ft := pass.Fset.File(file.Pos())
 
-	adjLine := pass.Fset.PositionFor(file.Pos(), false).Line - pass.Fset.PositionFor(file.Pos(), true).Line
+	adjLine := pass.Fset.PositionFor(
+		file.Pos(),
+		false,
+	).Line - pass.Fset.PositionFor(
+		file.Pos(),
+		true,
+	).Line
 
 	for _, d := range diffs {
 		if len(d.Hunks) == 0 {

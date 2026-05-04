@@ -9,7 +9,6 @@ import (
 	"strings"
 
 	gocriticlinter "github.com/go-critic/go-critic/linter"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
 )
@@ -34,7 +33,11 @@ type settingsWrapper struct {
 	inferredEnabledChecksLowerCased goCriticChecks[struct{}]
 }
 
-func newSettingsWrapper(logger logutils.Log, settings *config.GoCriticSettings, replacer *strings.Replacer) *settingsWrapper {
+func newSettingsWrapper(
+	logger logutils.Log,
+	settings *config.GoCriticSettings,
+	replacer *strings.Replacer,
+) *settingsWrapper {
 	allCheckers := gocriticlinter.GetCheckersInfo()
 
 	allChecks := make(goCriticChecks[struct{}], len(allCheckers))
@@ -128,7 +131,11 @@ func (s *settingsWrapper) inferEnabledChecks() {
 
 		for _, check := range s.EnabledChecks {
 			if enabledChecks.has(check) {
-				s.logger.Warnf("%s: no need to enable check %q: it's already enabled", linterName, check)
+				s.logger.Warnf(
+					"%s: no need to enable check %q: it's already enabled",
+					linterName,
+					check,
+				)
 				continue
 			}
 
@@ -151,7 +158,11 @@ func (s *settingsWrapper) inferEnabledChecks() {
 
 		for _, check := range s.DisabledChecks {
 			if !enabledChecks.has(check) {
-				s.logger.Warnf("%s: no need to disable check %q: it's already disabled", linterName, check)
+				s.logger.Warnf(
+					"%s: no need to disable check %q: it's already disabled",
+					linterName,
+					check,
+				)
 				continue
 			}
 
@@ -207,8 +218,11 @@ func (s *settingsWrapper) setCheckerParams(
 
 		// param `k` isn't supported
 		if len(info.Params) == 0 {
-			return fmt.Errorf("checker %s config param %s doesn't exist: checker doesn't have params",
-				info.Name, k)
+			return fmt.Errorf(
+				"checker %s config param %s doesn't exist: checker doesn't have params",
+				info.Name,
+				k,
+			)
 		}
 
 		return fmt.Errorf("checker %s config param %s doesn't exist, all existing: %s",
@@ -320,7 +334,9 @@ func (s *settingsWrapper) validateOptionsCombinations() error {
 		}
 
 		if len(s.EnabledTags) == 0 && len(s.EnabledChecks) == 0 {
-			return errors.New("all checks were disabled, but no one check was enabled: at least one must be enabled")
+			return errors.New(
+				"all checks were disabled, but no one check was enabled: at least one must be enabled",
+			)
 		}
 	}
 
@@ -330,13 +346,21 @@ func (s *settingsWrapper) validateOptionsCombinations() error {
 func (s *settingsWrapper) validateCheckerTags() error {
 	for _, tag := range s.EnabledTags {
 		if !s.allChecksByTag.has(tag) {
-			return fmt.Errorf("enabled tag %q doesn't exist, see %s's documentation", tag, linterName)
+			return fmt.Errorf(
+				"enabled tag %q doesn't exist, see %s's documentation",
+				tag,
+				linterName,
+			)
 		}
 	}
 
 	for _, tag := range s.DisabledTags {
 		if !s.allChecksByTag.has(tag) {
-			return fmt.Errorf("disabled tag %q doesn't exist, see %s's documentation", tag, linterName)
+			return fmt.Errorf(
+				"disabled tag %q doesn't exist, see %s's documentation",
+				tag,
+				linterName,
+			)
 		}
 	}
 
@@ -346,13 +370,21 @@ func (s *settingsWrapper) validateCheckerTags() error {
 func (s *settingsWrapper) validateCheckerNames() error {
 	for _, check := range s.EnabledChecks {
 		if !s.allChecks.has(check) {
-			return fmt.Errorf("enabled check %q doesn't exist, see %s's documentation", check, linterName)
+			return fmt.Errorf(
+				"enabled check %q doesn't exist, see %s's documentation",
+				check,
+				linterName,
+			)
 		}
 	}
 
 	for _, check := range s.DisabledChecks {
 		if !s.allChecks.has(check) {
-			return fmt.Errorf("disabled check %q doesn't exist, see %s documentation", check, linterName)
+			return fmt.Errorf(
+				"disabled check %q doesn't exist, see %s documentation",
+				check,
+				linterName,
+			)
 		}
 	}
 
@@ -360,7 +392,11 @@ func (s *settingsWrapper) validateCheckerNames() error {
 		lcName := strings.ToLower(check)
 
 		if !s.allChecksLowerCased.has(lcName) {
-			return fmt.Errorf("invalid check settings: check %q doesn't exist, see %s documentation", check, linterName)
+			return fmt.Errorf(
+				"invalid check settings: check %q doesn't exist, see %s documentation",
+				check,
+				linterName,
+			)
 		}
 
 		if !s.inferredEnabledChecksLowerCased.has(lcName) {

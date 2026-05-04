@@ -115,14 +115,7 @@
       ]
     },
     "gocritic-tags": {
-      "enum": [
-        "diagnostic",
-        "style",
-        "performance",
-        "experimental",
-        "opinionated",
-        "security"
-      ]
+      "enum": ["diagnostic", "style", "performance", "experimental", "opinionated", "security"]
     },
     "staticcheck-checks": {
       "enum": [
@@ -711,12 +704,7 @@
       ]
     },
     "iface-analyzers": {
-      "enum": [
-        "identical",
-        "unused",
-        "opaque",
-        "unexported"
-      ]
+      "enum": ["identical", "unused", "opaque", "unexported"]
     },
     "tagliatelle-cases": {
       "enum": [
@@ -787,12 +775,7 @@
       ]
     },
     "relative-path-modes": {
-      "enum": [
-        "gomod",
-        "gitroot",
-        "cfg",
-        "wd"
-      ]
+      "enum": ["gomod", "gitroot", "cfg", "wd"]
     },
     "simple-format": {
       "type": "object",
@@ -804,13 +787,10 @@
         }
       }
     },
-    "formats-path" : {
+    "formats-path": {
       "anyOf": [
         {
-          "enum": [
-            "stdout",
-            "stderr"
-          ]
+          "enum": ["stdout", "stderr"]
         },
         {
           "type": "string"
@@ -945,14 +925,7 @@
     },
     "formatter-names": {
       "description": "Usable formatter names.",
-      "enum": [
-        "gci",
-        "gofmt",
-        "gofumpt",
-        "goimports",
-        "golines",
-        "swaggo"
-      ]
+      "enum": ["gci", "gofmt", "gofumpt", "goimports", "golines", "swaggo"]
     },
     "settings": {
       "definitions": {
@@ -1519,14 +1492,7 @@
               "items": {
                 "anyOf": [
                   {
-                    "enum": [
-                      "standard",
-                      "default",
-                      "blank",
-                      "dot",
-                      "alias",
-                      "localmodule"
-                    ]
+                    "enum": ["standard", "default", "blank", "dot", "alias", "localmodule"]
                   },
                   {
                     "type": "string"
@@ -1760,7 +1726,7 @@
                   "type": "object",
                   "additionalProperties": false,
                   "properties": {
-                    "paramsOnly" : {
+                    "paramsOnly": {
                       "type": "boolean",
                       "default": true
                     }
@@ -1770,7 +1736,7 @@
                   "type": "object",
                   "additionalProperties": false,
                   "properties": {
-                    "minLength" : {
+                    "minLength": {
                       "type": "number",
                       "default": 15
                     }
@@ -1780,7 +1746,7 @@
                   "type": "object",
                   "additionalProperties": false,
                   "properties": {
-                    "skipBalanced" : {
+                    "skipBalanced": {
                       "type": "boolean",
                       "default": true
                     }
@@ -1790,7 +1756,7 @@
                   "type": "object",
                   "additionalProperties": false,
                   "properties": {
-                    "sizeThreshold" : {
+                    "sizeThreshold": {
                       "type": "number",
                       "default": 80
                     }
@@ -1800,7 +1766,7 @@
                   "type": "object",
                   "additionalProperties": false,
                   "properties": {
-                    "minThreshold" : {
+                    "minThreshold": {
                       "type": "number",
                       "default": 2
                     }
@@ -1810,7 +1776,7 @@
                   "type": "object",
                   "additionalProperties": false,
                   "properties": {
-                    "bodyWidth" : {
+                    "bodyWidth": {
                       "type": "number",
                       "default": 5
                     }
@@ -1820,11 +1786,11 @@
                   "type": "object",
                   "additionalProperties": false,
                   "properties": {
-                    "sizeThreshold" : {
+                    "sizeThreshold": {
                       "type": "number",
                       "default": 512
                     },
-                    "skipTestFuncs" : {
+                    "skipTestFuncs": {
                       "type": "boolean",
                       "default": true
                     }
@@ -1834,11 +1800,11 @@
                   "type": "object",
                   "additionalProperties": false,
                   "properties": {
-                    "sizeThreshold" : {
+                    "sizeThreshold": {
                       "type": "number",
                       "default": 128
                     },
-                    "skipTestFuncs" : {
+                    "skipTestFuncs": {
                       "type": "boolean",
                       "default": true
                     }
@@ -1848,19 +1814,19 @@
                   "type": "object",
                   "additionalProperties": false,
                   "properties": {
-                    "debug" : {
+                    "debug": {
                       "type": "string"
                     },
-                    "enable" : {
+                    "enable": {
                       "type": "string"
                     },
-                    "disable" : {
+                    "disable": {
                       "type": "string"
                     },
-                    "failOn" : {
+                    "failOn": {
                       "type": "string"
                     },
-                    "rules" : {
+                    "rules": {
                       "type": "string"
                     }
                   }
@@ -1869,7 +1835,7 @@
                   "type": "object",
                   "additionalProperties": false,
                   "properties": {
-                    "maxResults" : {
+                    "maxResults": {
                       "type": "number",
                       "default": 5
                     }
@@ -1879,7 +1845,7 @@
                   "type": "object",
                   "additionalProperties": false,
                   "properties": {
-                    "skipArchDependent" : {
+                    "skipArchDependent": {
                       "type": "boolean",
                       "default": true
                     }
@@ -1889,7 +1855,7 @@
                   "type": "object",
                   "additionalProperties": false,
                   "properties": {
-                    "skipRecvDeref" : {
+                    "skipRecvDeref": {
                       "type": "boolean",
                       "default": true
                     }
@@ -1899,7 +1865,7 @@
                   "type": "object",
                   "additionalProperties": false,
                   "properties": {
-                    "checkExported" : {
+                    "checkExported": {
                       "type": "boolean",
                       "default": false
                     }
@@ -2176,10 +2142,7 @@
               "examples": ["my_header_template.txt"]
             }
           },
-          "oneOf": [
-            { "required": ["template"] },
-            { "required": ["template-path"] }
-          ]
+          "oneOf": [{ "required": ["template"] }, { "required": ["template-path"] }]
         },
         "goimportsSettings": {
           "type": "object",
@@ -2876,7 +2839,7 @@
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "only-two":  {
+            "only-two": {
               "type": "boolean",
               "description": "To check functions with only two return values.",
               "default": true
@@ -2940,14 +2903,7 @@
               "description": "The list of enabled checks, see https://github.com/tommy-muehle/go-mnd/#checks for description.",
               "type": "array",
               "items": {
-                "enum": [
-                  "argument",
-                  "case",
-                  "condition",
-                  "operation",
-                  "return",
-                  "assign"
-                ]
+                "enum": ["argument", "case", "condition", "operation", "return", "assign"]
               }
             }
           }
@@ -3586,17 +3542,7 @@
                 "type": "string"
               },
               "default": [],
-              "examples": [
-                [
-                  "json",
-                  "yaml",
-                  "yml",
-                  "toml",
-                  "mapstructure",
-                  "binding",
-                  "validate"
-                ]
-              ]
+              "examples": [["json", "yaml", "yml", "toml", "mapstructure", "binding", "validate"]]
             },
             "strict": {
               "description": "Whether enable strict style.",
@@ -3841,9 +3787,7 @@
                   "suite-thelper",
                   "useless-assert"
                 ],
-                "default": [
-                  "suite-thelper"
-                ]
+                "default": ["suite-thelper"]
               }
             },
             "bool-compare": {
@@ -4386,9 +4330,7 @@
               "items": {
                 "type": "string"
               },
-              "examples": [
-                ["c echo.Context", "t testing.T", "f *foo.Bar", "const C"]
-              ]
+              "examples": [["c echo.Context", "t testing.T", "f *foo.Bar", "const C"]]
             }
           }
         },
@@ -4414,10 +4356,7 @@
           "properties": {
             "extra-ignore-sigs": {
               "description": "An array of strings specifying additional substrings of signatures to ignore.",
-              "default": [
-                ".CustomError(",
-                ".SpecificWrap("
-              ],
+              "default": [".CustomError(", ".SpecificWrap("],
               "type": "array",
               "items": {
                 "type": "string"
@@ -4636,7 +4575,7 @@
               "oneOf": [
                 {
                   "properties": {
-                    "type": {"enum": ["module"] }
+                    "type": { "enum": ["module"] }
                   },
                   "required": ["type"]
                 },
@@ -4838,12 +4777,7 @@
       "additionalProperties": false,
       "properties": {
         "default": {
-          "enum": [
-            "standard",
-            "all",
-            "none",
-            "fast"
-          ]
+          "enum": ["standard", "all", "none", "fast"]
         },
         "enable": {
           "description": "List of enabled linters.",
@@ -4879,7 +4813,7 @@
             "decorder": {
               "$ref": "#/definitions/settings/definitions/decorderSettings"
             },
-            "depguard":{
+            "depguard": {
               "$ref": "#/definitions/settings/definitions/depguardSettings"
             },
             "dogsled": {
@@ -4945,7 +4879,7 @@
             "godox": {
               "$ref": "#/definitions/settings/definitions/godoxSettings"
             },
-            "interfacebloat":{
+            "interfacebloat": {
               "$ref": "#/definitions/settings/definitions/interfacebloatSettings"
             },
             "goheader": {
@@ -4996,7 +4930,7 @@
             "maintidx": {
               "$ref": "#/definitions/settings/definitions/maintidxSettings"
             },
-            "makezero":{
+            "makezero": {
               "$ref": "#/definitions/settings/definitions/makezeroSettings"
             },
             "loggercheck": {
@@ -5026,7 +4960,7 @@
             "modernize": {
               "$ref": "#/definitions/settings/definitions/modernizeSettings"
             },
-            "nolintlint":{
+            "nolintlint": {
               "$ref": "#/definitions/settings/definitions/nolintlintSettings"
             },
             "reassign": {
@@ -5068,7 +5002,7 @@
             "spancheck": {
               "$ref": "#/definitions/settings/definitions/spancheckSettings"
             },
-            "staticcheck":{
+            "staticcheck": {
               "$ref": "#/definitions/settings/definitions/staticcheckSettings"
             },
             "tagalign": {
@@ -5122,12 +5056,12 @@
             "copyloopvar": {
               "$ref": "#/definitions/settings/definitions/copyloopvarSettings"
             },
-            "custom":{
+            "custom": {
               "$ref": "#/definitions/settings/definitions/customSettings"
             }
           }
         },
-        "exclusions":{
+        "exclusions": {
           "type": "object",
           "additionalProperties": false,
           "properties": {
@@ -5142,12 +5076,7 @@
             "presets": {
               "type": "array",
               "items": {
-                "enum": [
-                  "comments",
-                  "std-error-handling",
-                  "common-false-positives",
-                  "legacy"
-                ]
+                "enum": ["comments", "std-error-handling", "common-false-positives", "legacy"]
               }
             },
             "rules": {
@@ -5183,13 +5112,13 @@
                 ]
               }
             },
-            "paths":  {
+            "paths": {
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
-            "paths-except":  {
+            "paths-except": {
               "type": "array",
               "items": {
                 "type": "string"

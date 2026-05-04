@@ -4,4 +4,4 @@ linters:
     recvcheck:
       disable-builtin: true
       exclusions:
-        - '*.Value'
+        - "*.Value"

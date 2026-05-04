@@ -30,7 +30,7 @@ import (
 
 var _ Processor = (*Fixer)(nil)
 
-const filePerm = 0644
+const filePerm = 0o644
 
 // Fixer fixes reports if possible.
 // The reports that are not fixed are passed to the next processor.
@@ -42,7 +42,12 @@ type Fixer struct {
 	formatter *goformatters.MetaFormatter
 }
 
-func NewFixer(cfg *config.Config, log logutils.Log, fileCache *fsutils.FileCache, formatter *goformatters.MetaFormatter) *Fixer {
+func NewFixer(
+	cfg *config.Config,
+	log logutils.Log,
+	fileCache *fsutils.FileCache,
+	formatter *goformatters.MetaFormatter,
+) *Fixer {
 	return &Fixer{
 		cfg:       cfg,
 		log:       log,
@@ -80,7 +85,14 @@ func (p Fixer) process(issues []*result.Issue) ([]*result.Issue, error) {
 	// filenames / linters / edits
 	editsByLinter := make(map[string]map[string][]diff.Edit)
 
-	formatters := []string{gofumpt.Name, goimports.Name, gofmt.Name, gci.Name, golines.Name, swaggo.Name}
+	formatters := []string{
+		gofumpt.Name,
+		goimports.Name,
+		gofmt.Name,
+		gci.Name,
+		golines.Name,
+		swaggo.Name,
+	}
 
 	var notFixableIssues []*result.Issue
 
@@ -117,7 +129,10 @@ func (p Fixer) process(issues []*result.Issue) ([]*result.Issue, error) {
 					editsByLinter[issue.FilePath()] = make(map[string][]diff.Edit)
 				}
 
-				editsByLinter[issue.FilePath()][issue.FromLinter] = append(editsByLinter[issue.FilePath()][issue.FromLinter], edit)
+				editsByLinter[issue.FilePath()][issue.FromLinter] = append(
+					editsByLinter[issue.FilePath()][issue.FromLinter],
+					edit,
+				)
 			}
 		}
 	}
@@ -163,7 +178,12 @@ func (p Fixer) process(issues []*result.Issue) ([]*result.Issue, error) {
 
 				if _, invalid := validateEdits(combined); invalid > 0 {
 					excludedLinters[x] = struct{}{}
-					p.log.Warnf("Changes related to %q are skipped for the file %q due to conflicts with %q.", x, path, y)
+					p.log.Warnf(
+						"Changes related to %q are skipped for the file %q due to conflicts with %q.",
+						x,
+						path,
+						y,
+					)
 				}
 			}
 		}

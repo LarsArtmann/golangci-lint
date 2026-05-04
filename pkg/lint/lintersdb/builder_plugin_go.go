@@ -7,13 +7,12 @@ import (
 	"path/filepath"
 	"plugin"
 
-	"golang.org/x/tools/go/analysis"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/fsutils"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 	"github.com/golangci/golangci-lint/v2/pkg/lint/linter"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
+	"golang.org/x/tools/go/analysis"
 )
 
 const goPluginType = "goplugin"
@@ -47,7 +46,12 @@ func (b *PluginGoBuilder) Build(cfg *config.Config) ([]*linter.Config, error) {
 
 		lc, err := b.loadConfig(cfg, name, &settings)
 		if err != nil {
-			return nil, fmt.Errorf("unable to load custom analyzer %q: %s, %w", name, settings.Path, err)
+			return nil, fmt.Errorf(
+				"unable to load custom analyzer %q: %s, %w",
+				name,
+				settings.Path,
+				err,
+			)
 		}
 		linters = append(linters, lc)
 	}
@@ -57,7 +61,11 @@ func (b *PluginGoBuilder) Build(cfg *config.Config) ([]*linter.Config, error) {
 
 // loadConfig loads the configuration of private linters.
 // Private linters are dynamically loaded from .so plugin files.
-func (b *PluginGoBuilder) loadConfig(cfg *config.Config, name string, settings *config.CustomLinterSettings) (*linter.Config, error) {
+func (b *PluginGoBuilder) loadConfig(
+	cfg *config.Config,
+	name string,
+	settings *config.CustomLinterSettings,
+) (*linter.Config, error) {
 	analyzers, err := b.getAnalyzerPlugin(cfg, settings.Path, settings.Settings)
 	if err != nil {
 		return nil, err
@@ -81,9 +89,17 @@ func (b *PluginGoBuilder) loadConfig(cfg *config.Config, name string, settings *
 // and returns the 'AnalyzerPlugin' interface implemented by the private plugin.
 // An error is returned if the private linter cannot be loaded
 // or the linter does not implement the AnalyzerPlugin interface.
-func (b *PluginGoBuilder) getAnalyzerPlugin(cfg *config.Config, path string, settings any) ([]*analysis.Analyzer, error) {
+func (b *PluginGoBuilder) getAnalyzerPlugin(
+	cfg *config.Config,
+	path string,
+	settings any,
+) ([]*analysis.Analyzer, error) {
 	if !filepath.IsAbs(path) {
-		basePath, err := fsutils.GetBasePath(context.Background(), cfg.Run.RelativePathMode, cfg.GetConfigDir())
+		basePath, err := fsutils.GetBasePath(
+			context.Background(),
+			cfg.Run.RelativePathMode,
+			cfg.GetConfigDir(),
+		)
 		if err != nil {
 			return nil, fmt.Errorf("get base path: %w", err)
 		}
@@ -105,7 +121,10 @@ func (b *PluginGoBuilder) getAnalyzerPlugin(cfg *config.Config, path string, set
 	return analyzers, nil
 }
 
-func (b *PluginGoBuilder) lookupPlugin(plug *plugin.Plugin, settings any) ([]*analysis.Analyzer, error) {
+func (b *PluginGoBuilder) lookupPlugin(
+	plug *plugin.Plugin,
+	settings any,
+) ([]*analysis.Analyzer, error) {
 	symbol, err := plug.Lookup("New")
 	if err != nil {
 		analyzers, errP := b.lookupAnalyzerPlugin(plug)
@@ -131,8 +150,10 @@ func (b *PluginGoBuilder) lookupAnalyzerPlugin(plug *plugin.Plugin) ([]*analysis
 		return nil, err
 	}
 
-	b.log.Warnf("plugin: 'AnalyzerPlugin' plugins are deprecated, please use the new plugin signature: " +
-		"https://golangci-lint.run/docs/plugins/go-plugins#create-a-plugin")
+	b.log.Warnf(
+		"plugin: 'AnalyzerPlugin' plugins are deprecated, please use the new plugin signature: " +
+			"https://golangci-lint.run/docs/plugins/go-plugins#create-a-plugin",
+	)
 
 	analyzerPlugin, ok := symbol.(AnalyzerPlugin)
 	if !ok {

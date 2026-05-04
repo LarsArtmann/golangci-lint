@@ -15,11 +15,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/shirou/gopsutil/v4/process"
-	"github.com/stretchr/testify/require"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/lint/lintersdb"
+	"github.com/shirou/gopsutil/v4/process"
+	"github.com/stretchr/testify/require"
 )
 
 const binName = "golangci-lint-bench"
@@ -157,7 +156,8 @@ func cloneGithubProject(tb testing.TB, benchRoot, owner, name string) string {
 	if _, err := os.Stat(dir); os.IsNotExist(err) {
 		repo := fmt.Sprintf("https://github.com/%s/%s.git", owner, name)
 
-		err = exec.CommandContext(tb.Context(), "git", "clone", "--depth", "1", "--single-branch", repo, dir).Run()
+		err = exec.CommandContext(tb.Context(), "git", "clone", "--depth", "1", "--single-branch", repo, dir).
+			Run()
 		if err != nil {
 			tb.Fatalf("can't git clone %s/%s: %s", owner, name, err)
 		}
@@ -208,7 +208,12 @@ func run(tb testing.TB, name string, args []string) {
 func countGoLines(tb testing.TB) int {
 	tb.Helper()
 
-	cmd := exec.CommandContext(tb.Context(), "bash", "-c", `find . -type f -name "*.go" |  grep -F -v vendor | xargs wc -l | tail -1`)
+	cmd := exec.CommandContext(
+		tb.Context(),
+		"bash",
+		"-c",
+		`find . -type f -name "*.go" |  grep -F -v vendor | xargs wc -l | tail -1`,
+	)
 
 	out, err := cmd.CombinedOutput()
 	if err != nil {

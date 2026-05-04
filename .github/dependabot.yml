@@ -19,7 +19,7 @@ updates:
     groups:
       github-actions:
         patterns:
-          - "*"  # Group all updates into a single larger pull request.
+          - "*" # Group all updates into a single larger pull request.
   - package-ecosystem: docker
     directory: "/build"
     schedule:
@@ -27,7 +27,7 @@ updates:
     groups:
       docker:
         patterns:
-          - "*"  # Group all updates into a single larger pull request.
+          - "*" # Group all updates into a single larger pull request.
   - package-ecosystem: gomod
     directory: "/scripts/gen_github_action_config"
     schedule:
@@ -35,7 +35,7 @@ updates:
     groups:
       scripts:
         patterns:
-          - "*"  # Group all updates into a single larger pull request.
+          - "*" # Group all updates into a single larger pull request.
   - package-ecosystem: gomod
     directories:
       - pkg/golinters/arangolint/testdata/
@@ -47,7 +47,7 @@ updates:
     groups:
       linter-testdata:
         patterns:
-          - "*"  # Group all updates into a single larger pull request.
+          - "*" # Group all updates into a single larger pull request.
     schedule:
       interval: monthly
       day: "wednesday"

@@ -54,7 +54,10 @@ func saveData(dir string) error {
 		return fmt.Errorf("get the latest version: %w", err)
 	}
 
-	err = saveToJSONFile(filepath.Join(dir, "version.json"), map[string]string{"version": latestVersion})
+	err = saveToJSONFile(
+		filepath.Join(dir, "version.json"),
+		map[string]string{"version": latestVersion},
+	)
 	if err != nil {
 		return fmt.Errorf("save latest version: %w", err)
 	}

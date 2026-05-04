@@ -9,10 +9,9 @@ import (
 
 	"charm.land/fang/v2"
 	"github.com/fatih/color"
+	"github.com/golangci/golangci-lint/v2/pkg/logutils"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
-
-	"github.com/golangci/golangci-lint/v2/pkg/logutils"
 )
 
 func Execute(info BuildInfo) error {
@@ -87,7 +86,12 @@ func (c *rootCommand) Execute() error {
 func setupRootPersistentFlags(fs *pflag.FlagSet, opts *rootOptions) {
 	fs.BoolP("help", "h", false, "Help for a command")
 	fs.BoolVarP(&opts.Verbose, "verbose", "v", false, "Verbose output")
-	fs.StringVar(&opts.Color, "color", "auto", "Use color when printing; can be 'always', 'auto', or 'never'")
+	fs.StringVar(
+		&opts.Color,
+		"color",
+		"auto",
+		"Use color when printing; can be 'always', 'auto', or 'never'",
+	)
 }
 
 func setupLogger(logger logutils.Log) error {
@@ -110,7 +114,10 @@ func setupLogger(logger logutils.Log) error {
 	case "auto":
 		// nothing
 	default:
-		logger.Fatalf("invalid value %q for --color; must be 'always', 'auto', or 'never'", opts.Color)
+		logger.Fatalf(
+			"invalid value %q for --color; must be 'always', 'auto', or 'never'",
+			opts.Color,
+		)
 	}
 
 	// For log level colors (mainly for verbose output)
@@ -159,7 +166,8 @@ func safeArgs(fs *pflag.FlagSet, args []string) []string {
 
 	var cleanArgs []string
 	for _, arg := range args {
-		if len(arg) > 1 && arg[0] == '-' && arg[1] != '-' && !slices.Contains(shorthands, string(arg[1])) {
+		if len(arg) > 1 && arg[0] == '-' && arg[1] != '-' &&
+			!slices.Contains(shorthands, string(arg[1])) {
 			cleanArgs = append(cleanArgs, "--potato")
 			continue
 		}

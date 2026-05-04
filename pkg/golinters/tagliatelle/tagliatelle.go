@@ -4,10 +4,9 @@ import (
 	"maps"
 	"strings"
 
-	"github.com/ldez/tagliatelle"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/ldez/tagliatelle"
 )
 
 func New(settings *config.TagliatelleSettings) *goanalysis.Linter {
@@ -47,7 +46,9 @@ func New(settings *config.TagliatelleSettings) *goanalysis.Linter {
 		WithLoadMode(goanalysis.LoadModeTypesInfo)
 }
 
-func toExtendedRules(src map[string]config.TagliatelleExtendedRule) map[string]tagliatelle.ExtendedRule {
+func toExtendedRules(
+	src map[string]config.TagliatelleExtendedRule,
+) map[string]tagliatelle.ExtendedRule {
 	result := make(map[string]tagliatelle.ExtendedRule, len(src))
 
 	for k, v := range src {

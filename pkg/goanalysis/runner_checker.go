@@ -110,7 +110,6 @@ func (act *action) analyze() {
 			// in-memory outputs of prerequisite analyzers
 			// become inputs to this analysis pass.
 			inputs[dep.Analyzer] = dep.Result
-
 		} else if dep.Analyzer == act.Analyzer { // (always true)
 			// Same analysis, different package (vertical edge):
 			// serialized facts produced by prerequisite analysis

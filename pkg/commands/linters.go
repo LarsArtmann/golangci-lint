@@ -5,14 +5,13 @@ import (
 	"fmt"
 
 	"github.com/fatih/color"
-	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goformatters"
 	"github.com/golangci/golangci-lint/v2/pkg/lint/linter"
 	"github.com/golangci/golangci-lint/v2/pkg/lint/lintersdb"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 type lintersHelp struct {
@@ -69,15 +68,27 @@ func newLintersCommand(logger logutils.Log) *lintersCommand {
 }
 
 func (c *lintersCommand) preRunE(cmd *cobra.Command, args []string) error {
-	loader := config.NewLintersLoader(c.log.Child(logutils.DebugKeyConfigReader), c.viper, cmd.Flags(), c.opts.LoaderOptions, c.cfg, args)
+	loader := config.NewLintersLoader(
+		c.log.Child(logutils.DebugKeyConfigReader),
+		c.viper,
+		cmd.Flags(),
+		c.opts.LoaderOptions,
+		c.cfg,
+		args,
+	)
 
 	err := loader.Load(config.LoadOptions{Validation: true})
 	if err != nil {
 		return fmt.Errorf("can't load config: %w", err)
 	}
 
-	dbManager, err := lintersdb.NewManager(c.log.Child(logutils.DebugKeyLintersDB), c.cfg,
-		lintersdb.NewLinterBuilder(), lintersdb.NewPluginModuleBuilder(c.log), lintersdb.NewPluginGoBuilder(c.log))
+	dbManager, err := lintersdb.NewManager(
+		c.log.Child(logutils.DebugKeyLintersDB),
+		c.cfg,
+		lintersdb.NewLinterBuilder(),
+		lintersdb.NewPluginModuleBuilder(c.log),
+		lintersdb.NewPluginGoBuilder(c.log),
+	)
 	if err != nil {
 		return err
 	}

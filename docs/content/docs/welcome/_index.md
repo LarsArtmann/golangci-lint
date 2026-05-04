@@ -8,10 +8,10 @@ This quickstart guide provides step-by-step instructions to help you install, co
 <!--more-->
 
 {{< cards >}}
-  {{< card link="/docs/welcome/install/local" title="Local Installation" icon="archive" >}}
-  {{< card link="/docs/welcome/install/ci" title="CI Installation" icon="archive" >}}
-  {{< card link="/docs/welcome/integrations/" title="Integrations" icon="sparkles" >}}
-  {{< card link="/docs/welcome/quick-start/#linting" title="Quick Start: Linting" icon="fast-forward" >}}
-  {{< card link="/docs/welcome/quick-start/#formatting" title="Quick Start: Formatting" icon="fast-forward" >}}
-  {{< card link="/docs/welcome/faq/" title="FAQ" icon="question-mark-circle" >}}
+{{< card link="/docs/welcome/install/local" title="Local Installation" icon="archive" >}}
+{{< card link="/docs/welcome/install/ci" title="CI Installation" icon="archive" >}}
+{{< card link="/docs/welcome/integrations/" title="Integrations" icon="sparkles" >}}
+{{< card link="/docs/welcome/quick-start/#linting" title="Quick Start: Linting" icon="fast-forward" >}}
+{{< card link="/docs/welcome/quick-start/#formatting" title="Quick Start: Formatting" icon="fast-forward" >}}
+{{< card link="/docs/welcome/faq/" title="FAQ" icon="question-mark-circle" >}}
 {{< /cards >}}

@@ -4,7 +4,6 @@ import (
 	"strings"
 
 	"github.com/Abirdcfly/dupword"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 )

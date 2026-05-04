@@ -4,9 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"golang.org/x/tools/go/analysis"
-
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"golang.org/x/tools/go/analysis"
 )
 
 func FormatCode(code string) string {

@@ -5,7 +5,7 @@ nolintlint is a Go static analysis tool to find ill-formed or insufficiently exp
 
 ## Purpose
 
-To ensure that lint exceptions have explanations.  Consider the case below:
+To ensure that lint exceptions have explanations. Consider the case below:
 
 ```Go
 import "crypto/md5" //nolint:all
@@ -16,7 +16,7 @@ func hash(data []byte) []byte {
 ```
 
 In the above case, nolint directives are present, but the user has no idea why this is being done or which linter
-is being suppressed (in this case, gosec recommends against use of md5).  `nolintlint` can require that the code provide an explanation, which might look as follows:
+is being suppressed (in this case, gosec recommends against use of md5). `nolintlint` can require that the code provide an explanation, which might look as follows:
 
 ```Go
 import "crypto/md5" //nolint:gosec // this is not used in a secure application
@@ -26,6 +26,5 @@ func hash(data []byte) []byte {
 }
 ```
 
-`nolintlint` can also identify cases where you may have written `//  nolint`.  Finally, `nolintlint`, can also enforce that you
+`nolintlint` can also identify cases where you may have written `//  nolint`. Finally, `nolintlint`, can also enforce that you
 use the machine-readable nolint directive format `//nolint:all` and that you mention what linter is being suppressed, as shown above when we write `//nolint:gosec`.
-

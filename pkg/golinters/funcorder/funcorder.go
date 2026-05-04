@@ -1,10 +1,9 @@
 package funcorder
 
 import (
-	"github.com/manuelarte/funcorder/analyzer"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/manuelarte/funcorder/analyzer"
 )
 
 func New(settings *config.FuncOrderSettings) *goanalysis.Linter {

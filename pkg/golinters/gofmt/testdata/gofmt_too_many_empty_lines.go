@@ -7,4 +7,3 @@ import "fmt"
 func _() {
 	fmt.Println("foo")
 }
-

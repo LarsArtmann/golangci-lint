@@ -7,12 +7,11 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/golangci/misspell"
-	"golang.org/x/tools/go/analysis"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 	"github.com/golangci/golangci-lint/v2/pkg/golinters/internal"
+	"github.com/golangci/misspell"
+	"golang.org/x/tools/go/analysis"
 )
 
 const linterName = "misspell"
@@ -73,7 +72,12 @@ func createMisspellReplacer(settings *config.MisspellSettings) (*misspell.Replac
 	return replacer, nil
 }
 
-func runMisspellOnFile(pass *analysis.Pass, file *ast.File, replacer *misspell.Replacer, mode string) error {
+func runMisspellOnFile(
+	pass *analysis.Pass,
+	file *ast.File,
+	replacer *misspell.Replacer,
+	mode string,
+) error {
 	position, isGoFile := goanalysis.GetGoFilePosition(pass, file)
 	if !isGoFile {
 		return nil
@@ -133,14 +137,27 @@ func appendExtraWords(replacer *misspell.Replacer, extraWords []config.MisspellE
 
 	for _, word := range extraWords {
 		if word.Typo == "" || word.Correction == "" {
-			return fmt.Errorf("typo (%q) and correction (%q) fields should not be empty", word.Typo, word.Correction)
+			return fmt.Errorf(
+				"typo (%q) and correction (%q) fields should not be empty",
+				word.Typo,
+				word.Correction,
+			)
 		}
 
 		if strings.ContainsFunc(word.Typo, func(r rune) bool { return !unicode.IsLetter(r) }) {
-			return fmt.Errorf("the word %q in the 'typo' field should only contain letters", word.Typo)
+			return fmt.Errorf(
+				"the word %q in the 'typo' field should only contain letters",
+				word.Typo,
+			)
 		}
-		if strings.ContainsFunc(word.Correction, func(r rune) bool { return !unicode.IsLetter(r) }) {
-			return fmt.Errorf("the word %q in the 'correction' field should only contain letters", word.Correction)
+		if strings.ContainsFunc(
+			word.Correction,
+			func(r rune) bool { return !unicode.IsLetter(r) },
+		) {
+			return fmt.Errorf(
+				"the word %q in the 'correction' field should only contain letters",
+				word.Correction,
+			)
 		}
 
 		extra = append(extra, strings.ToLower(word.Typo), strings.ToLower(word.Correction))

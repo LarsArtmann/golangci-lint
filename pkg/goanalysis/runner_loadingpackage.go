@@ -15,13 +15,12 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"golang.org/x/sync/errgroup"
-	"golang.org/x/tools/go/gcexportdata"
-	"golang.org/x/tools/go/packages"
-
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis/load"
 	"github.com/golangci/golangci-lint/v2/pkg/goutil"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
+	"golang.org/x/sync/errgroup"
+	"golang.org/x/tools/go/gcexportdata"
+	"golang.org/x/tools/go/packages"
 )
 
 const unsafePkgName = "unsafe"
@@ -41,7 +40,12 @@ type loadingPackage struct {
 	decUseMutex sync.Mutex
 }
 
-func (lp *loadingPackage) analyzeRecursive(ctx context.Context, cancel context.CancelFunc, loadMode LoadMode, loadSem chan struct{}) {
+func (lp *loadingPackage) analyzeRecursive(
+	ctx context.Context,
+	cancel context.CancelFunc,
+	loadMode LoadMode,
+	loadSem chan struct{},
+) {
 	lp.analyzeOnce.Do(func() {
 		// Load the direct dependencies, in parallel.
 		var wg sync.WaitGroup
@@ -58,7 +62,12 @@ func (lp *loadingPackage) analyzeRecursive(ctx context.Context, cancel context.C
 	})
 }
 
-func (lp *loadingPackage) analyze(ctx context.Context, cancel context.CancelFunc, loadMode LoadMode, loadSem chan struct{}) {
+func (lp *loadingPackage) analyze(
+	ctx context.Context,
+	cancel context.CancelFunc,
+	loadMode LoadMode,
+	loadSem chan struct{},
+) {
 	select {
 	case <-ctx.Done():
 		return
@@ -299,7 +308,10 @@ func (lp *loadingPackage) loadWithFacts(loadMode LoadMode) error {
 			if !act.loadCachedFacts() {
 				// Cached facts loading failed: analyze later the action from source.
 				act.needAnalyzeSource = true
-				factsCacheDebugf("Loading of facts for already loaded %s failed, analyze it from source later", act)
+				factsCacheDebugf(
+					"Loading of facts for already loaded %s failed, analyze it from source later",
+					act,
+				)
 				act.markDepsForAnalyzingSource()
 			}
 		}
@@ -401,7 +413,11 @@ func (lp *loadingPackage) decUse(canClearTypes bool) {
 		act.Deps = nil
 		if act.Result != nil {
 			if isMemoryDebug {
-				debugf("%s: decUse: nilling act result of size %d bytes", act, sizeOfValueTreeBytes(act.Result))
+				debugf(
+					"%s: decUse: nilling act result of size %d bytes",
+					act,
+					sizeOfValueTreeBytes(act.Result),
+				)
 			}
 			act.Result = nil
 		}
@@ -531,8 +547,8 @@ func sizeOfReflectValueTreeBytes(rv reflect.Value, visitedPtrs map[uintptr]struc
 		return sizeOfReflectValueTreeBytes(rv.Elem(), visitedPtrs)
 	case reflect.Struct:
 		ret := 0
-		for i := range rv.NumField() {
-			ret += sizeOfReflectValueTreeBytes(rv.Field(i), visitedPtrs)
+		for _, field := range rv.Fields() {
+			ret += sizeOfReflectValueTreeBytes(field, visitedPtrs)
 		}
 		return ret
 	case reflect.Slice, reflect.Array, reflect.Chan:

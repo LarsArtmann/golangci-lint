@@ -9,4 +9,3 @@ issues:
 linters-settings:
   copyloopvar:
     check-alias: true
-

@@ -33,11 +33,11 @@ In order for a pull request adding a linter to be reviewed, the linter and the P
 - [ ] The file `.golangci.next.reference.yml` must be updated.
 - [ ] The file `.golangci.reference.yml` must NOT be edited.
 - [ ] The linter must be added to the lists of available linters (alphabetical case-insensitive order).
-    - `enable` and `disable` options
+  - `enable` and `disable` options
 - [ ] If the linter has a configuration, the exhaustive configuration of the linter must be added (alphabetical case-insensitive order)
-    - The values must be different from the default ones.
-    - The default values must be defined in a comment.
-    - The option must have a short description.
+  - The values must be different from the default ones.
+  - The default values must be defined in a comment.
+  - The option must have a short description.
 
 ### Others Requirements
 
@@ -45,8 +45,8 @@ In order for a pull request adding a linter to be reviewed, the linter and the P
 - [ ] The `.golangci.yml` of golangci-lint itself must not be edited and the linter must not be added to this file.
 - [ ] The linters must be sorted in the alphabetical order (case-insensitive) in the `lintersdb/builder_linter.go` and `.golangci.next.reference.yml`.
 - [ ] The load mode (`WithLoadMode(...)`):
-    - if the linter uses `goanalysis.LoadModeSyntax` -> no `WithLoadForGoAnalysis()` in `lintersdb/builder_linter.go`
-    - if the linter uses `goanalysis.LoadModeTypesInfo`, it requires `WithLoadForGoAnalysis()` in `lintersdb/builder_linter.go`
+  - if the linter uses `goanalysis.LoadModeSyntax` -> no `WithLoadForGoAnalysis()` in `lintersdb/builder_linter.go`
+  - if the linter uses `goanalysis.LoadModeTypesInfo`, it requires `WithLoadForGoAnalysis()` in `lintersdb/builder_linter.go`
 - [ ] The version in `WithSince(...)` must be the next minor version (`v1.X.0`) of golangci-lint.
 - [ ] `WithURL()` must contain the URL of the repository.
 

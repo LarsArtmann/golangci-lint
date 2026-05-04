@@ -14,7 +14,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '0 17 * * 5'
+    - cron: "0 17 * * 5"
 
 jobs:
   analyze:
@@ -31,7 +31,7 @@ jobs:
         # Override automatic language detection by changing the below list
         # Supported options are ['csharp', 'cpp', 'go', 'java', 'javascript', 'python']
         # TODO: Enable for javascript later
-        language: [ 'go']
+        language: ["go"]
 
     steps:
       - name: Checkout repository

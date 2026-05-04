@@ -2,7 +2,6 @@ package errname
 
 import (
 	"github.com/Antonboom/errname/pkg/analyzer"
-
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 )
 

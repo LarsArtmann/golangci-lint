@@ -4,10 +4,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/ldez/grignotin/goenv"
-
 	"github.com/golangci/golangci-lint/v2/pkg/goutil"
 	"github.com/golangci/golangci-lint/v2/pkg/result"
+	"github.com/ldez/grignotin/goenv"
 )
 
 var _ Processor = (*Cgo)(nil)

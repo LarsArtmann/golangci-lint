@@ -9,4 +9,5 @@ func Deref[T any](v *T) T {
 	return *v
 }
 
-func Pointer[T any](v T) *T { return &v }
+//go:fix inline
+func Pointer[T any](v T) *T { return new(v) }

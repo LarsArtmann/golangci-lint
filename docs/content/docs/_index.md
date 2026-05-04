@@ -1,9 +1,9 @@
 ---
-title: 'Golangci-lint Documentation'
+title: "Golangci-lint Documentation"
 ---
 
 {{< hextra/hero-subtitle >}}
-  Everything you need to know for your golangci-lint journey.
+Everything you need to know for your golangci-lint journey.
 {{< /hextra/hero-subtitle >}}
 
 ![golangci-lint demo](/images/demo.gif)

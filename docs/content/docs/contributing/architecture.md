@@ -24,6 +24,7 @@ graph LR
 The configuration is loaded from file and flags by `config.Loader` inside `PersistentPreRun` (or `PreRun`) of the commands that require configuration.
 
 The linter database (`linterdb.Manager`) is fill based on the configuration:
+
 - The linters ("internals" and plugins) are built by `linterdb.LinterBuilder` and `linterdb.PluginBuilder` builders.
 - The configuration is validated by `linterdb.Validator`.
 
@@ -73,7 +74,7 @@ func (lc *Config) WithLoadForGoAnalysis() *Config {
 }
 ```
 
-After finding a load mode, we run `go/packages`: 
+After finding a load mode, we run `go/packages`:
 the library get list of dirs (or `./...` as the default value) as input and outputs list of packages and requested information about them:
 filenames, type information, AST, etc.
 
@@ -183,33 +184,33 @@ $ tree -L 1 ./pkg/result/processors/ | grep -v test
 -->
 
 {{< filetree/container >}}
-  {{< filetree/folder name="./pkg/result/processors/" >}}
-	{{< filetree/file name="cgo.go" >}}
-	{{< filetree/file name="diff.go" >}}
-	{{< filetree/file name="exclusion_generated_file_filter.go" >}}
-	{{< filetree/file name="exclusion_generated_file_matcher.go" >}}
-	{{< filetree/file name="exclusion_paths.go" >}}
-	{{< filetree/file name="exclusion_presets.go" >}}
-	{{< filetree/file name="exclusion_rules.go" >}}
-	{{< filetree/file name="filename_unadjuster.go" >}}
-	{{< filetree/file name="fixer.go" >}}
-	{{< filetree/file name="identifier_marker.go" >}}
-	{{< filetree/file name="invalid_issue.go" >}}
-	{{< filetree/file name="issues.go" >}}
-	{{< filetree/file name="max_from_linter.go" >}}
-	{{< filetree/file name="max_per_file_from_linter.go" >}}
-	{{< filetree/file name="max_same_issues.go" >}}
-	{{< filetree/file name="nolint_filter.go" >}}
-	{{< filetree/file name="path_absoluter.go" >}}
-	{{< filetree/file name="path_prettifier.go" >}}
-	{{< filetree/file name="path_relativity.go" >}}
-	{{< filetree/file name="path_shortener.go" >}}
-	{{< filetree/file name="processor.go" >}}
-	{{< filetree/file name="severity.go" >}}
-	{{< filetree/file name="sort_results.go" >}}
-	{{< filetree/file name="source_code.go" >}}
-	{{< filetree/file name="uniq_by_line.go" >}}
-  {{< /filetree/folder >}}
+{{< filetree/folder name="./pkg/result/processors/" >}}
+{{< filetree/file name="cgo.go" >}}
+{{< filetree/file name="diff.go" >}}
+{{< filetree/file name="exclusion_generated_file_filter.go" >}}
+{{< filetree/file name="exclusion_generated_file_matcher.go" >}}
+{{< filetree/file name="exclusion_paths.go" >}}
+{{< filetree/file name="exclusion_presets.go" >}}
+{{< filetree/file name="exclusion_rules.go" >}}
+{{< filetree/file name="filename_unadjuster.go" >}}
+{{< filetree/file name="fixer.go" >}}
+{{< filetree/file name="identifier_marker.go" >}}
+{{< filetree/file name="invalid_issue.go" >}}
+{{< filetree/file name="issues.go" >}}
+{{< filetree/file name="max_from_linter.go" >}}
+{{< filetree/file name="max_per_file_from_linter.go" >}}
+{{< filetree/file name="max_same_issues.go" >}}
+{{< filetree/file name="nolint_filter.go" >}}
+{{< filetree/file name="path_absoluter.go" >}}
+{{< filetree/file name="path_prettifier.go" >}}
+{{< filetree/file name="path_relativity.go" >}}
+{{< filetree/file name="path_shortener.go" >}}
+{{< filetree/file name="processor.go" >}}
+{{< filetree/file name="severity.go" >}}
+{{< filetree/file name="sort_results.go" >}}
+{{< filetree/file name="source_code.go" >}}
+{{< filetree/file name="uniq_by_line.go" >}}
+{{< /filetree/folder >}}
 {{< /filetree/container >}}
 
 The abstraction is simple:
@@ -233,16 +234,16 @@ $ tree -L 1 ./pkg/printers/ | grep -v test
 -->
 
 {{< filetree/container >}}
-  {{< filetree/folder name="./pkg/printers/" >}}
-    {{< filetree/file name="checkstyle.go" >}}
-    {{< filetree/file name="codeclimate.go" >}}
-    {{< filetree/file name="html.go" >}}
-    {{< filetree/file name="json.go" >}}
-    {{< filetree/file name="junitxml.go" >}}
-    {{< filetree/file name="printer.go" >}}
-    {{< filetree/file name="sarif.go" >}}
-    {{< filetree/file name="tab.go" >}}
-    {{< filetree/file name="teamcity.go" >}}
-    {{< filetree/file name="text.go" >}}
-  {{< /filetree/folder >}}
+{{< filetree/folder name="./pkg/printers/" >}}
+{{< filetree/file name="checkstyle.go" >}}
+{{< filetree/file name="codeclimate.go" >}}
+{{< filetree/file name="html.go" >}}
+{{< filetree/file name="json.go" >}}
+{{< filetree/file name="junitxml.go" >}}
+{{< filetree/file name="printer.go" >}}
+{{< filetree/file name="sarif.go" >}}
+{{< filetree/file name="tab.go" >}}
+{{< filetree/file name="teamcity.go" >}}
+{{< filetree/file name="text.go" >}}
+{{< /filetree/folder >}}
 {{< /filetree/container >}}

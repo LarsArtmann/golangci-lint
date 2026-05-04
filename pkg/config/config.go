@@ -9,12 +9,11 @@ import (
 	"slices"
 	"strings"
 
+	"github.com/golangci/golangci-lint/v2/pkg/logutils"
 	hcversion "github.com/hashicorp/go-version"
 	"github.com/ldez/grignotin/goenv"
 	"github.com/ldez/grignotin/gomod"
 	"golang.org/x/mod/modfile"
-
-	"github.com/golangci/golangci-lint/v2/pkg/logutils"
 )
 
 // defaultGoVersion the value should be "oldstable" - 1.

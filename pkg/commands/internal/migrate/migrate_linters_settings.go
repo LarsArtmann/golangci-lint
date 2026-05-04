@@ -218,10 +218,13 @@ func toErrorLintSettings(old versionone.ErrorLintSettings) versiontwo.ErrorLintS
 		})
 	}
 	for _, allowedError := range old.AllowedErrorsWildcard {
-		settings.AllowedErrorsWildcard = append(settings.AllowedErrorsWildcard, versiontwo.ErrorLintAllowPair{
-			Err: allowedError.Err,
-			Fun: allowedError.Fun,
-		})
+		settings.AllowedErrorsWildcard = append(
+			settings.AllowedErrorsWildcard,
+			versiontwo.ErrorLintAllowPair{
+				Err: allowedError.Err,
+				Fun: allowedError.Fun,
+			},
+		)
 	}
 
 	return settings
@@ -315,7 +318,9 @@ func toGocognitSettings(old versionone.GocognitSettings) versiontwo.GocognitSett
 	}
 }
 
-func toGoChecksumTypeSettings(old versionone.GoChecksumTypeSettings) versiontwo.GoChecksumTypeSettings {
+func toGoChecksumTypeSettings(
+	old versionone.GoChecksumTypeSettings,
+) versiontwo.GoChecksumTypeSettings {
 	return versiontwo.GoChecksumTypeSettings{
 		DefaultSignifiesExhaustive: old.DefaultSignifiesExhaustive,
 		IncludeSharedInterfaces:    old.IncludeSharedInterfaces,
@@ -406,7 +411,9 @@ func toGoHeaderSettings(old versionone.GoHeaderSettings) versiontwo.GoHeaderSett
 	}
 }
 
-func toGoModDirectivesSettings(old versionone.GoModDirectivesSettings) versiontwo.GoModDirectivesSettings {
+func toGoModDirectivesSettings(
+	old versionone.GoModDirectivesSettings,
+) versiontwo.GoModDirectivesSettings {
 	return versiontwo.GoModDirectivesSettings{
 		ReplaceAllowList:          old.ReplaceAllowList,
 		ReplaceLocal:              old.ReplaceLocal,
@@ -532,7 +539,9 @@ func toINamedParamSettings(old versionone.INamedParamSettings) versiontwo.INamed
 	}
 }
 
-func toInterfaceBloatSettings(old versionone.InterfaceBloatSettings) versiontwo.InterfaceBloatSettings {
+func toInterfaceBloatSettings(
+	old versionone.InterfaceBloatSettings,
+) versiontwo.InterfaceBloatSettings {
 	return versiontwo.InterfaceBloatSettings{
 		Max: old.Max,
 	}
@@ -651,7 +660,9 @@ func toNoLintLintSettings(old versionone.NoLintLintSettings) versiontwo.NoLintLi
 	}
 }
 
-func toNoNamedReturnsSettings(old versionone.NoNamedReturnsSettings) versiontwo.NoNamedReturnsSettings {
+func toNoNamedReturnsSettings(
+	old versionone.NoNamedReturnsSettings,
+) versiontwo.NoNamedReturnsSettings {
 	return versiontwo.NoNamedReturnsSettings{
 		ReportErrorInDefer: old.ReportErrorInDefer,
 	}
@@ -939,7 +950,9 @@ func toUnusedSettings(old versionone.UnusedSettings) versiontwo.UnusedSettings {
 	}
 }
 
-func toUseStdlibVarsSettings(old versionone.UseStdlibVarsSettings) versiontwo.UseStdlibVarsSettings {
+func toUseStdlibVarsSettings(
+	old versionone.UseStdlibVarsSettings,
+) versiontwo.UseStdlibVarsSettings {
 	return versiontwo.UseStdlibVarsSettings{
 		HTTPMethod:         old.HTTPMethod,
 		HTTPStatusCode:     old.HTTPStatusCode,
@@ -1016,7 +1029,9 @@ func toWSLSettings(old versionone.WSLSettings) versiontwo.WSLv4Settings {
 	}
 }
 
-func toCustom(old map[string]versionone.CustomLinterSettings) map[string]versiontwo.CustomLinterSettings {
+func toCustom(
+	old map[string]versionone.CustomLinterSettings,
+) map[string]versiontwo.CustomLinterSettings {
 	if old == nil {
 		return nil
 	}

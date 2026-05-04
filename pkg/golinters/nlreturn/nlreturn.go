@@ -1,10 +1,9 @@
 package nlreturn
 
 import (
-	"github.com/ssgreg/nlreturn/v2/pkg/nlreturn"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/ssgreg/nlreturn/v2/pkg/nlreturn"
 )
 
 func New(settings *config.NlreturnSettings) *goanalysis.Linter {

@@ -2,7 +2,6 @@ package testifylint
 
 import (
 	"github.com/Antonboom/testifylint/analyzer"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 )

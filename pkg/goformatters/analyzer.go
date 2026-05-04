@@ -6,12 +6,11 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/rogpeppe/go-internal/diff"
-	"golang.org/x/tools/go/analysis"
-
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 	"github.com/golangci/golangci-lint/v2/pkg/goformatters/internal"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
+	"github.com/rogpeppe/go-internal/diff"
+	"golang.org/x/tools/go/analysis"
 )
 
 // NewAnalyzer converts a [Formatter] to an [analysis.Analyzer].
@@ -44,7 +43,12 @@ func NewAnalyzer(logger logutils.Log, doc string, formatter Formatter) *analysis
 
 					err = internal.ExtractDiagnosticFromPatch(pass, file, patch, logger)
 					if err != nil {
-						return nil, fmt.Errorf("can't extract issues from %s diff output %q: %w", formatter.Name(), patch, err)
+						return nil, fmt.Errorf(
+							"can't extract issues from %s diff output %q: %w",
+							formatter.Name(),
+							patch,
+							err,
+						)
 					}
 				}
 			}

@@ -4,14 +4,13 @@ import (
 	"regexp"
 	"sync"
 
-	"github.com/ldez/gomoddirectives"
-	"golang.org/x/tools/go/analysis"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 	"github.com/golangci/golangci-lint/v2/pkg/golinters/internal"
 	"github.com/golangci/golangci-lint/v2/pkg/lint/linter"
 	"github.com/golangci/golangci-lint/v2/pkg/result"
+	"github.com/ldez/gomoddirectives"
+	"golang.org/x/tools/go/analysis"
 )
 
 const linterName = "gomoddirectives"

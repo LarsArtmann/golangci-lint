@@ -1,10 +1,9 @@
 package usestdlibvars
 
 import (
-	"github.com/sashamelentyev/usestdlibvars/pkg/analyzer"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/sashamelentyev/usestdlibvars/pkg/analyzer"
 )
 
 func New(settings *config.UseStdlibVarsSettings) *goanalysis.Linter {

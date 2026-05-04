@@ -8,11 +8,10 @@ import (
 
 	"github.com/go-critic/go-critic/checkers"
 	gocriticlinter "github.com/go-critic/go-critic/linter"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 // https://go-critic.com/overview.html
@@ -118,7 +117,13 @@ func Test_settingsWrapper_inferEnabledChecks(t *testing.T) {
 		{
 			name: "enable all checks via tags",
 			settings: &config.GoCriticSettings{
-				EnabledTags: []string{"diagnostic", "experimental", "opinionated", "performance", "style"},
+				EnabledTags: []string{
+					"diagnostic",
+					"experimental",
+					"opinionated",
+					"performance",
+					"style",
+				},
 			},
 			expectedEnabledChecks: allChecks,
 		},
@@ -158,7 +163,13 @@ func Test_settingsWrapper_inferEnabledChecks(t *testing.T) {
 		{
 			name: "enable checks disable checks enable tags",
 			settings: &config.GoCriticSettings{
-				EnabledChecks:  []string{"badCall", "badLock", "boolExprSimplify", "indexAlloc", "hugeParam"},
+				EnabledChecks: []string{
+					"badCall",
+					"badLock",
+					"boolExprSimplify",
+					"indexAlloc",
+					"hugeParam",
+				},
 				DisabledChecks: []string{"deprecatedComment", "typeSwitchVar"},
 				EnabledTags:    []string{"experimental"},
 			},
@@ -171,7 +182,13 @@ func Test_settingsWrapper_inferEnabledChecks(t *testing.T) {
 		{
 			name: "enable checks disable checks enable tags disable tags",
 			settings: &config.GoCriticSettings{
-				EnabledChecks:  []string{"badCall", "badCond", "badLock", "indexAlloc", "hugeParam"},
+				EnabledChecks: []string{
+					"badCall",
+					"badCond",
+					"badLock",
+					"indexAlloc",
+					"hugeParam",
+				},
 				DisabledChecks: []string{"deprecatedComment", "typeSwitchVar"},
 				EnabledTags:    []string{"experimental"},
 				DisabledTags:   []string{"performance"},
@@ -267,7 +284,11 @@ func Test_settingsWrapper_inferEnabledChecks(t *testing.T) {
 
 			wr.inferEnabledChecks()
 
-			assert.ElementsMatch(t, test.expectedEnabledChecks, slices.Collect(maps.Keys(wr.inferredEnabledChecks)))
+			assert.ElementsMatch(
+				t,
+				test.expectedEnabledChecks,
+				slices.Collect(maps.Keys(wr.inferredEnabledChecks)),
+			)
 
 			assert.NoError(t, wr.validate())
 		})
@@ -405,15 +426,27 @@ func Test_settingsWrapper_Load(t *testing.T) {
 		{
 			name: "disable all checks via tags",
 			settings: &config.GoCriticSettings{
-				DisabledTags: []string{"diagnostic", "experimental", "opinionated", "performance", "style"},
+				DisabledTags: []string{
+					"diagnostic",
+					"experimental",
+					"opinionated",
+					"performance",
+					"style",
+				},
 			},
 			expectedErr: true,
 		},
 		{
 			name: "enable-all and disable all checks via tags",
 			settings: &config.GoCriticSettings{
-				EnableAll:    true,
-				DisabledTags: []string{"diagnostic", "experimental", "opinionated", "performance", "style"},
+				EnableAll: true,
+				DisabledTags: []string{
+					"diagnostic",
+					"experimental",
+					"opinionated",
+					"performance",
+					"style",
+				},
 			},
 			expectedErr: true,
 		},

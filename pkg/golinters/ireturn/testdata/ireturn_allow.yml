@@ -4,4 +4,4 @@ linters:
   settings:
     ireturn:
       allow:
-      - IreturnAllowDoer
+        - IreturnAllowDoer

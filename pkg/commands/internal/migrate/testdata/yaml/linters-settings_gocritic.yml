@@ -256,9 +256,9 @@ linters-settings:
         sizeThreshold: 32
         skipTestFuncs: false
       ruleguard:
-        debug: 'emptyDecl'
+        debug: "emptyDecl"
         failOn: dsl,import
-        rules: '${configDir}/ruleguard/rules-*.go,${configDir}/myrule1.go'
+        rules: "${configDir}/ruleguard/rules-*.go,${configDir}/myrule1.go"
         enable: "myGroupName,#myTagName"
         disable: "myGroupName,#myTagName"
       tooManyResultsChecker:

@@ -33,14 +33,21 @@ func NewContextBuilder(cfg *config.Config, pkgLoader *PackageLoader,
 	}
 }
 
-func (cl *ContextBuilder) Build(ctx context.Context, log logutils.Log, linters []*linter.Config) (*linter.Context, error) {
+func (cl *ContextBuilder) Build(
+	ctx context.Context,
+	log logutils.Log,
+	linters []*linter.Config,
+) (*linter.Context, error) {
 	pkgs, deduplicatedPkgs, err := cl.pkgLoader.Load(ctx, linters)
 	if err != nil {
 		return nil, fmt.Errorf("failed to load packages: %w", err)
 	}
 
 	if len(deduplicatedPkgs) == 0 {
-		return nil, fmt.Errorf("%w: running `go mod tidy` may solve the problem", exitcodes.ErrNoGoFiles)
+		return nil, fmt.Errorf(
+			"%w: running `go mod tidy` may solve the problem",
+			exitcodes.ErrNoGoFiles,
+		)
 	}
 
 	ret := &linter.Context{

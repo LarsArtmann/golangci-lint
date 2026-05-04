@@ -4,4 +4,4 @@ linters:
   settings:
     govet:
       enable:
-      - ifaceassert
+        - ifaceassert

@@ -2,9 +2,10 @@
 //golangcitest:expected_exitcode 0
 package slicessort
 
-import "slices"
-
-import "sort"
+import (
+	"slices"
+	"sort"
+)
 
 type myint int
 

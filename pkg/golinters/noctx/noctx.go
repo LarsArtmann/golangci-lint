@@ -1,9 +1,8 @@
 package noctx
 
 import (
-	"github.com/sonatard/noctx"
-
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/sonatard/noctx"
 )
 
 func New() *goanalysis.Linter {

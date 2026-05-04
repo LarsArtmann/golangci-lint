@@ -128,4 +128,3 @@ source ~/.bashrc
 ## CI Integration
 
 Check out our [documentation for CI integrations](/docs/welcome/install#ci-installation).
-

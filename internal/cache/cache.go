@@ -13,11 +13,10 @@ import (
 	"strings"
 	"sync"
 
-	"golang.org/x/tools/go/packages"
-
 	"github.com/golangci/golangci-lint/v2/internal/go/cache"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
 	"github.com/golangci/golangci-lint/v2/pkg/timeutils"
+	"golang.org/x/tools/go/packages"
 )
 
 type HashMode int
@@ -72,7 +71,12 @@ func (c *Cache) Put(pkg *packages.Package, mode HashMode, key string, data any) 
 
 	err = c.putBytes(actionID, buf)
 	if err != nil {
-		return fmt.Errorf("failed to save data to low-level cache by key %s for package %s: %w", key, pkg.Name, err)
+		return fmt.Errorf(
+			"failed to save data to low-level cache by key %s for package %s: %w",
+			key,
+			pkg.Name,
+			err,
+		)
 	}
 
 	return nil
@@ -89,7 +93,12 @@ func (c *Cache) Get(pkg *packages.Package, mode HashMode, key string, data any) 
 		if cache.IsErrMissing(err) {
 			return ErrMissing
 		}
-		return fmt.Errorf("failed to get data from low-level cache by key %s for package %s: %w", key, pkg.Name, err)
+		return fmt.Errorf(
+			"failed to get data from low-level cache by key %s for package %s: %w",
+			key,
+			pkg.Name,
+			err,
+		)
 	}
 
 	return c.decode(cachedData, data)
@@ -175,7 +184,10 @@ func (c *Cache) computePkgHash(pkg *packages.Package) (hashResults, error) {
 
 		// This is the current module (the project to analyze).
 		if pkg.Module != nil && pkg.Module.Version == "" {
-			f = pkg.Module.Path + strings.TrimPrefix(filepath.ToSlash(f), filepath.ToSlash(pkg.Module.Dir))
+			f = pkg.Module.Path + strings.TrimPrefix(
+				filepath.ToSlash(f),
+				filepath.ToSlash(pkg.Module.Dir),
+			)
 		}
 
 		fmt.Fprintf(key, "file %s %x\n", f, h)
@@ -213,7 +225,12 @@ func (c *Cache) computeDepsHash(depMode HashMode, imps []*packages.Package, key 
 
 		depHash, err := c.packageHash(dep, depMode)
 		if err != nil {
-			return fmt.Errorf("failed to calculate hash for dependency %s with mode %d: %w", dep.Name, depMode, err)
+			return fmt.Errorf(
+				"failed to calculate hash for dependency %s with mode %d: %w",
+				dep.Name,
+				depMode,
+				err,
+			)
 		}
 
 		fmt.Fprintf(key, "import %s %s\n", dep.PkgPath, depHash)

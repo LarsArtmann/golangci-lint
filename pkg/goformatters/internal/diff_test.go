@@ -5,12 +5,11 @@ import (
 	"path/filepath"
 	"testing"
 
+	"github.com/golangci/golangci-lint/v2/pkg/logutils"
 	diffpkg "github.com/sourcegraph/go-diff/diff"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
-
-	"github.com/golangci/golangci-lint/v2/pkg/logutils"
 )
 
 func Test_parse(t *testing.T) {

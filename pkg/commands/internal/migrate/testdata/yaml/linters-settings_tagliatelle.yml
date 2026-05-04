@@ -32,8 +32,7 @@ linters-settings:
         - Bar
         - Foo
       overrides:
-        -
-          pkg: foo/bar
+        - pkg: foo/bar
           rules:
             json: snake
             xml: pascal

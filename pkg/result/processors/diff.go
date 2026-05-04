@@ -8,10 +8,9 @@ import (
 	"os"
 	"strings"
 
-	"github.com/golangci/revgrep"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/result"
+	"github.com/golangci/revgrep"
 )
 
 const envGolangciDiffProcessorPatch = "GOLANGCI_DIFF_PROCESSOR_PATCH"
@@ -49,7 +48,8 @@ func (*Diff) Name() string {
 }
 
 func (p *Diff) Process(issues []*result.Issue) ([]*result.Issue, error) {
-	if !p.onlyNew && p.fromRev == "" && p.fromMergeBase == "" && p.patchFilePath == "" && p.patch == "" {
+	if !p.onlyNew && p.fromRev == "" && p.fromMergeBase == "" && p.patchFilePath == "" &&
+		p.patch == "" {
 		return issues, nil
 	}
 

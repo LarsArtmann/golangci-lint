@@ -6,7 +6,6 @@ import (
 	"text/tabwriter"
 
 	"github.com/fatih/color"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/logutils"
 	"github.com/golangci/golangci-lint/v2/pkg/result"

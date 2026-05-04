@@ -4,11 +4,10 @@ import (
 	"go/token"
 	"strings"
 
-	"github.com/matoous/godox"
-	"golang.org/x/tools/go/analysis"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
+	"github.com/matoous/godox"
+	"golang.org/x/tools/go/analysis"
 )
 
 func New(settings *config.GodoxSettings) *goanalysis.Linter {
@@ -50,7 +49,11 @@ func run(pass *analysis.Pass, settings *config.GodoxSettings) error {
 			index := strings.Index(msg, "Line contains")
 
 			pass.Report(analysis.Diagnostic{
-				Pos:     ft.LineStart(goanalysis.AdjustPos(i.Pos.Line, nonAdjPosition.Line, position.Line)) + token.Pos(i.Pos.Column),
+				Pos: ft.LineStart(
+					goanalysis.AdjustPos(i.Pos.Line, nonAdjPosition.Line, position.Line),
+				) + token.Pos(
+					i.Pos.Column,
+				),
 				Message: msg[index:],
 			})
 		}

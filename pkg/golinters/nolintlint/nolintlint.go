@@ -4,13 +4,12 @@ import (
 	"fmt"
 	"sync"
 
-	"golang.org/x/tools/go/analysis"
-
 	"github.com/golangci/golangci-lint/v2/pkg/config"
 	"github.com/golangci/golangci-lint/v2/pkg/goanalysis"
 	"github.com/golangci/golangci-lint/v2/pkg/golinters/internal"
 	nolintlint "github.com/golangci/golangci-lint/v2/pkg/golinters/nolintlint/internal"
 	"github.com/golangci/golangci-lint/v2/pkg/lint/linter"
+	"golang.org/x/tools/go/analysis"
 )
 
 const LinterName = nolintlint.LinterName
